@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33122.133
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BOP3 Task 1 DB and File Server App", "BOP3 Task 1 DB and File Server App.csproj", "{C2C64672-5BEA-4DEF-B3EE-59B8F6409428}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C2C64672-5BEA-4DEF-B3EE-59B8F6409428}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2C64672-5BEA-4DEF-B3EE-59B8F6409428}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2C64672-5BEA-4DEF-B3EE-59B8F6409428}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2C64672-5BEA-4DEF-B3EE-59B8F6409428}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DAD7F53E-9EBA-4760-A51E-2FD5F13DFF08}
+	EndGlobalSection
+EndGlobal

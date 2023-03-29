@@ -43,5 +43,15 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             //_ = new DatabaseForm();
             this.Hide();
         }
+
+        private void MainScreen_Closing(Object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                this.Hide();
+
+            }
+        }
     }
 }

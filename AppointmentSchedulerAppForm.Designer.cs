@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.ApptSchedulerDGV = new System.Windows.Forms.DataGridView();
+            this.AppoinmentsDGV = new System.Windows.Forms.DataGridView();
             this.AddUpdateDeleteApptButton = new System.Windows.Forms.Button();
             this.TotalApptCntLabel = new System.Windows.Forms.Label();
             this.TotalApptCnt = new System.Windows.Forms.Label();
@@ -37,17 +37,22 @@
             this.CustomerDBButton = new System.Windows.Forms.Button();
             this.CustomerDBToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.CalendarView = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.ApptSchedulerDGV)).BeginInit();
+            this.Appointment_ID_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Customer_Name_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.AppoinmentsDGV)).BeginInit();
             this.SuspendLayout();
             // 
-            // ApptSchedulerDGV
+            // AppoinmentsDGV
             // 
-            this.ApptSchedulerDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ApptSchedulerDGV.Location = new System.Drawing.Point(31, 55);
-            this.ApptSchedulerDGV.Margin = new System.Windows.Forms.Padding(4);
-            this.ApptSchedulerDGV.Name = "ApptSchedulerDGV";
-            this.ApptSchedulerDGV.Size = new System.Drawing.Size(873, 360);
-            this.ApptSchedulerDGV.TabIndex = 0;
+            this.AppoinmentsDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.AppoinmentsDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Appointment_ID_Column,
+            this.Customer_Name_Column});
+            this.AppoinmentsDGV.Location = new System.Drawing.Point(31, 55);
+            this.AppoinmentsDGV.Margin = new System.Windows.Forms.Padding(4);
+            this.AppoinmentsDGV.Name = "AppoinmentsDGV";
+            this.AppoinmentsDGV.Size = new System.Drawing.Size(873, 360);
+            this.AppoinmentsDGV.TabIndex = 0;
             // 
             // AddUpdateDeleteApptButton
             // 
@@ -118,6 +123,20 @@
             this.CalendarView.Size = new System.Drawing.Size(121, 26);
             this.CalendarView.TabIndex = 5;
             // 
+            // Appointment_ID_Column
+            // 
+            this.Appointment_ID_Column.DataPropertyName = "Appointment_ID_Column";
+            this.Appointment_ID_Column.HeaderText = "Appt ID";
+            this.Appointment_ID_Column.Name = "Appointment_ID_Column";
+            this.Appointment_ID_Column.Width = 85;
+            // 
+            // Customer_Name_Column
+            // 
+            this.Customer_Name_Column.DataPropertyName = "Customer_Name_Column";
+            this.Customer_Name_Column.HeaderText = "Customer Name";
+            this.Customer_Name_Column.Name = "Customer_Name_Column";
+            this.Customer_Name_Column.Width = 200;
+            // 
             // MainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -128,7 +147,7 @@
             this.Controls.Add(this.TotalApptCnt);
             this.Controls.Add(this.TotalApptCntLabel);
             this.Controls.Add(this.AddUpdateDeleteApptButton);
-            this.Controls.Add(this.ApptSchedulerDGV);
+            this.Controls.Add(this.AppoinmentsDGV);
             this.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
@@ -137,7 +156,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Appointment Scheduler App";
-            ((System.ComponentModel.ISupportInitialize)(this.ApptSchedulerDGV)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AppoinmentsDGV)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -145,7 +164,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView ApptSchedulerDGV;
+        private System.Windows.Forms.DataGridView AppoinmentsDGV;
         private System.Windows.Forms.Button AddUpdateDeleteApptButton;
         private System.Windows.Forms.Label TotalApptCntLabel;
         private System.Windows.Forms.Label TotalApptCnt;
@@ -153,5 +172,7 @@
         private System.Windows.Forms.Button CustomerDBButton;
         private System.Windows.Forms.ToolTip CustomerDBToolTip;
         private System.Windows.Forms.ComboBox CalendarView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Appointment_ID_Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Customer_Name_Column;
     }
 }

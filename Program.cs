@@ -26,7 +26,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new AppLoginForm());
-            DBConnection.stopConnection();
+            DBConnection.closeConnection();
         }
     }
 }

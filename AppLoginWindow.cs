@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,9 +14,12 @@ namespace BOP3_Task_1_DB_and_File_Server_App
     public partial class AppLoginForm : Form
     {
         public bool loginSuccessful;
-        private int DBuserID;
-        private string DBuserName;
-        private string DBpassword;
+        private string usersLanguage;
+        private string LoginErrorEnglish = "Invalid User Name and/or Password.  Please try again.";
+
+        //private int DBuserID;
+        //private string DBuserName;
+        //private string DBpassword;
 
         //private DB User...
         //public DB Appointment...
@@ -24,18 +28,23 @@ namespace BOP3_Task_1_DB_and_File_Server_App
         public AppLoginForm()
         {
             InitializeComponent();
+            LoginErrorLabelUsersLanguage.Text = string.Empty;
             LoginErrorLabelEnglish.Text = string.Empty;
-            LoginErrorLabelOtherLanguage.Text = string.Empty;
+
+            //Todo How to get the language the user's PC is set to.
+            //Todo Set LoginErrorLabelOtherLanguage to German so there's a single place to update it, if needed.  Good place for Lambda use?
+            usersLanguage = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
+
         }
 
         private void UserNameInputBox_TextChanged(object sender, EventArgs e)
         {
+            LoginErrorLabelUsersLanguage.Text = string.Empty;
             LoginErrorLabelEnglish.Text = string.Empty;
-            LoginErrorLabelOtherLanguage.Text = string.Empty;
-            // Validate that the User Name field is populated and the User Name is in the DB.
+            //Todo Validate that the User Name field is populated and the User Name is in the DB.
             if (!string.IsNullOrEmpty(UserNameInputBox.Text))// || UserNameInputBox.Text is in the UserDB for the UserID)
             {
-                //Test this step.  Verify that when "Test" or "test" or "TEST" or any other option is input that is goes green.
+                //Todo Test this step.  Verify that when "Test" or "test" or "TEST" or any other option is input that is goes green.
                 UserNameInputBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             }
             else
@@ -46,34 +55,38 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
         private void PasswordInputBox_TextChanged(object sender, EventArgs e)
         {
+            LoginErrorLabelUsersLanguage.Text = string.Empty;
             LoginErrorLabelEnglish.Text = string.Empty;
-            LoginErrorLabelOtherLanguage.Text = string.Empty;
-            // Validate that the Password field is populated and the Password is in the DB.
-            if (!string.IsNullOrEmpty(PasswordInputBox.Text))
-            {
-                PasswordInputBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            }
-            else
+            //Todo Validate that the Password field is populated and the Password is in the DB.
+            
+            if (string.IsNullOrEmpty(PasswordInputBox.Text))  //Is there a need/benefit to use coloring for the password field?  Is this a security concern?
             {
                 PasswordInputBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             }
+            /**else
+            {
+                PasswordInputBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            }*/
         }
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            // If all fields have been validated, then continue processing.  Otherwise, inform the user.
+            //Todo Capture the system
+            
+            //If all fields have been validated, then continue processing.  Otherwise, inform the user.
             if (UserNameInputBox.BackColor == System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192))))) &&
                 PasswordInputBox.BackColor == System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192))))))// &&
                 //UserNameInputBox.Text is in the UserDB for the UserID row && PasswordInputBox.Text is in the UserDB for the UserID row)
             {
                 loginSuccessful = true;
-                //Update DB user table to add a loginSuccessful = true row.
+                //Todo Update DB user table to add a loginSuccessful = true row.
+                //Todo Update DB 
                 Hide();
                 _ = new MainScreen();
             }
             else
             {
-                // Validate that the User Name field is populated and the User Name is in the DB.
+                //Todo Validate that the User Name field is populated and the User Name is in the DB.
                 if (!string.IsNullOrEmpty(UserNameInputBox.Text))// || UserNameInputBox.Text is in the UserDB)
                 {
                     UserNameInputBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
@@ -83,7 +96,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                     UserNameInputBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
                 }
 
-                // Validate that the Password field is populated and the Password is in the DB.
+                //Todo Validate that the Password field is populated and the Password is in the DB.
                 if (!string.IsNullOrEmpty(PasswordInputBox.Text))// || PasswordInputBox.Text is in the UserDB)
                 {
                     PasswordInputBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
@@ -92,11 +105,20 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                 {
                     PasswordInputBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
                 }
-               
-                LoginErrorLabelEnglish.Text = "Invalid User Name and/or Password.  Please try again.";
-                LoginErrorLabelOtherLanguage.Text = "Invalid User Name and/or Password.  Please try again.";
 
-                //Update DB user table to add a loginSuccessful = false row.
+                if (usersLanguage == "en")
+                {
+                    LoginErrorLabelUsersLanguage.Text = LoginErrorEnglish.ToString();
+                }
+                
+                if (usersLanguage != "en")
+                {
+                    //Todo LoginErrorLabelUsersLanguage.Text = LoginErrorLabelEnglish.ToString(usersLanguage);
+                    LoginErrorLabelEnglish.Text = LoginErrorEnglish.ToString();
+                }
+
+
+                //Todo Update DB user table to add a loginSuccessful = false row.
 
 
             }

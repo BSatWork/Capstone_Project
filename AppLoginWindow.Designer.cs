@@ -34,8 +34,8 @@
             this.PasswordInputBox = new System.Windows.Forms.TextBox();
             this.PasswordLabel = new System.Windows.Forms.Label();
             this.LoginButton = new System.Windows.Forms.Button();
-            this.LoginErrorLabelOtherLanguage = new System.Windows.Forms.Label();
             this.LoginErrorLabelEnglish = new System.Windows.Forms.Label();
+            this.LoginErrorLabelUsersLanguage = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // LoginWelcomeLabel
@@ -107,35 +107,35 @@
             this.LoginButton.UseVisualStyleBackColor = false;
             this.LoginButton.Click += new System.EventHandler(this.LoginButton_Click);
             // 
-            // LoginErrorLabelOtherLanguage
-            // 
-            this.LoginErrorLabelOtherLanguage.AutoSize = true;
-            this.LoginErrorLabelOtherLanguage.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LoginErrorLabelOtherLanguage.ForeColor = System.Drawing.Color.Red;
-            this.LoginErrorLabelOtherLanguage.Location = new System.Drawing.Point(12, 306);
-            this.LoginErrorLabelOtherLanguage.Name = "LoginErrorLabelOtherLanguage";
-            this.LoginErrorLabelOtherLanguage.Size = new System.Drawing.Size(360, 16);
-            this.LoginErrorLabelOtherLanguage.TabIndex = 6;
-            this.LoginErrorLabelOtherLanguage.Text = "Invalid User Name and/or Password.  Please try again.";
-            // 
             // LoginErrorLabelEnglish
             // 
             this.LoginErrorLabelEnglish.AutoSize = true;
             this.LoginErrorLabelEnglish.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LoginErrorLabelEnglish.ForeColor = System.Drawing.Color.Red;
-            this.LoginErrorLabelEnglish.Location = new System.Drawing.Point(52, 85);
+            this.LoginErrorLabelEnglish.Location = new System.Drawing.Point(12, 306);
             this.LoginErrorLabelEnglish.Name = "LoginErrorLabelEnglish";
             this.LoginErrorLabelEnglish.Size = new System.Drawing.Size(360, 16);
-            this.LoginErrorLabelEnglish.TabIndex = 7;
+            this.LoginErrorLabelEnglish.TabIndex = 6;
             this.LoginErrorLabelEnglish.Text = "Invalid User Name and/or Password.  Please try again.";
+            // 
+            // LoginErrorLabelUsersLanguage
+            // 
+            this.LoginErrorLabelUsersLanguage.AutoSize = true;
+            this.LoginErrorLabelUsersLanguage.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LoginErrorLabelUsersLanguage.ForeColor = System.Drawing.Color.Red;
+            this.LoginErrorLabelUsersLanguage.Location = new System.Drawing.Point(52, 85);
+            this.LoginErrorLabelUsersLanguage.Name = "LoginErrorLabelUsersLanguage";
+            this.LoginErrorLabelUsersLanguage.Size = new System.Drawing.Size(360, 16);
+            this.LoginErrorLabelUsersLanguage.TabIndex = 7;
+            this.LoginErrorLabelUsersLanguage.Text = "Invalid User Name and/or Password.  Please try again.";
             // 
             // AppLoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(467, 330);
+            this.Controls.Add(this.LoginErrorLabelUsersLanguage);
             this.Controls.Add(this.LoginErrorLabelEnglish);
-            this.Controls.Add(this.LoginErrorLabelOtherLanguage);
             this.Controls.Add(this.LoginButton);
             this.Controls.Add(this.PasswordLabel);
             this.Controls.Add(this.PasswordInputBox);
@@ -161,8 +161,8 @@
         private System.Windows.Forms.TextBox PasswordInputBox;
         private System.Windows.Forms.Label PasswordLabel;
         private System.Windows.Forms.Button LoginButton;
-        private System.Windows.Forms.Label LoginErrorLabelOtherLanguage;
         private System.Windows.Forms.Label LoginErrorLabelEnglish;
+        private System.Windows.Forms.Label LoginErrorLabelUsersLanguage;
     }
 }
 

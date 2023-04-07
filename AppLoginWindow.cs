@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BOP3_Task_1_DB_and_File_Server_App.Classes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +14,9 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 {
     public partial class AppLoginForm : Form
     {
+        public BindingList<User> UserTable = new BindingList<User>();
+        //public BindingList<Appointment> AppointmentTable = new BindingList<Appointment>();
+
         public bool loginSuccessful;
         private string usersLanguage;
         private string LoginErrorEnglish = "Invalid User Name and/or Password.  Please try again.";
@@ -23,11 +27,12 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
         //private DB User...
         //public DB Appointment...
-        public MainScreen myMainScreen;
 
         public AppLoginForm()
         {
             InitializeComponent();
+            Show();
+            Activate();
             LoginErrorLabelUsersLanguage.Text = string.Empty;
             LoginErrorLabelEnglish.Text = string.Empty;
 
@@ -57,12 +62,11 @@ namespace BOP3_Task_1_DB_and_File_Server_App
         {
             LoginErrorLabelUsersLanguage.Text = string.Empty;
             LoginErrorLabelEnglish.Text = string.Empty;
-            //Todo Validate that the Password field is populated and the Password is in the DB.
             
-            if (string.IsNullOrEmpty(PasswordInputBox.Text))  //Is there a need/benefit to use coloring for the password field?  Is this a security concern?
+            if (string.IsNullOrEmpty(PasswordInputBox.Text))  //Todo && password is in the User DB for the input UserName
             {
                 PasswordInputBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            }
+            } //Todo Is there a need/benefit to use coloring for the password field?  Is this a security concern?
             /**else
             {
                 PasswordInputBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
@@ -71,7 +75,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            //Todo Capture the system
+            //Todo Capture the system language for user input errors.
             
             //If all fields have been validated, then continue processing.  Otherwise, inform the user.
             if (UserNameInputBox.BackColor == System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192))))) &&
@@ -79,8 +83,8 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                 //UserNameInputBox.Text is in the UserDB for the UserID row && PasswordInputBox.Text is in the UserDB for the UserID row)
             {
                 loginSuccessful = true;
-                //Todo Update DB user table to add a loginSuccessful = true row.
-                //Todo Update DB 
+                //Todo Update DB user table to add new record with active = true, create date and created by.
+                
                 Hide();
                 _ = new MainScreen();
             }
@@ -118,10 +122,15 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                 }
 
 
-                //Todo Update DB user table to add a loginSuccessful = false row.
+                //Todo Update DB user table to add a loginSuccessful = false row?
 
 
             }
+        }
+
+        private void CloseLoginButton_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

@@ -36,6 +36,7 @@
             this.LoginButton = new System.Windows.Forms.Button();
             this.LoginErrorLabelEnglish = new System.Windows.Forms.Label();
             this.LoginErrorLabelUsersLanguage = new System.Windows.Forms.Label();
+            this.CloseLoginButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // LoginWelcomeLabel
@@ -129,11 +130,28 @@
             this.LoginErrorLabelUsersLanguage.TabIndex = 7;
             this.LoginErrorLabelUsersLanguage.Text = "Invalid User Name and/or Password.  Please try again.";
             // 
+            // CloseLoginButton
+            // 
+            this.CloseLoginButton.BackColor = System.Drawing.SystemColors.Control;
+            this.CloseLoginButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.CloseLoginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CloseLoginButton.Font = new System.Drawing.Font("Tahoma", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CloseLoginButton.Location = new System.Drawing.Point(420, -5);
+            this.CloseLoginButton.Margin = new System.Windows.Forms.Padding(0);
+            this.CloseLoginButton.Name = "CloseLoginButton";
+            this.CloseLoginButton.Size = new System.Drawing.Size(52, 25);
+            this.CloseLoginButton.TabIndex = 8;
+            this.CloseLoginButton.Text = "Close";
+            this.CloseLoginButton.UseVisualStyleBackColor = false;
+            this.CloseLoginButton.Click += new System.EventHandler(this.CloseLoginButton_Click);
+            // 
             // AppLoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(467, 330);
+            this.ControlBox = false;
+            this.Controls.Add(this.CloseLoginButton);
             this.Controls.Add(this.LoginErrorLabelUsersLanguage);
             this.Controls.Add(this.LoginErrorLabelEnglish);
             this.Controls.Add(this.LoginButton);
@@ -163,6 +181,7 @@
         private System.Windows.Forms.Button LoginButton;
         private System.Windows.Forms.Label LoginErrorLabelEnglish;
         private System.Windows.Forms.Label LoginErrorLabelUsersLanguage;
+        private System.Windows.Forms.Button CloseLoginButton;
     }
 }
 

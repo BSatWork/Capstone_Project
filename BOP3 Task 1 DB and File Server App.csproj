@@ -87,17 +87,17 @@
     <Compile Include="AppLoginWindow.Designer.cs">
       <DependentUpon>AppLoginWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="AppointmentSchedulerAppForm.cs">
+    <Compile Include="App_Main_Screen_Form.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AppointmentSchedulerAppForm.Designer.cs">
-      <DependentUpon>AppointmentSchedulerAppForm.cs</DependentUpon>
+    <Compile Include="App_Main_Screen_Form.Designer.cs">
+      <DependentUpon>App_Main_Screen_Form.cs</DependentUpon>
     </Compile>
-    <Compile Include="ApptAddOrUpdateForm.cs">
+    <Compile Include="AppointmentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ApptAddOrUpdateForm.Designer.cs">
-      <DependentUpon>ApptAddOrUpdateForm.cs</DependentUpon>
+    <Compile Include="AppointmentForm.Designer.cs">
+      <DependentUpon>AppointmentForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\Address.cs" />
     <Compile Include="Classes\Appointment.cs" />
@@ -105,17 +105,35 @@
     <Compile Include="Classes\Country.cs" />
     <Compile Include="Classes\Customer.cs" />
     <Compile Include="Classes\User.cs" />
+    <Compile Include="CustomerDatabaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomerDatabaseForm.Designer.cs">
+      <DependentUpon>CustomerDatabaseForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Database\DBConnection.cs" />
+    <Compile Include="NewCustomerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewCustomerForm.Designer.cs">
+      <DependentUpon>NewCustomerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AppLoginWindow.resx">
       <DependentUpon>AppLoginWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AppointmentSchedulerAppForm.resx">
-      <DependentUpon>AppointmentSchedulerAppForm.cs</DependentUpon>
+    <EmbeddedResource Include="App_Main_Screen_Form.resx">
+      <DependentUpon>App_Main_Screen_Form.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ApptAddOrUpdateForm.resx">
-      <DependentUpon>ApptAddOrUpdateForm.cs</DependentUpon>
+    <EmbeddedResource Include="AppointmentForm.resx">
+      <DependentUpon>AppointmentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomerDatabaseForm.resx">
+      <DependentUpon>CustomerDatabaseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewCustomerForm.resx">
+      <DependentUpon>NewCustomerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

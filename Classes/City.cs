@@ -14,7 +14,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Classes
         //public new DateTime createDate;
         //public new string createdBy;
         public new DateTime lastUpdate;
-        public new string lastUpdatedBy;
+        public new string lastUpdateBy;
 
         public City()
         {
@@ -26,7 +26,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Classes
         public new void Update(DateTime createDate, string createdBy)
         {
             lastUpdate = DateTime.Now;  //Todo Send to the city table, when there's a change to the city
-            lastUpdatedBy = "somebody"; //Todo Send to the city table, when there's a change to the city
+            lastUpdateBy = "somebody"; //Todo Send to the city table, when there's a change to the city
 
             //Todo Send createDate to the city table, when there's a change to the city
             //Todo Send createdBy to the city table, when there's a change to the city

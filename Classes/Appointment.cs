@@ -27,20 +27,30 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Classes
         public DateTime createDate;
         public string createdBy;
         public DateTime lastUpdate;
-        public string lastUpdatedBy;
+        public string lastUpdateBy;
 
 
 
 
 
-
-        public void Update()
+        public void AddAppointment()
         {
-            lastUpdate = DateTime.Now;  //Todo Send to the appointment table, when there's a change to the appointment
-            lastUpdatedBy = "somebody"; //Todo Send to the appointment table, when there's a change to the appointment
 
-            //Todo Send createDate to the appointment table, when there's a change to the appointment
-            //Todo Send createdBy to the appointment table, when there's a change to the appointment
+            createDate = DateTime.UtcNow;
+            createdBy = "somebody";
+            //Todo Send to the appointment table
+            //Todo Send to the appointment table
+        }
+
+        public void UpdateAppointment()
+        {
+            lastUpdate = DateTime.UtcNow;   //Todo Send to the appointment table
+            lastUpdateBy = "somebody";      //Todo Send to the appointment table
+        }
+
+        public void DeleteAppointment()
+        {
+
         }
 
         // The following column strings are used to create the column header in the Appointments DGV.

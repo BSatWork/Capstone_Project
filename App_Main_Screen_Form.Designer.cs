@@ -193,6 +193,7 @@
             this.Appointment_ID_Column.HeaderText = "Appt ID";
             this.Appointment_ID_Column.Name = "Appointment_ID_Column";
             this.Appointment_ID_Column.ReadOnly = true;
+            this.Appointment_ID_Column.Visible = false;
             this.Appointment_ID_Column.Width = 85;
             // 
             // Customer_ID_Column
@@ -201,7 +202,6 @@
             this.Customer_ID_Column.HeaderText = "Customer ID";
             this.Customer_ID_Column.Name = "Customer_ID_Column";
             this.Customer_ID_Column.ReadOnly = true;
-            this.Customer_ID_Column.Visible = false;
             // 
             // Customer_Name_Column
             // 

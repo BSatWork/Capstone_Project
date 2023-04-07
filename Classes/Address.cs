@@ -17,7 +17,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Classes
         public DateTime createDate;
         public string createdBy;
         public new DateTime lastUpdate;
-        public new string lastUpdatedBy;
+        public new string lastUpdateBy;
 
         public Address()
         {
@@ -27,7 +27,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Classes
         public new void Update(DateTime createDate, string createdBy)
         {
             lastUpdate = DateTime.Now;  //Todo Send to the address table, when there's a change to the address
-            lastUpdatedBy = "somebody"; //Todo Send to the address table, when there's a change to the address
+            lastUpdateBy = "somebody"; //Todo Send to the address table, when there's a change to the address
 
             //Todo Send createDate to the address table, when there's a change to the address
             //Todo Send createdBy to the address table, when there's a change to the address

@@ -42,6 +42,8 @@
             this.Customer_City_Label = new System.Windows.Forms.Label();
             this.Customer_Country = new System.Windows.Forms.TextBox();
             this.Customer_City = new System.Windows.Forms.TextBox();
+            this.Customer_Phone = new System.Windows.Forms.TextBox();
+            this.Customer_Phone_Label = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Customer_Address2_Label
@@ -134,7 +136,7 @@
             // Customer_Save_Button
             // 
             this.Customer_Save_Button.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Customer_Save_Button.Location = new System.Drawing.Point(320, 280);
+            this.Customer_Save_Button.Location = new System.Drawing.Point(320, 308);
             this.Customer_Save_Button.Name = "Customer_Save_Button";
             this.Customer_Save_Button.Size = new System.Drawing.Size(75, 41);
             this.Customer_Save_Button.TabIndex = 25;
@@ -145,7 +147,7 @@
             // Customer_Cancel_Button
             // 
             this.Customer_Cancel_Button.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Customer_Cancel_Button.Location = new System.Drawing.Point(220, 280);
+            this.Customer_Cancel_Button.Location = new System.Drawing.Point(220, 308);
             this.Customer_Cancel_Button.Name = "Customer_Cancel_Button";
             this.Customer_Cancel_Button.Size = new System.Drawing.Size(75, 41);
             this.Customer_Cancel_Button.TabIndex = 24;
@@ -197,12 +199,36 @@
             this.Customer_City.TabIndex = 26;
             this.Customer_City.TextChanged += new System.EventHandler(this.Customer_City_TextChanged);
             // 
+            // Customer_Phone
+            // 
+            this.Customer_Phone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.Customer_Phone.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Customer_Phone.Location = new System.Drawing.Point(145, 270);
+            this.Customer_Phone.Name = "Customer_Phone";
+            this.Customer_Phone.Size = new System.Drawing.Size(251, 26);
+            this.Customer_Phone.TabIndex = 30;
+            this.Customer_Phone.TextChanged += new System.EventHandler(this.Customer_Phone_TextChanged);
+            // 
+            // Customer_Phone_Label
+            // 
+            this.Customer_Phone_Label.AutoSize = true;
+            this.Customer_Phone_Label.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Customer_Phone_Label.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.Customer_Phone_Label.Location = new System.Drawing.Point(61, 273);
+            this.Customer_Phone_Label.Name = "Customer_Phone_Label";
+            this.Customer_Phone_Label.Size = new System.Drawing.Size(48, 18);
+            this.Customer_Phone_Label.TabIndex = 31;
+            this.Customer_Phone_Label.Text = "Phone";
+            this.Customer_Phone_Label.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // NewCustomerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(435, 344);
+            this.ClientSize = new System.Drawing.Size(435, 363);
             this.ControlBox = false;
+            this.Controls.Add(this.Customer_Phone_Label);
+            this.Controls.Add(this.Customer_Phone);
             this.Controls.Add(this.Customer_Country_Label);
             this.Controls.Add(this.Customer_City_Label);
             this.Controls.Add(this.Customer_Country);
@@ -241,5 +267,7 @@
         private System.Windows.Forms.Label Customer_City_Label;
         private System.Windows.Forms.TextBox Customer_Country;
         private System.Windows.Forms.TextBox Customer_City;
+        private System.Windows.Forms.TextBox Customer_Phone;
+        private System.Windows.Forms.Label Customer_Phone_Label;
     }
 }

@@ -14,38 +14,34 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 {
     public partial class AppLoginForm : Form
     {
-        public BindingList<User> UserTable = new BindingList<User>();
-        //public BindingList<Appointment> AppointmentTable = new BindingList<Appointment>();
-
-        public bool loginSuccessful;
-        private string usersLanguage;
-        private string LoginErrorEnglish = "Invalid User Name and/or Password.  Please try again.";
-
-        //private int DBuserID;
-        //private string DBuserName;
-        //private string DBpassword;
-
-        //private DB User...
-        //public DB Appointment...
+        //public bool loginSuccessful;
+        private readonly string LoginError = "Invalid Login Credentials.  Please try again.";
 
         public AppLoginForm()
         {
             InitializeComponent();
-            Show();
-            Activate();
-            LoginErrorLabelUsersLanguage.Text = string.Empty;
-            LoginErrorLabelEnglish.Text = string.Empty;
+            //Show();
+            //Activate();
 
-            //Todo How to get the language the user's PC is set to.
-            //Todo Set LoginErrorLabelOtherLanguage to German so there's a single place to update it, if needed.  Good place for Lambda use?
-            usersLanguage = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
+            //CultureInfo.CurrentCulture = new CultureInfo("de"); //Todo For Testing purposes only.  Remove before submission!!!
+
+            //Language check - German
+            if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "de")
+            {
+                AppLoginForm.ActiveForm.Text = "Anmeldefenster";
+                LoginWelcomeLabel.Text = "Terminplaner";
+                UserNameLabel.Text = "Nutzername";
+                PasswordLabel.Text = "Passwort";
+                LoginButton.Text = "Anmeldung";
+                CloseLoginLabel.Text = "Schließen";
+
+                LoginError = "Ungültige Login-Details. Bitte versuche es erneut.";
+            }
 
         }
 
         private void UserNameInputBox_TextChanged(object sender, EventArgs e)
         {
-            LoginErrorLabelUsersLanguage.Text = string.Empty;
-            LoginErrorLabelEnglish.Text = string.Empty;
             //Todo Validate that the User Name field is populated and the User Name is in the DB.
             if (!string.IsNullOrEmpty(UserNameInputBox.Text))// || UserNameInputBox.Text is in the UserDB for the UserID)
             {
@@ -59,10 +55,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
         }
 
         private void PasswordInputBox_TextChanged(object sender, EventArgs e)
-        {
-            LoginErrorLabelUsersLanguage.Text = string.Empty;
-            LoginErrorLabelEnglish.Text = string.Empty;
-            
+        {            
             if (string.IsNullOrEmpty(PasswordInputBox.Text))  //Todo && password is in the User DB for the input UserName
             {
                 PasswordInputBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
@@ -74,15 +67,12 @@ namespace BOP3_Task_1_DB_and_File_Server_App
         }
 
         private void LoginButton_Click(object sender, EventArgs e)
-        {
-            //Todo Capture the system language for user input errors.
-            
+        {            
             //If all fields have been validated, then continue processing.  Otherwise, inform the user.
             if (UserNameInputBox.BackColor == System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192))))) &&
                 PasswordInputBox.BackColor == System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192))))))// &&
                 //UserNameInputBox.Text is in the UserDB for the UserID row && PasswordInputBox.Text is in the UserDB for the UserID row)
             {
-                loginSuccessful = true;
                 //Todo Update DB user table to add new record with active = true, create date and created by.
                 
                 Hide();
@@ -110,25 +100,11 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                     PasswordInputBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
                 }
 
-                if (usersLanguage == "en")
-                {
-                    LoginErrorLabelUsersLanguage.Text = LoginErrorEnglish.ToString();
-                }
-                
-                if (usersLanguage != "en")
-                {
-                    //Todo LoginErrorLabelUsersLanguage.Text = LoginErrorLabelEnglish.ToString(usersLanguage);
-                    LoginErrorLabelEnglish.Text = LoginErrorEnglish.ToString();
-                }
-
-
-                //Todo Update DB user table to add a loginSuccessful = false row?
-
-
+                LoginErrorLabel.Text = LoginError;
             }
         }
 
-        private void CloseLoginButton_Click(object sender, EventArgs e)
+        private void CloseLoginLabel_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }

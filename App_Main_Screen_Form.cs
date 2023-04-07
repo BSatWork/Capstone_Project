@@ -26,6 +26,8 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             CustomerDBToolTip.SetToolTip(CustomerDBButton, "View or Update the Customer Database");
             ApptCount.Text = "0";
 
+            //Todo Update DB user table to add a new row with Active = 1.
+
         }
 
         private void AddUpdateDeleteApptButton_Click(object sender, EventArgs e)

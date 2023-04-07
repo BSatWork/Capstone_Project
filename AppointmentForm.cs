@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BOP3_Task_1_DB_and_File_Server_App.Classes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,7 +14,16 @@ namespace BOP3_Task_1_DB_and_File_Server_App
     public partial class AppointmentForm : Form
     {
         public MainScreen appMainScreen;
-        
+        public BindingList<User> UserTable = new BindingList<User>();
+        //public BindingList<Appointment> AppointmentTable = new BindingList<Appointment>();
+
+        //private int DBuserID;
+        //private string DBuserName;
+        //private string DBpassword;
+
+        //private DB User...
+        //public DB Appointment...
+
         public AppointmentForm(MainScreen mainScreen)   //Todo Include pulling in the ApptDGV DB in here.
         {
             InitializeComponent();
@@ -21,7 +31,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             Activate();
             appMainScreen = mainScreen;
             
-            if (!string.IsNullOrEmpty(ApptType.Text))
+            if (!string.IsNullOrEmpty(ApptUserID.Text))
             {
                 ApptCancelButton.Visible = false;
                 ApptDeleteButton.Visible = true;
@@ -36,29 +46,11 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
         }
 
-        public void CreateMyDateTimePicker()
-        {
-            // Create a new DateTimePicker control and initialize it.
-            DateTimePicker dateTimePicker1 = new DateTimePicker();
-
-            // Set the MinDate and MaxDate.
-            dateTimePicker1.MinDate = DateTime.Today;
-            dateTimePicker1.MaxDate = new DateTime(9999, 12, 31);
-
-            // Set the CustomFormat string.
-            dateTimePicker1.CustomFormat = "MMMM dd, yyyy - dddd";
-            dateTimePicker1.Format = DateTimePickerFormat.Custom;
-
-            // Show the CheckBox and display the control as an up-down control.
-            dateTimePicker1.ShowCheckBox = true;
-            dateTimePicker1.ShowUpDown = true;
-        }
-
         private void ApptSave_Click(object sender, EventArgs e)
         {
             // If all fields have been validated, then continue processing.  Otherwise, inform the user.
             if (ApptUserID.BackColor == System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192))))) && 
-                ApptType.BackColor == System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192))))) &&
+                //ApptType.BackColor == System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192))))) &&
                 ApptCustomerID.BackColor == System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192))))) /*&&
                 Customer_City.BackColor == System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192))))) &&
                 Customer_Country.BackColor == System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))))*/
@@ -116,7 +108,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             }
         }
         
-        private void ApptType_TextChanged(object sender, EventArgs e)
+        /*private void ApptType_TextChanged(object sender, EventArgs e)
         {
             // Validate the Type field is populated.
             if (!string.IsNullOrEmpty(ApptType.Text))
@@ -127,9 +119,9 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             {
                 ApptType.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             }
-        }
+        }*/
 
-        private void ApptCustomer_TextChanged(object sender, EventArgs e)
+        private void ApptCustomerID_TextChanged(object sender, EventArgs e)
         {
             // Validate the Customer field is populated.
             if (!string.IsNullOrEmpty(ApptCustomerID.Text))
@@ -142,12 +134,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             }
         }
 
-        private void ApptStartDate_ValueChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void ApptEndDate_ValueChanged(object sender, EventArgs e)
+        private void ApptTypeListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

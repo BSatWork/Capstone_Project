@@ -28,12 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DateTimePicker ApptStartDate;
-            System.Windows.Forms.DateTimePicker ApptEndDate;
+            System.Windows.Forms.DateTimePicker ApptStartDateTime;
+            System.Windows.Forms.DateTimePicker ApptEndDateTime;
             this.ApptSaveButton = new System.Windows.Forms.Button();
             this.ApptDeleteButton = new System.Windows.Forms.Button();
             this.ApptTypeLabel = new System.Windows.Forms.Label();
-            this.ApptType = new System.Windows.Forms.TextBox();
             this.ApptEndDateLabel = new System.Windows.Forms.Label();
             this.ApptCustomerIDLabel = new System.Windows.Forms.Label();
             this.ApptCustomerID = new System.Windows.Forms.TextBox();
@@ -41,32 +40,34 @@
             this.ApptCancelButton = new System.Windows.Forms.Button();
             this.ApptUserID = new System.Windows.Forms.TextBox();
             this.ApptUserIDLabel = new System.Windows.Forms.Label();
-            ApptStartDate = new System.Windows.Forms.DateTimePicker();
-            ApptEndDate = new System.Windows.Forms.DateTimePicker();
+            this.ApptTypeListBox = new System.Windows.Forms.ListBox();
+            ApptStartDateTime = new System.Windows.Forms.DateTimePicker();
+            ApptEndDateTime = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
-            // ApptStartDate
+            // ApptStartDateTime
             // 
-            ApptStartDate.AllowDrop = true;
-            ApptStartDate.CustomFormat = "MM/DD/YYY HH:MM";
-            ApptStartDate.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            ApptStartDate.Location = new System.Drawing.Point(205, 182);
-            ApptStartDate.MinDate = new System.DateTime(2023, 1, 1, 0, 0, 0, 0);
-            ApptStartDate.Name = "ApptStartDate";
-            ApptStartDate.Size = new System.Drawing.Size(194, 21);
-            ApptStartDate.TabIndex = 20;
-            ApptStartDate.ValueChanged += new System.EventHandler(this.ApptStartDate_ValueChanged);
+            ApptStartDateTime.CustomFormat = "MM/dd/yyyy hh:mm tt";
+            ApptStartDateTime.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            ApptStartDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            ApptStartDateTime.Location = new System.Drawing.Point(205, 182);
+            ApptStartDateTime.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            ApptStartDateTime.Name = "ApptStartDateTime";
+            ApptStartDateTime.Size = new System.Drawing.Size(194, 21);
+            ApptStartDateTime.TabIndex = 20;
+            ApptStartDateTime.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             // 
-            // ApptEndDate
+            // ApptEndDateTime
             // 
-            ApptEndDate.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            ApptEndDate.Location = new System.Drawing.Point(205, 232);
-            ApptEndDate.MinDate = new System.DateTime(2023, 1, 1, 0, 0, 0, 0);
-            ApptEndDate.Name = "ApptEndDate";
-            ApptEndDate.Size = new System.Drawing.Size(194, 21);
-            ApptEndDate.TabIndex = 22;
-            ApptEndDate.Value = new System.DateTime(2023, 3, 10, 0, 0, 0, 0);
-            ApptEndDate.ValueChanged += new System.EventHandler(this.ApptEndDate_ValueChanged);
+            ApptEndDateTime.CustomFormat = "MM/dd/yyyy hh:mm tt";
+            ApptEndDateTime.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            ApptEndDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            ApptEndDateTime.Location = new System.Drawing.Point(205, 232);
+            ApptEndDateTime.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            ApptEndDateTime.Name = "ApptEndDateTime";
+            ApptEndDateTime.Size = new System.Drawing.Size(194, 21);
+            ApptEndDateTime.TabIndex = 22;
+            ApptEndDateTime.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             // 
             // ApptSaveButton
             // 
@@ -100,15 +101,6 @@
             this.ApptTypeLabel.TabIndex = 12;
             this.ApptTypeLabel.Text = "Type";
             // 
-            // ApptType
-            // 
-            this.ApptType.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ApptType.Location = new System.Drawing.Point(205, 80);
-            this.ApptType.Name = "ApptType";
-            this.ApptType.Size = new System.Drawing.Size(194, 27);
-            this.ApptType.TabIndex = 13;
-            this.ApptType.TextChanged += new System.EventHandler(this.ApptType_TextChanged);
-            // 
             // ApptEndDateLabel
             // 
             this.ApptEndDateLabel.AutoSize = true;
@@ -131,12 +123,14 @@
             // 
             // ApptCustomerID
             // 
+            this.ApptCustomerID.BackColor = System.Drawing.Color.White;
             this.ApptCustomerID.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ApptCustomerID.ForeColor = System.Drawing.Color.Black;
             this.ApptCustomerID.Location = new System.Drawing.Point(205, 130);
             this.ApptCustomerID.Name = "ApptCustomerID";
             this.ApptCustomerID.Size = new System.Drawing.Size(194, 27);
             this.ApptCustomerID.TabIndex = 15;
-            this.ApptCustomerID.TextChanged += new System.EventHandler(this.ApptCustomer_TextChanged);
+            this.ApptCustomerID.TextChanged += new System.EventHandler(this.ApptCustomerID_TextChanged);
             // 
             // ApptStartDateLabel
             // 
@@ -161,7 +155,9 @@
             // 
             // ApptUserID
             // 
+            this.ApptUserID.BackColor = System.Drawing.Color.White;
             this.ApptUserID.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ApptUserID.ForeColor = System.Drawing.Color.Black;
             this.ApptUserID.Location = new System.Drawing.Point(205, 30);
             this.ApptUserID.Name = "ApptUserID";
             this.ApptUserID.Size = new System.Drawing.Size(194, 27);
@@ -178,21 +174,32 @@
             this.ApptUserIDLabel.TabIndex = 26;
             this.ApptUserIDLabel.Text = "User ID";
             // 
+            // ApptTypeListBox
+            // 
+            this.ApptTypeListBox.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ApptTypeListBox.FormattingEnabled = true;
+            this.ApptTypeListBox.ItemHeight = 19;
+            this.ApptTypeListBox.Location = new System.Drawing.Point(205, 81);
+            this.ApptTypeListBox.Name = "ApptTypeListBox";
+            this.ApptTypeListBox.Size = new System.Drawing.Size(194, 23);
+            this.ApptTypeListBox.TabIndex = 27;
+            this.ApptTypeListBox.SelectedIndexChanged += new System.EventHandler(this.ApptTypeListBox_SelectedIndexChanged);
+            // 
             // AppointmentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(453, 337);
             this.ControlBox = false;
+            this.Controls.Add(this.ApptTypeListBox);
             this.Controls.Add(this.ApptUserIDLabel);
             this.Controls.Add(this.ApptUserID);
             this.Controls.Add(this.ApptCancelButton);
-            this.Controls.Add(ApptEndDate);
-            this.Controls.Add(ApptStartDate);
+            this.Controls.Add(ApptEndDateTime);
+            this.Controls.Add(ApptStartDateTime);
             this.Controls.Add(this.ApptStartDateLabel);
             this.Controls.Add(this.ApptCustomerID);
             this.Controls.Add(this.ApptCustomerIDLabel);
-            this.Controls.Add(this.ApptType);
             this.Controls.Add(this.ApptTypeLabel);
             this.Controls.Add(this.ApptEndDateLabel);
             this.Controls.Add(this.ApptDeleteButton);
@@ -213,7 +220,6 @@
         private System.Windows.Forms.Button ApptSaveButton;
         private System.Windows.Forms.Button ApptDeleteButton;
         private System.Windows.Forms.Label ApptTypeLabel;
-        private System.Windows.Forms.TextBox ApptType;
         private System.Windows.Forms.Label ApptEndDateLabel;
         private System.Windows.Forms.Label ApptCustomerIDLabel;
         private System.Windows.Forms.TextBox ApptCustomerID;
@@ -221,5 +227,6 @@
         private System.Windows.Forms.Button ApptCancelButton;
         private System.Windows.Forms.TextBox ApptUserID;
         private System.Windows.Forms.Label ApptUserIDLabel;
+        private System.Windows.Forms.ListBox ApptTypeListBox;
     }
 }

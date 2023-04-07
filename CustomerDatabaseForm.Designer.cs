@@ -45,6 +45,7 @@
             this.DBCity_City = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DBCity_CountryID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DBCountry_Country = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DBAddress_Phone_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.CustomerDBDGV)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,7 +55,7 @@
             this.CustomerDBCloseButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.CustomerDBCloseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CustomerDBCloseButton.Font = new System.Drawing.Font("Tahoma", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CustomerDBCloseButton.Location = new System.Drawing.Point(1239, -4);
+            this.CustomerDBCloseButton.Location = new System.Drawing.Point(1214, -4);
             this.CustomerDBCloseButton.Margin = new System.Windows.Forms.Padding(0);
             this.CustomerDBCloseButton.Name = "CustomerDBCloseButton";
             this.CustomerDBCloseButton.Size = new System.Drawing.Size(52, 23);
@@ -78,7 +79,8 @@
             this.DBAddress_CityID,
             this.DBCity_City,
             this.DBCity_CountryID,
-            this.DBCountry_Country});
+            this.DBCountry_Country,
+            this.DBAddress_Phone_Column});
             this.CustomerDBDGV.Location = new System.Drawing.Point(30, 55);
             this.CustomerDBDGV.Margin = new System.Windows.Forms.Padding(4);
             this.CustomerDBDGV.MultiSelect = false;
@@ -86,7 +88,7 @@
             this.CustomerDBDGV.ReadOnly = true;
             this.CustomerDBDGV.RowHeadersVisible = false;
             this.CustomerDBDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.CustomerDBDGV.Size = new System.Drawing.Size(1225, 360);
+            this.CustomerDBDGV.Size = new System.Drawing.Size(1200, 360);
             this.CustomerDBDGV.TabIndex = 10;
             // 
             // NewCustomerButton
@@ -209,7 +211,7 @@
             this.DBCity_City.HeaderText = "City";
             this.DBCity_City.Name = "DBCity_City";
             this.DBCity_City.ReadOnly = true;
-            this.DBCity_City.Width = 150;
+            this.DBCity_City.Width = 115;
             // 
             // DBCity_CountryID
             // 
@@ -218,7 +220,6 @@
             this.DBCity_CountryID.Name = "DBCity_CountryID";
             this.DBCity_CountryID.ReadOnly = true;
             this.DBCity_CountryID.Visible = false;
-            this.DBCity_CountryID.Width = 150;
             // 
             // DBCountry_Country
             // 
@@ -226,13 +227,20 @@
             this.DBCountry_Country.HeaderText = "Country";
             this.DBCountry_Country.Name = "DBCountry_Country";
             this.DBCountry_Country.ReadOnly = true;
-            this.DBCountry_Country.Width = 150;
+            this.DBCountry_Country.Width = 115;
+            // 
+            // DBAddress_Phone_Column
+            // 
+            this.DBAddress_Phone_Column.HeaderText = "Phone";
+            this.DBAddress_Phone_Column.Name = "DBAddress_Phone_Column";
+            this.DBAddress_Phone_Column.ReadOnly = true;
+            this.DBAddress_Phone_Column.Width = 115;
             // 
             // CustomerDatabaseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1284, 461);
+            this.ClientSize = new System.Drawing.Size(1259, 461);
             this.ControlBox = false;
             this.Controls.Add(this.CustomerCount);
             this.Controls.Add(this.CustomerCountLabel);
@@ -269,5 +277,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn DBCity_City;
         private System.Windows.Forms.DataGridViewTextBoxColumn DBCity_CountryID;
         private System.Windows.Forms.DataGridViewTextBoxColumn DBCountry_Country;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DBAddress_Phone_Column;
     }
 }

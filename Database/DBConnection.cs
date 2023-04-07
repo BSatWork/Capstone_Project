@@ -28,7 +28,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Database
                 // Open the connection.
                 connectToDB.Open();
 
-                MessageBox.Show("Connection is open");
+                //MessageBox.Show("Connection is open");
             }
             catch (MySqlException ex)
             {

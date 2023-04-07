@@ -14,8 +14,8 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Classes
         public int addressCityID;
         public string postalCode;
         public string phone;
-        //public DateTime createDate;
-        //public string createdBy;
+        public DateTime createDate;
+        public string createdBy;
         public new DateTime lastUpdate;
         public new string lastUpdatedBy;
 

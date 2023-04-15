@@ -31,7 +31,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             Activate();
             appMainScreen = mainScreen;
             
-            if (!string.IsNullOrEmpty(ApptUserID.Text))
+            if (!string.IsNullOrEmpty(UserIDComboBox.Text))
             {
                 ApptCancelButton.Visible = false;
                 ApptDeleteButton.Visible = true;
@@ -49,8 +49,9 @@ namespace BOP3_Task_1_DB_and_File_Server_App
         private void ApptSave_Click(object sender, EventArgs e)
         {
             // If all fields have been validated, then continue processing.  Otherwise, inform the user.
-            if (ApptUserID.BackColor == System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192))))) &&
-                !string.IsNullOrEmpty(ApptTypeComboBox.Text) && !string.IsNullOrEmpty(CustomerComboBox.Text)
+            if (!string.IsNullOrEmpty(UserIDComboBox.Text) &&
+                !string.IsNullOrEmpty(ApptTypeComboBox.Text) &&
+                !string.IsNullOrEmpty(CustomerComboBox.Text)
                 )
             {
                 //Todo Save the Appt data to the DB
@@ -86,22 +87,5 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             Close();
             appMainScreen.Show();
         }
-
-
-        // Form field validation...
-        // Fields will turn green, indicating the input is acceptable, or they will stay red.
-
-        /*private void ApptUserID_TextChanged(object sender, EventArgs e)
-        {
-            // Validate the User ID field is populated.
-            if (!string.IsNullOrEmpty(ApptUserID.Text))
-            {
-                ApptUserID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            }
-            else
-            {
-                ApptUserID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            }
-        }*/
     }
 }

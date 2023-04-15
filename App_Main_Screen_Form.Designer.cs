@@ -30,15 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.AppoinmentsDGV = new System.Windows.Forms.DataGridView();
-            this.AddUpdateDeleteApptButton = new System.Windows.Forms.Button();
-            this.ApptCountLabel = new System.Windows.Forms.Label();
-            this.ApptCount = new System.Windows.Forms.Label();
-            this.AddUpdateDeleteApptToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.CustomerDBButton = new System.Windows.Forms.Button();
-            this.CustomerDBToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.CalendarView = new System.Windows.Forms.ComboBox();
-            this.MainScreenCloseButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.Appointment_ID_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Customer_ID_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Customer_Name_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,6 +45,17 @@
             this.Created_By_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Last_Update_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Last_Update_By_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AddUpdateDeleteApptButton = new System.Windows.Forms.Button();
+            this.ApptCountLabel = new System.Windows.Forms.Label();
+            this.ApptCount = new System.Windows.Forms.Label();
+            this.AddUpdateDeleteApptToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.CustomerDBButton = new System.Windows.Forms.Button();
+            this.CustomerDBToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.CalendarView = new System.Windows.Forms.ComboBox();
+            this.MainScreenCloseButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.ReportsButton = new System.Windows.Forms.Button();
+            this.ReportsToolTip = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.AppoinmentsDGV)).BeginInit();
             this.SuspendLayout();
             // 
@@ -87,105 +89,6 @@
             this.AppoinmentsDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.AppoinmentsDGV.Size = new System.Drawing.Size(975, 360);
             this.AppoinmentsDGV.TabIndex = 0;
-            // 
-            // AddUpdateDeleteApptButton
-            // 
-            this.AddUpdateDeleteApptButton.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddUpdateDeleteApptButton.Location = new System.Drawing.Point(30, 13);
-            this.AddUpdateDeleteApptButton.Margin = new System.Windows.Forms.Padding(4);
-            this.AddUpdateDeleteApptButton.Name = "AddUpdateDeleteApptButton";
-            this.AddUpdateDeleteApptButton.Size = new System.Drawing.Size(243, 36);
-            this.AddUpdateDeleteApptButton.TabIndex = 1;
-            this.AddUpdateDeleteApptButton.Text = "Add/Update/Delete Appt";
-            this.AddUpdateDeleteApptButton.UseVisualStyleBackColor = true;
-            this.AddUpdateDeleteApptButton.Click += new System.EventHandler(this.AddUpdateDeleteApptButton_Click);
-            // 
-            // ApptCountLabel
-            // 
-            this.ApptCountLabel.AutoSize = true;
-            this.ApptCountLabel.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ApptCountLabel.Location = new System.Drawing.Point(33, 419);
-            this.ApptCountLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.ApptCountLabel.Name = "ApptCountLabel";
-            this.ApptCountLabel.Size = new System.Drawing.Size(154, 18);
-            this.ApptCountLabel.TabIndex = 2;
-            this.ApptCountLabel.Text = "Appointment Count:";
-            // 
-            // ApptCount
-            // 
-            this.ApptCount.AutoSize = true;
-            this.ApptCount.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ApptCount.Location = new System.Drawing.Point(188, 419);
-            this.ApptCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.ApptCount.Name = "ApptCount";
-            this.ApptCount.Size = new System.Drawing.Size(18, 18);
-            this.ApptCount.TabIndex = 3;
-            this.ApptCount.Text = "0";
-            // 
-            // AddUpdateDeleteApptToolTip
-            // 
-            this.AddUpdateDeleteApptToolTip.AutoPopDelay = 10000;
-            this.AddUpdateDeleteApptToolTip.InitialDelay = 100;
-            this.AddUpdateDeleteApptToolTip.IsBalloon = true;
-            this.AddUpdateDeleteApptToolTip.ReshowDelay = 100;
-            // 
-            // CustomerDBButton
-            // 
-            this.CustomerDBButton.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CustomerDBButton.Location = new System.Drawing.Point(831, 420);
-            this.CustomerDBButton.Margin = new System.Windows.Forms.Padding(4);
-            this.CustomerDBButton.Name = "CustomerDBButton";
-            this.CustomerDBButton.Size = new System.Drawing.Size(175, 29);
-            this.CustomerDBButton.TabIndex = 4;
-            this.CustomerDBButton.Text = "Customer Database";
-            this.CustomerDBButton.UseVisualStyleBackColor = true;
-            this.CustomerDBButton.Click += new System.EventHandler(this.CustomerDBButton_Click);
-            // 
-            // CustomerDBToolTip
-            // 
-            this.CustomerDBToolTip.AutoPopDelay = 10000;
-            this.CustomerDBToolTip.InitialDelay = 100;
-            this.CustomerDBToolTip.IsBalloon = true;
-            this.CustomerDBToolTip.ReshowDelay = 100;
-            // 
-            // CalendarView
-            // 
-            this.CalendarView.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CalendarView.Items.AddRange(new object[] {
-            "All",
-            "30 Days",
-            "7 Days"});
-            this.CalendarView.Location = new System.Drawing.Point(884, 21);
-            this.CalendarView.Name = "CalendarView";
-            this.CalendarView.Size = new System.Drawing.Size(121, 24);
-            this.CalendarView.TabIndex = 5;
-            this.CalendarView.Text = "All";
-            this.CalendarView.SelectedIndexChanged += new System.EventHandler(this.CalendarView_SelectedIndexChanged);
-            // 
-            // MainScreenCloseButton
-            // 
-            this.MainScreenCloseButton.BackColor = System.Drawing.SystemColors.Control;
-            this.MainScreenCloseButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.MainScreenCloseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.MainScreenCloseButton.Font = new System.Drawing.Font("Tahoma", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MainScreenCloseButton.Location = new System.Drawing.Point(988, -4);
-            this.MainScreenCloseButton.Margin = new System.Windows.Forms.Padding(0);
-            this.MainScreenCloseButton.Name = "MainScreenCloseButton";
-            this.MainScreenCloseButton.Size = new System.Drawing.Size(52, 23);
-            this.MainScreenCloseButton.TabIndex = 9;
-            this.MainScreenCloseButton.Text = "Close";
-            this.MainScreenCloseButton.UseVisualStyleBackColor = false;
-            this.MainScreenCloseButton.Click += new System.EventHandler(this.MainScreenCloseButton_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(785, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(93, 14);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "Calendar View";
             // 
             // Appointment_ID_Column
             // 
@@ -307,12 +210,128 @@
             this.Last_Update_By_Column.ReadOnly = true;
             this.Last_Update_By_Column.Visible = false;
             // 
+            // AddUpdateDeleteApptButton
+            // 
+            this.AddUpdateDeleteApptButton.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AddUpdateDeleteApptButton.Location = new System.Drawing.Point(30, 13);
+            this.AddUpdateDeleteApptButton.Margin = new System.Windows.Forms.Padding(4);
+            this.AddUpdateDeleteApptButton.Name = "AddUpdateDeleteApptButton";
+            this.AddUpdateDeleteApptButton.Size = new System.Drawing.Size(243, 36);
+            this.AddUpdateDeleteApptButton.TabIndex = 1;
+            this.AddUpdateDeleteApptButton.Text = "Add/Update/Delete Appt";
+            this.AddUpdateDeleteApptButton.UseVisualStyleBackColor = true;
+            this.AddUpdateDeleteApptButton.Click += new System.EventHandler(this.AddUpdateDeleteApptButton_Click);
+            // 
+            // ApptCountLabel
+            // 
+            this.ApptCountLabel.AutoSize = true;
+            this.ApptCountLabel.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ApptCountLabel.Location = new System.Drawing.Point(33, 419);
+            this.ApptCountLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.ApptCountLabel.Name = "ApptCountLabel";
+            this.ApptCountLabel.Size = new System.Drawing.Size(154, 18);
+            this.ApptCountLabel.TabIndex = 2;
+            this.ApptCountLabel.Text = "Appointment Count:";
+            // 
+            // ApptCount
+            // 
+            this.ApptCount.AutoSize = true;
+            this.ApptCount.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ApptCount.Location = new System.Drawing.Point(188, 419);
+            this.ApptCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.ApptCount.Name = "ApptCount";
+            this.ApptCount.Size = new System.Drawing.Size(18, 18);
+            this.ApptCount.TabIndex = 3;
+            this.ApptCount.Text = "0";
+            // 
+            // AddUpdateDeleteApptToolTip
+            // 
+            this.AddUpdateDeleteApptToolTip.AutoPopDelay = 5000;
+            this.AddUpdateDeleteApptToolTip.InitialDelay = 500;
+            this.AddUpdateDeleteApptToolTip.IsBalloon = true;
+            this.AddUpdateDeleteApptToolTip.ReshowDelay = 100;
+            // 
+            // CustomerDBButton
+            // 
+            this.CustomerDBButton.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CustomerDBButton.Location = new System.Drawing.Point(831, 420);
+            this.CustomerDBButton.Margin = new System.Windows.Forms.Padding(4);
+            this.CustomerDBButton.Name = "CustomerDBButton";
+            this.CustomerDBButton.Size = new System.Drawing.Size(175, 29);
+            this.CustomerDBButton.TabIndex = 4;
+            this.CustomerDBButton.Text = "Customer Database";
+            this.CustomerDBButton.UseVisualStyleBackColor = true;
+            this.CustomerDBButton.Click += new System.EventHandler(this.CustomerDBButton_Click);
+            // 
+            // CustomerDBToolTip
+            // 
+            this.CustomerDBToolTip.AutoPopDelay = 5000;
+            this.CustomerDBToolTip.InitialDelay = 500;
+            this.CustomerDBToolTip.IsBalloon = true;
+            this.CustomerDBToolTip.ReshowDelay = 100;
+            // 
+            // CalendarView
+            // 
+            this.CalendarView.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CalendarView.Items.AddRange(new object[] {
+            "All",
+            "30 Days",
+            "7 Days"});
+            this.CalendarView.Location = new System.Drawing.Point(884, 21);
+            this.CalendarView.Name = "CalendarView";
+            this.CalendarView.Size = new System.Drawing.Size(121, 24);
+            this.CalendarView.TabIndex = 5;
+            this.CalendarView.Text = "All";
+            this.CalendarView.SelectedIndexChanged += new System.EventHandler(this.CalendarView_SelectedIndexChanged);
+            // 
+            // MainScreenCloseButton
+            // 
+            this.MainScreenCloseButton.BackColor = System.Drawing.SystemColors.Control;
+            this.MainScreenCloseButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.MainScreenCloseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.MainScreenCloseButton.Font = new System.Drawing.Font("Tahoma", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MainScreenCloseButton.Location = new System.Drawing.Point(988, -4);
+            this.MainScreenCloseButton.Margin = new System.Windows.Forms.Padding(0);
+            this.MainScreenCloseButton.Name = "MainScreenCloseButton";
+            this.MainScreenCloseButton.Size = new System.Drawing.Size(52, 23);
+            this.MainScreenCloseButton.TabIndex = 9;
+            this.MainScreenCloseButton.Text = "Close";
+            this.MainScreenCloseButton.UseVisualStyleBackColor = false;
+            this.MainScreenCloseButton.Click += new System.EventHandler(this.MainScreenCloseButton_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(785, 25);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(93, 14);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Calendar View";
+            // 
+            // ReportsButton
+            // 
+            this.ReportsButton.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ReportsButton.Location = new System.Drawing.Point(723, 420);
+            this.ReportsButton.Margin = new System.Windows.Forms.Padding(4);
+            this.ReportsButton.Name = "ReportsButton";
+            this.ReportsButton.Size = new System.Drawing.Size(100, 29);
+            this.ReportsButton.TabIndex = 11;
+            this.ReportsButton.Text = "Reports";
+            this.ReportsButton.UseVisualStyleBackColor = true;
+            this.ReportsButton.Click += new System.EventHandler(this.ReportsButton_Click);
+            // 
+            // ReportsToolTip
+            // 
+            this.ReportsToolTip.IsBalloon = true;
+            // 
             // MainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1034, 461);
             this.ControlBox = false;
+            this.Controls.Add(this.ReportsButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.MainScreenCloseButton);
             this.Controls.Add(this.CalendarView);
@@ -328,7 +347,7 @@
             this.Name = "MainScreen";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Appointment Scheduler App";
+            this.Text = "Appointment Scheduler";
             ((System.ComponentModel.ISupportInitialize)(this.AppoinmentsDGV)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -362,5 +381,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Created_By_Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn Last_Update_Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn Last_Update_By_Column;
+        private System.Windows.Forms.Button ReportsButton;
+        private System.Windows.Forms.ToolTip ReportsToolTip;
     }
 }

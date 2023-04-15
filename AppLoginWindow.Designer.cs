@@ -50,8 +50,6 @@
             // 
             // UserNameInputBox
             // 
-            this.UserNameInputBox.AcceptsReturn = true;
-            this.UserNameInputBox.AcceptsTab = true;
             this.UserNameInputBox.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UserNameInputBox.Location = new System.Drawing.Point(189, 121);
             this.UserNameInputBox.Name = "UserNameInputBox";
@@ -72,8 +70,6 @@
             // 
             // PasswordInputBox
             // 
-            this.PasswordInputBox.AcceptsReturn = true;
-            this.PasswordInputBox.AcceptsTab = true;
             this.PasswordInputBox.BackColor = System.Drawing.Color.White;
             this.PasswordInputBox.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PasswordInputBox.Location = new System.Drawing.Point(189, 189);

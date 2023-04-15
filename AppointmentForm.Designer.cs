@@ -35,12 +35,12 @@
             this.ApptTypeLabel = new System.Windows.Forms.Label();
             this.ApptEndDateLabel = new System.Windows.Forms.Label();
             this.ApptCustomerIDLabel = new System.Windows.Forms.Label();
-            this.ApptCustomerID = new System.Windows.Forms.TextBox();
             this.ApptStartDateLabel = new System.Windows.Forms.Label();
             this.ApptCancelButton = new System.Windows.Forms.Button();
             this.ApptUserID = new System.Windows.Forms.TextBox();
             this.ApptUserIDLabel = new System.Windows.Forms.Label();
             this.ApptTypeListBox = new System.Windows.Forms.ListBox();
+            this.ApptCustomerListBox = new System.Windows.Forms.ListBox();
             ApptStartDateTime = new System.Windows.Forms.DateTimePicker();
             ApptEndDateTime = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
@@ -107,9 +107,9 @@
             this.ApptEndDateLabel.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ApptEndDateLabel.Location = new System.Drawing.Point(50, 234);
             this.ApptEndDateLabel.Name = "ApptEndDateLabel";
-            this.ApptEndDateLabel.Size = new System.Drawing.Size(74, 18);
+            this.ApptEndDateLabel.Size = new System.Drawing.Size(119, 18);
             this.ApptEndDateLabel.TabIndex = 2;
-            this.ApptEndDateLabel.Text = "End Date";
+            this.ApptEndDateLabel.Text = "End Date/Time";
             // 
             // ApptCustomerIDLabel
             // 
@@ -117,20 +117,9 @@
             this.ApptCustomerIDLabel.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ApptCustomerIDLabel.Location = new System.Drawing.Point(50, 134);
             this.ApptCustomerIDLabel.Name = "ApptCustomerIDLabel";
-            this.ApptCustomerIDLabel.Size = new System.Drawing.Size(101, 18);
+            this.ApptCustomerIDLabel.Size = new System.Drawing.Size(79, 18);
             this.ApptCustomerIDLabel.TabIndex = 14;
-            this.ApptCustomerIDLabel.Text = "Customer ID";
-            // 
-            // ApptCustomerID
-            // 
-            this.ApptCustomerID.BackColor = System.Drawing.Color.White;
-            this.ApptCustomerID.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ApptCustomerID.ForeColor = System.Drawing.Color.Black;
-            this.ApptCustomerID.Location = new System.Drawing.Point(205, 130);
-            this.ApptCustomerID.Name = "ApptCustomerID";
-            this.ApptCustomerID.Size = new System.Drawing.Size(194, 27);
-            this.ApptCustomerID.TabIndex = 15;
-            this.ApptCustomerID.TextChanged += new System.EventHandler(this.ApptCustomerID_TextChanged);
+            this.ApptCustomerIDLabel.Text = "Customer";
             // 
             // ApptStartDateLabel
             // 
@@ -138,9 +127,9 @@
             this.ApptStartDateLabel.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ApptStartDateLabel.Location = new System.Drawing.Point(50, 184);
             this.ApptStartDateLabel.Name = "ApptStartDateLabel";
-            this.ApptStartDateLabel.Size = new System.Drawing.Size(85, 18);
+            this.ApptStartDateLabel.Size = new System.Drawing.Size(130, 18);
             this.ApptStartDateLabel.TabIndex = 16;
-            this.ApptStartDateLabel.Text = "Start Date";
+            this.ApptStartDateLabel.Text = "Start Date/Time";
             // 
             // ApptCancelButton
             // 
@@ -185,12 +174,24 @@
             this.ApptTypeListBox.TabIndex = 27;
             this.ApptTypeListBox.SelectedIndexChanged += new System.EventHandler(this.ApptTypeListBox_SelectedIndexChanged);
             // 
+            // ApptCustomerListBox
+            // 
+            this.ApptCustomerListBox.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ApptCustomerListBox.FormattingEnabled = true;
+            this.ApptCustomerListBox.ItemHeight = 19;
+            this.ApptCustomerListBox.Location = new System.Drawing.Point(205, 130);
+            this.ApptCustomerListBox.Name = "ApptCustomerListBox";
+            this.ApptCustomerListBox.Size = new System.Drawing.Size(194, 23);
+            this.ApptCustomerListBox.TabIndex = 28;
+            this.ApptCustomerListBox.SelectedIndexChanged += new System.EventHandler(this.ApptCustomerListBox_SelectedIndexChanged);
+            // 
             // AppointmentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(453, 337);
             this.ControlBox = false;
+            this.Controls.Add(this.ApptCustomerListBox);
             this.Controls.Add(this.ApptTypeListBox);
             this.Controls.Add(this.ApptUserIDLabel);
             this.Controls.Add(this.ApptUserID);
@@ -198,7 +199,6 @@
             this.Controls.Add(ApptEndDateTime);
             this.Controls.Add(ApptStartDateTime);
             this.Controls.Add(this.ApptStartDateLabel);
-            this.Controls.Add(this.ApptCustomerID);
             this.Controls.Add(this.ApptCustomerIDLabel);
             this.Controls.Add(this.ApptTypeLabel);
             this.Controls.Add(this.ApptEndDateLabel);
@@ -222,11 +222,11 @@
         private System.Windows.Forms.Label ApptTypeLabel;
         private System.Windows.Forms.Label ApptEndDateLabel;
         private System.Windows.Forms.Label ApptCustomerIDLabel;
-        private System.Windows.Forms.TextBox ApptCustomerID;
         private System.Windows.Forms.Label ApptStartDateLabel;
         private System.Windows.Forms.Button ApptCancelButton;
         private System.Windows.Forms.TextBox ApptUserID;
         private System.Windows.Forms.Label ApptUserIDLabel;
         private System.Windows.Forms.ListBox ApptTypeListBox;
+        private System.Windows.Forms.ListBox ApptCustomerListBox;
     }
 }

@@ -155,6 +155,7 @@
             this.DBCustomer_ID_Column.HeaderText = "Customer ID";
             this.DBCustomer_ID_Column.Name = "DBCustomer_ID_Column";
             this.DBCustomer_ID_Column.ReadOnly = true;
+            this.DBCustomer_ID_Column.Visible = false;
             this.DBCustomer_ID_Column.Width = 90;
             // 
             // DBCustomer_Name_Column

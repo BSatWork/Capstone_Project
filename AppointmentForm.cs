@@ -49,9 +49,9 @@ namespace BOP3_Task_1_DB_and_File_Server_App
         private void ApptSave_Click(object sender, EventArgs e)
         {
             // If all fields have been validated, then continue processing.  Otherwise, inform the user.
-            if (ApptUserID.BackColor == System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192))))) && 
-                //ApptType.BackColor == System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192))))) &&
-                ApptCustomerID.BackColor == System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192))))) /*&&
+            if (ApptUserID.BackColor == System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192))))) /*&& 
+                ApptType.BackColor == System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192))))) &&
+                ApptCustomerListBox.BackColor == System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192))))) &&
                 Customer_City.BackColor == System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192))))) &&
                 Customer_Country.BackColor == System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))))*/
                 )
@@ -107,7 +107,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                 ApptUserID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             }
         }
-        
+
         /*private void ApptType_TextChanged(object sender, EventArgs e)
         {
             // Validate the Type field is populated.
@@ -121,17 +121,17 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             }
         }*/
 
-        private void ApptCustomerID_TextChanged(object sender, EventArgs e)
+        private void ApptCustomerListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Validate the Customer field is populated.
-            if (!string.IsNullOrEmpty(ApptCustomerID.Text))
+            /*if (!string.IsNullOrEmpty(ApptCustomerListBox.Text))
             {
-                ApptCustomerID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+                ApptCustomerListBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             }
             else
             {
-                ApptCustomerID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            }
+                ApptCustomerListBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            }*/
         }
 
         private void ApptTypeListBox_SelectedIndexChanged(object sender, EventArgs e)

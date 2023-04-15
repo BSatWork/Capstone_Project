@@ -24,9 +24,13 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             Activate();
             AddUpdateDeleteApptToolTip.SetToolTip(AddUpdateDeleteApptButton, "To Update or Delete, Select an Appointment First");
             CustomerDBToolTip.SetToolTip(CustomerDBButton, "View or Update the Customer Database");
+            ReportsToolTip.SetToolTip(ReportsButton, "Generate Reports");
+
+            //Todo check the appt database for qty of ALL appointments and if there's an upcoming appt within 15 min.
+
             ApptCount.Text = "0";
 
-            //Todo Update DB user table to add a new row with Active = 1.
+            //Todo If there's an appt upcoming within 15 min, then MessageBox.Show("The highlighted appointment begins within the next 15 minutes.")
 
         }
 
@@ -42,30 +46,9 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             this.Hide();
         }
 
-        /*private void MainScreen_Closing(Object sender, FormClosingEventArgs e)
-        {
-            if (e.CloseReason == CloseReason.UserClosing)
-            {
-                e.Cancel = true;
-                this.Hide();
-
-            }
-        }*/
-
         private void MainScreenCloseButton_Click(object sender, EventArgs e)
         {
             Application.Exit();
-            /*DialogResult delete = MessageBox.Show("Close the app and return to the Login Window?", "Close Confirmation", MessageBoxButtons.YesNo);
-
-            switch (delete)
-            {
-                case DialogResult.Yes:
-                    Close();
-                    _ = new AppLoginForm();
-                    break;
-                case DialogResult.No:
-                    break;
-            }*/
         }
 
         private void CalendarView_SelectedIndexChanged(object sender, EventArgs e)
@@ -82,6 +65,12 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             {
                 //Todo Show All appointments within the next 7 days.
             }
+        }
+
+        private void ReportsButton_Click(object sender, EventArgs e)
+        {
+            _ = new ReportForm(this);
+            this.Hide();
         }
     }
 }

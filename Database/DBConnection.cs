@@ -11,22 +11,22 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Database
 {
     public class DBConnection
     {
-        public static MySqlConnection connectToDB { get; set; }
+        public static MySqlConnection ConnectToDB { get; set; }
 
-        public static void startConnection()
+        public static void StartConnection()
         {
-            
+
             // Make the connection.
-            //MySqlConnection connectToDB = null;
+            //MySqlConnection ConnectToDB = null;
 
             try
             {
                 // Get the connection string.
                 string constr = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
-                connectToDB = new MySqlConnection(constr);
+                ConnectToDB = new MySqlConnection(constr);
 
                 // Open the connection.
-                connectToDB.Open();
+                ConnectToDB.Open();
 
                 //MessageBox.Show("Connection is open");
             }
@@ -36,16 +36,16 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Database
             }
         }
 
-        public static void closeConnection()
+        public static void CloseConnection()
         {
             try
             {
                 // Close the connection
-                if (connectToDB != null)
+                if (ConnectToDB != null)
                 {
-                    connectToDB.Close();
+                    ConnectToDB.Close();
                 }
-                connectToDB = null;
+                ConnectToDB = null;
             }
             catch (MySqlException ex)
             {

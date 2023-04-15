@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BOP3_Task_1_DB_and_File_Server_App.Database;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,6 +21,8 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             Show();
             Activate();
             this.customerDBForm = customerDBForm;
+
+            //maxCustomerID = "Select Max(customerId) from client_schedule.customer";
 
 
         }

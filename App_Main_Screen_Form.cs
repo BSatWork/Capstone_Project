@@ -26,6 +26,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             CustomerDBToolTip.SetToolTip(CustomerDBButton, "View or Update the Customer Database");
             ReportsToolTip.SetToolTip(ReportsButton, "Generate Reports");
 
+            AppoinmentsDGV.DataSource = "";
             //Todo check the appt database for qty of ALL appointments and if there's an upcoming appt within 15 min.
 
             ApptCount.Text = "0";

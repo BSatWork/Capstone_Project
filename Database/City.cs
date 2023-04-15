@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BOP3_Task_1_DB_and_File_Server_App.Classes
+namespace BOP3_Task_1_DB_and_File_Server_App.Database
 {
     public class City : Country
     {
@@ -18,9 +19,12 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Classes
         public new DateTime lastUpdate = DateTime.UtcNow;
         public new string lastUpdateBy = "Somebody";
 
+        //public BindingList<City> CityDB = new BindingList<City>();
+        //public BindingList<City> CityDB = 
+
         public void AddCity()
         {
-            
+            //string sqlAddCity = "";
         }
 
         public void UpdateCity(DateTime createDate, string createdBy)

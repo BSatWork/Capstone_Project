@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BOP3_Task_1_DB_and_File_Server_App.Database;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -6,8 +7,10 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data;
+using MySql.Data.MySqlClient;
 
-namespace BOP3_Task_1_DB_and_File_Server_App.Classes
+namespace BOP3_Task_1_DB_and_File_Server_App.Database
 {
     internal class Appointment
     {
@@ -33,7 +36,8 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Classes
 
         public void AddAppointment(Appointment appointment)
         {
-            AppointmentDB.Add(appointment);
+            //AppointmentDB.Add(appointment);
+
         }
 
         public void UpdateAppointment(int existingAppointmentIndex, Appointment updatedAppointment)

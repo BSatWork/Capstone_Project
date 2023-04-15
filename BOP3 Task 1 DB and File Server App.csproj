@@ -99,12 +99,12 @@
     <Compile Include="AppointmentForm.Designer.cs">
       <DependentUpon>AppointmentForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Address.cs" />
-    <Compile Include="Classes\Appointment.cs" />
-    <Compile Include="Classes\City.cs" />
-    <Compile Include="Classes\Country.cs" />
-    <Compile Include="Classes\Customer.cs" />
-    <Compile Include="Classes\User.cs" />
+    <Compile Include="Database\Address.cs" />
+    <Compile Include="Database\Appointment.cs" />
+    <Compile Include="Database\City.cs" />
+    <Compile Include="Database\Country.cs" />
+    <Compile Include="Database\Customer.cs" />
+    <Compile Include="Database\User.cs" />
     <Compile Include="ConsultantScheduleForm.cs">
       <SubType>Form</SubType>
     </Compile>

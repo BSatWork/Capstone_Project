@@ -15,7 +15,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
         [STAThread]
         static void Main()
         {
-            DBConnection.startConnection();
+            DBConnection.StartConnection();
             //Test data for the DB...
 
             //Add "test" for the userName and password of userID 1.
@@ -26,7 +26,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new AppLoginForm());
-            DBConnection.closeConnection();
+            DBConnection.CloseConnection();
         }
     }
 }

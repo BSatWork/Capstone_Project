@@ -1,4 +1,4 @@
-﻿using BOP3_Task_1_DB_and_File_Server_App.Classes;
+﻿using BOP3_Task_1_DB_and_File_Server_App.Database;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,6 +19,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
     {
         private readonly string LoginError = "Invalid Login Credentials.  Please try again.";
         private string LoginCheck;
+        public DBConnection DBConn = new DBConnection();
 
         public AppLoginForm()
         {
@@ -43,7 +44,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             }
 
             //Todo Get an instance of User table to use for validating the login credentials
-
+            
         }
 
         private void UserNameInputBox_TextChanged(object sender, EventArgs e)
@@ -83,8 +84,8 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
         static void LoginAttempt(string LoginCheck)
         {
-            string LogFilePath = "C:\\Users\\Owner\\source\\repos\\BSatWork\\BOP3-Task-1---Brady-Patterson\\LoginLogFile.txt";//For use on my home PC.
-            //string LogFilePath = "C:\\Users\\Owner\\source\\repos\\BSatWork\\BOP3-Task-1---Brady-Patterson\\LoginLogFile.txt";//For use on the Virtual Lab PC.
+            //string LogFilePath = "C:\\Users\\Owner\\source\\repos\\BSatWork\\BOP3-Task-1---Brady-Patterson\\LoginLogFile.txt";//For use on my home PC.
+            string LogFilePath = "C:\\Users\\LabUser\\Documents\\C969 Project\\LoginLogFile.txt";//For use on the Virtual Lab PC.
             File.AppendAllText(LogFilePath, LoginCheck);//add text to existing file
         }
 

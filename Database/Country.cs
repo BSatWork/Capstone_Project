@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BOP3_Task_1_DB_and_File_Server_App.Classes
+namespace BOP3_Task_1_DB_and_File_Server_App.Database
 {
     public class Country
     {

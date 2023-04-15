@@ -11,24 +11,30 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Classes
     {
         public int countryID;
         public string country;
-        //public DateTime createDate;
-        //public string createdBy;
-        public DateTime lastUpdate;
-        public string lastUpdateBy;
 
-        public Country()
+        //The following variables are not used in the app, but are in the tables so they have default values.
+        public DateTime createDate = DateTime.UtcNow;
+        public string createdBy = "Somebody";
+        public DateTime lastUpdate = DateTime.UtcNow;
+        public string lastUpdateBy = "Somebody";
+
+        public void AddCountry()
         {
-            countryID = 0;  //Todo Pull this from the country table
-            country = null; //Todo Pull this from the country table
+            
         }
 
-        public void Update(DateTime createDate, string createdBy)
+        public void UpdateCountry(DateTime createDate, string createdBy)
         {
-            lastUpdate = DateTime.Now;  //Todo Send to the country table, when there's a change to the country
-            lastUpdateBy = "somebody"; //Todo Send to the country table, when there's a change to the country
+            lastUpdate = DateTime.Now;
+            lastUpdateBy = "somebody"; //Todo Update to use the logged in User Name.
 
             //Todo Send createDate to the country table, when there's a change to the country
             //Todo Send createdBy to the country table, when there's a change to the country
+        }
+
+        public void DeleteCountry()
+        {
+            
         }
     }
 }

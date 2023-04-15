@@ -241,7 +241,7 @@
             this.Controls.Add(this.ConsultantScheduleDGV);
             this.Name = "ConsultantScheduleForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Consultant Schedule";
+            //this.Text = "Consultant Schedule";
             ((System.ComponentModel.ISupportInitialize)(this.ConsultantScheduleDGV)).EndInit();
             this.ResumeLayout(false);
 

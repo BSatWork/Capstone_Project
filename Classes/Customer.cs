@@ -13,29 +13,19 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Classes
         public int customerID;
         public string customerName;
         public int customerAddressID;
-        public int active;
-        public new DateTime createDate;
-        public new string createdBy;
-        public new DateTime lastUpdate;
-        public new string lastUpdateBy;
+
+        //The following variables are not used in the app, but are in the tables so they have default values.
+        public int active = 1;
+        public new DateTime createDate = DateTime.UtcNow;
+        public new string createdBy = "Somebody";
+        public new DateTime lastUpdate = DateTime.UtcNow;
+        public new string lastUpdateBy = "Somebody";
 
         // The following column strings are used to create the column header in the Appointments DGV.
         public string Customer_Name_Column { get { return customerName; } }
 
-        public Customer()
-        {
-            customerID = 0;
-            customerName = string.Empty;
-            customerAddressID = 0;
-            active = 0;
-            
-
-        }
-
         public void AddCustomer()
         {
-            
-            createDate = DateTime.UtcNow;
             
         }
 

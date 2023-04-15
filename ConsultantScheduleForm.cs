@@ -20,6 +20,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             Show();
             Activate();
             appReportScreen = ReportScreen;
+            ConsultantScheduleForm.ActiveForm.Text = "Schedule for " + Consultant;
 
             //Todo Populate the ConsultantScheduleDGV for the provided Consultant.
         }

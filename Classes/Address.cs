@@ -12,25 +12,32 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Classes
         public string addressLine1;
         public string addressLine2;
         public int addressCityID;
-        public string postalCode;
         public string phone;
-        public DateTime createDate;
-        public string createdBy;
-        public new DateTime lastUpdate;
-        public new string lastUpdateBy;
 
-        public Address()
+        //The following variables are not used in the app, but are in the tables so they have default values.
+        public string postalCode = "Somewhere";
+        public new DateTime createDate = DateTime.UtcNow;
+        public new string createdBy = "Somebody";
+        public new DateTime lastUpdate = DateTime.UtcNow;
+        public new string lastUpdateBy = "Somebody";
+
+        public void AddAddress()
         {
 
         }
 
-        public new void Update(DateTime createDate, string createdBy)
+        public void UpdateAddress(DateTime createDate, string createdBy)
         {
-            lastUpdate = DateTime.Now;  //Todo Send to the address table, when there's a change to the address
-            lastUpdateBy = "somebody"; //Todo Send to the address table, when there's a change to the address
+            lastUpdate = DateTime.Now;
+            lastUpdateBy = "somebody";  //Todo Update to use the logged in User Name.
 
             //Todo Send createDate to the address table, when there's a change to the address
             //Todo Send createdBy to the address table, when there's a change to the address
+        }
+
+        public void DeleteAddress()
+        {
+
         }
     }
 }

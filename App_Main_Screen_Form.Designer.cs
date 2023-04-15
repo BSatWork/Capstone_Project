@@ -272,6 +272,7 @@
             // 
             // CalendarView
             // 
+            this.CalendarView.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CalendarView.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CalendarView.Items.AddRange(new object[] {
             "All",
@@ -281,7 +282,6 @@
             this.CalendarView.Name = "CalendarView";
             this.CalendarView.Size = new System.Drawing.Size(121, 24);
             this.CalendarView.TabIndex = 5;
-            this.CalendarView.Text = "All";
             this.CalendarView.SelectedIndexChanged += new System.EventHandler(this.CalendarView_SelectedIndexChanged);
             // 
             // MainScreenCloseButton

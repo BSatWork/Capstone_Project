@@ -12,11 +12,13 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Classes
         public int userID;
         public string userName;
         public string password;
-        public bool active;
-        public DateTime createDate;
-        public string createdBy;
-        public DateTime lastUpdate;
-        public string lastUpdateBy;
+
+        //The following variables are not used in the app, but are in the tables so they have default values.
+        public int active = 1;
+        public DateTime createDate = DateTime.UtcNow;
+        public string createdBy = "Somebody";
+        public DateTime lastUpdate = DateTime.UtcNow;
+        public string lastUpdateBy = "Somebody";
 
         public void AddUser()
         {
@@ -30,6 +32,11 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Classes
 
             //Todo Send createDate to the user table, when there's a change to the user
             //Todo Send createdBy to the user table, when there's a change to the user
+        }
+
+        public void DeleteUser()
+        {
+            
         }
     }
 }

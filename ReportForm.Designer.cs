@@ -32,13 +32,13 @@
             this.ReportFormCloseButton = new System.Windows.Forms.Button();
             this.NumberApptTypesByMonthButton = new System.Windows.Forms.Button();
             this.NumberApptTypesByMonth = new System.Windows.Forms.ToolTip(this.components);
-            this.ApptTypeListBox = new System.Windows.Forms.ListBox();
-            this.MonthsListBox = new System.Windows.Forms.ListBox();
-            this.ConsultantListBox = new System.Windows.Forms.ListBox();
             this.ConsultantScheduleButton = new System.Windows.Forms.Button();
             this.ConsultantScheduleToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.TotalApptsThisYearButton = new System.Windows.Forms.Button();
             this.TotalApptsThisYearToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.ConsultantComboBox = new System.Windows.Forms.ComboBox();
+            this.MonthsComboBox = new System.Windows.Forms.ComboBox();
+            this.ApptTypeComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // ReportFormCloseButton
@@ -72,49 +72,6 @@
             // 
             this.NumberApptTypesByMonth.IsBalloon = true;
             // 
-            // ApptTypeListBox
-            // 
-            this.ApptTypeListBox.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ApptTypeListBox.FormattingEnabled = true;
-            this.ApptTypeListBox.ItemHeight = 19;
-            this.ApptTypeListBox.Location = new System.Drawing.Point(28, 122);
-            this.ApptTypeListBox.Name = "ApptTypeListBox";
-            this.ApptTypeListBox.Size = new System.Drawing.Size(175, 23);
-            this.ApptTypeListBox.TabIndex = 28;
-            // 
-            // MonthsListBox
-            // 
-            this.MonthsListBox.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MonthsListBox.FormattingEnabled = true;
-            this.MonthsListBox.ItemHeight = 19;
-            this.MonthsListBox.Items.AddRange(new object[] {
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
-            "August",
-            "September",
-            "October",
-            "November",
-            "December"});
-            this.MonthsListBox.Location = new System.Drawing.Point(28, 177);
-            this.MonthsListBox.Name = "MonthsListBox";
-            this.MonthsListBox.Size = new System.Drawing.Size(175, 23);
-            this.MonthsListBox.TabIndex = 29;
-            // 
-            // ConsultantListBox
-            // 
-            this.ConsultantListBox.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ConsultantListBox.FormattingEnabled = true;
-            this.ConsultantListBox.ItemHeight = 19;
-            this.ConsultantListBox.Location = new System.Drawing.Point(255, 122);
-            this.ConsultantListBox.Name = "ConsultantListBox";
-            this.ConsultantListBox.Size = new System.Drawing.Size(175, 23);
-            this.ConsultantListBox.TabIndex = 31;
-            // 
             // ConsultantScheduleButton
             // 
             this.ConsultantScheduleButton.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -147,17 +104,69 @@
             // 
             this.TotalApptsThisYearToolTip.IsBalloon = true;
             // 
+            // ConsultantComboBox
+            // 
+            this.ConsultantComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ConsultantComboBox.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ConsultantComboBox.FormattingEnabled = true;
+            this.ConsultantComboBox.Items.AddRange(new object[] {
+            "Bob",
+            "Mary",
+            "Brady"});
+            this.ConsultantComboBox.Location = new System.Drawing.Point(255, 122);
+            this.ConsultantComboBox.Name = "ConsultantComboBox";
+            this.ConsultantComboBox.Size = new System.Drawing.Size(175, 27);
+            this.ConsultantComboBox.TabIndex = 33;
+            // 
+            // MonthsComboBox
+            // 
+            this.MonthsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.MonthsComboBox.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MonthsComboBox.FormattingEnabled = true;
+            this.MonthsComboBox.Items.AddRange(new object[] {
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"});
+            this.MonthsComboBox.Location = new System.Drawing.Point(28, 177);
+            this.MonthsComboBox.Name = "MonthsComboBox";
+            this.MonthsComboBox.Size = new System.Drawing.Size(175, 27);
+            this.MonthsComboBox.TabIndex = 34;
+            // 
+            // ApptTypeComboBox
+            // 
+            this.ApptTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ApptTypeComboBox.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ApptTypeComboBox.FormattingEnabled = true;
+            this.ApptTypeComboBox.Items.AddRange(new object[] {
+            "Initial Consultation",
+            "Follow-up",
+            "Emergency",
+            "Contract Closing"});
+            this.ApptTypeComboBox.Location = new System.Drawing.Point(28, 122);
+            this.ApptTypeComboBox.Name = "ApptTypeComboBox";
+            this.ApptTypeComboBox.Size = new System.Drawing.Size(175, 27);
+            this.ApptTypeComboBox.TabIndex = 35;
+            // 
             // ReportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(461, 355);
             this.ControlBox = false;
+            this.Controls.Add(this.ApptTypeComboBox);
+            this.Controls.Add(this.MonthsComboBox);
+            this.Controls.Add(this.ConsultantComboBox);
             this.Controls.Add(this.TotalApptsThisYearButton);
-            this.Controls.Add(this.ConsultantListBox);
             this.Controls.Add(this.ConsultantScheduleButton);
-            this.Controls.Add(this.MonthsListBox);
-            this.Controls.Add(this.ApptTypeListBox);
             this.Controls.Add(this.NumberApptTypesByMonthButton);
             this.Controls.Add(this.ReportFormCloseButton);
             this.Name = "ReportForm";
@@ -172,12 +181,12 @@
         private System.Windows.Forms.Button ReportFormCloseButton;
         private System.Windows.Forms.Button NumberApptTypesByMonthButton;
         private System.Windows.Forms.ToolTip NumberApptTypesByMonth;
-        private System.Windows.Forms.ListBox ApptTypeListBox;
-        private System.Windows.Forms.ListBox MonthsListBox;
-        private System.Windows.Forms.ListBox ConsultantListBox;
         private System.Windows.Forms.Button ConsultantScheduleButton;
         private System.Windows.Forms.ToolTip ConsultantScheduleToolTip;
         private System.Windows.Forms.Button TotalApptsThisYearButton;
         private System.Windows.Forms.ToolTip TotalApptsThisYearToolTip;
+        private System.Windows.Forms.ComboBox ConsultantComboBox;
+        private System.Windows.Forms.ComboBox MonthsComboBox;
+        private System.Windows.Forms.ComboBox ApptTypeComboBox;
     }
 }

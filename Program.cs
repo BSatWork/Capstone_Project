@@ -1,6 +1,7 @@
 ﻿using BOP3_Task_1_DB_and_File_Server_App.Database;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,7 +16,13 @@ namespace BOP3_Task_1_DB_and_File_Server_App
         [STAThread]
         static void Main()
         {
-            DBConnection.StartConnection();
+            string LogFilePath = "C:\\Users\\LabUser\\Documents\\C969 Project\\LoginLogFile.txt";//For use on the Virtual Lab PC.
+
+            if (File.Exists(LogFilePath))
+            {
+                DBConnection.StartConnection();
+            }
+
             //Test data for the DB...
 
             //Add "test" for the userName and password of userID 1.
@@ -26,7 +33,11 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new AppLoginForm());
-            DBConnection.CloseConnection();
+
+            if (File.Exists(LogFilePath))
+            {
+                DBConnection.CloseConnection();
+            }
         }
     }
 }

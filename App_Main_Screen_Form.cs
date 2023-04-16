@@ -16,6 +16,9 @@ namespace BOP3_Task_1_DB_and_File_Server_App
     public partial class MainScreen : Form
     {
         public AppLoginForm appLogin;
+        readonly MySqlConnection conn = null;
+        readonly MySqlCommand cmd = null;
+        readonly DataTable dataTable = new DataTable();
 
         public MainScreen()
         {
@@ -26,7 +29,16 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             CustomerDBToolTip.SetToolTip(CustomerDBButton, "View or Update the Customer Database");
             ReportsToolTip.SetToolTip(ReportsButton, "Generate Reports");
 
-            AppoinmentsDGV.DataSource = "";
+            string sql = "Select * from appointments;";
+            conn = new MySqlConnection();
+            cmd = new MySqlCommand(sql, conn);
+
+            using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
+            {
+                da.Fill(dataTable);
+            }
+
+            AppointmentsDGV.DataSource = dataTable;
             //Todo check the appt database for qty of ALL appointments and if there's an upcoming appt within 15 min.
 
             ApptCount.Text = "0";

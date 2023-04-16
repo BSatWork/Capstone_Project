@@ -14,7 +14,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
     public partial class AppointmentForm : Form
     {
         public MainScreen appMainScreen;
-        public BindingList<User> UserTable = new BindingList<User>();
+        //public BindingList<User> UserTable = new BindingList<User>();
         //public BindingList<Appointment> AppointmentTable = new BindingList<Appointment>();
 
         //private int DBuserID;
@@ -31,7 +31,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             Activate();
             appMainScreen = mainScreen;
             
-            if (!string.IsNullOrEmpty(ApptUserID.Text))
+            if (!string.IsNullOrEmpty(UserIDComboBox.Text))
             {
                 ApptCancelButton.Visible = false;
                 ApptDeleteButton.Visible = true;
@@ -49,7 +49,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
         private void ApptSave_Click(object sender, EventArgs e)
         {
             // If all fields have been validated, then continue processing.  Otherwise, inform the user.
-            if (ApptUserID.BackColor == System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192))))) &&
+            if (UserIDComboBox.BackColor == System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192))))) &&
                 !string.IsNullOrEmpty(ApptTypeComboBox.Text) && !string.IsNullOrEmpty(CustomerComboBox.Text)
                 )
             {

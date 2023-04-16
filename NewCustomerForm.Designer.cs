@@ -35,7 +35,7 @@
             this.Customer_Address2 = new System.Windows.Forms.TextBox();
             this.Customer_Address1 = new System.Windows.Forms.TextBox();
             this.Customer_Name = new System.Windows.Forms.TextBox();
-            this.Part_ID = new System.Windows.Forms.TextBox();
+            this.Customer_ID = new System.Windows.Forms.TextBox();
             this.Customer_Save_Button = new System.Windows.Forms.Button();
             this.Customer_Cancel_Button = new System.Windows.Forms.Button();
             this.Customer_Country_Label = new System.Windows.Forms.Label();
@@ -124,14 +124,14 @@
             this.Customer_Name.TabIndex = 17;
             this.Customer_Name.TextChanged += new System.EventHandler(this.Customer_Name_TextChanged);
             // 
-            // Part_ID
+            // Customer_ID
             // 
-            this.Part_ID.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Part_ID.Location = new System.Drawing.Point(145, 30);
-            this.Part_ID.Name = "Part_ID";
-            this.Part_ID.ReadOnly = true;
-            this.Part_ID.Size = new System.Drawing.Size(251, 26);
-            this.Part_ID.TabIndex = 16;
+            this.Customer_ID.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Customer_ID.Location = new System.Drawing.Point(145, 30);
+            this.Customer_ID.Name = "Customer_ID";
+            this.Customer_ID.ReadOnly = true;
+            this.Customer_ID.Size = new System.Drawing.Size(251, 26);
+            this.Customer_ID.TabIndex = 16;
             // 
             // Customer_Save_Button
             // 
@@ -242,7 +242,7 @@
             this.Controls.Add(this.Customer_Address2);
             this.Controls.Add(this.Customer_Address1);
             this.Controls.Add(this.Customer_Name);
-            this.Controls.Add(this.Part_ID);
+            this.Controls.Add(this.Customer_ID);
             this.Name = "NewCustomerForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "New Customer Information";
@@ -260,7 +260,7 @@
         private System.Windows.Forms.TextBox Customer_Address2;
         private System.Windows.Forms.TextBox Customer_Address1;
         private System.Windows.Forms.TextBox Customer_Name;
-        private System.Windows.Forms.TextBox Part_ID;
+        private System.Windows.Forms.TextBox Customer_ID;
         private System.Windows.Forms.Button Customer_Save_Button;
         private System.Windows.Forms.Button Customer_Cancel_Button;
         private System.Windows.Forms.Label Customer_Country_Label;

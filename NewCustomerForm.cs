@@ -1,4 +1,6 @@
 ﻿using BOP3_Task_1_DB_and_File_Server_App.Database;
+using MySql.Data;
+using MySql.Data.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,12 +10,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace BOP3_Task_1_DB_and_File_Server_App
 {
     public partial class NewCustomerForm : Form
     {
         public CustomerDatabaseForm customerDBForm;
+        private readonly string sqlCmd;
+        public int maxCustomerID;
 
         public NewCustomerForm(CustomerDatabaseForm customerDBForm)
         {
@@ -22,8 +27,16 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             Activate();
             this.customerDBForm = customerDBForm;
 
-            //maxCustomerID = "Select Max(customerId) from client_schedule.customer";
+            /*const string DB_CONN_STR = "Server=127.0.0.1;Uid=sqlUser;Pwd=Passw0rd!;Database=client_schedule;";
+            MySqlConnection cn = new MySqlConnection(DB_CONN_STR);*/
 
+            sqlCmd = "Select max(customerId) from customer";
+            MySqlDataAdapter adapter = new MySqlDataAdapter(sqlCmd, Database.DBConnection.ConnectToDB);
+            adapter.SelectCommand.CommandType = CommandType.Text;
+            DataTable dt = new DataTable();
+            maxCustomerID = adapter.Fill(dt);
+            maxCustomerID = maxCustomerID++;
+            Customer_ID.Text = maxCustomerID.ToString();
 
         }
 

@@ -15,6 +15,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Database
     internal class Appointment
     {
         public BindingList<Appointment> AppointmentDB = new BindingList<Appointment>();
+        //string sqlCmd = "Select * from ";
 
         public int appointmentID;
         public int customerID;

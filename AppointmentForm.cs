@@ -86,22 +86,5 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             Close();
             appMainScreen.Show();
         }
-
-
-        // Form field validation...
-        // Fields will turn green, indicating the input is acceptable, or they will stay red.
-
-        /*private void ApptUserID_TextChanged(object sender, EventArgs e)
-        {
-            // Validate the User ID field is populated.
-            if (!string.IsNullOrEmpty(ApptUserID.Text))
-            {
-                ApptUserID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            }
-            else
-            {
-                ApptUserID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            }
-        }*/
     }
 }

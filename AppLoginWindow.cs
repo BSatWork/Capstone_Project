@@ -84,9 +84,18 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
         static void LoginAttempt(string LoginCheck)
         {
-            //string LogFilePath = "C:\\Users\\Owner\\source\\repos\\BSatWork\\BOP3-Task-1---Brady-Patterson\\LoginLogFile.txt";//For use on my home PC.
+            string LogFilePathHome = "C:\\Users\\Owner\\source\\repos\\BSatWork\\BOP3-Task-1---Brady-Patterson\\LoginLogFile.txt";//For use on my home PC.
             string LogFilePath = "C:\\Users\\LabUser\\Documents\\C969 Project\\LoginLogFile.txt";//For use on the Virtual Lab PC.
-            File.AppendAllText(LogFilePath, LoginCheck);//add text to existing file
+            
+            if(File.Exists(LogFilePathHome))
+            {
+                File.AppendAllText(LogFilePathHome, LoginCheck);//add text to existing file
+            }
+
+            if (File.Exists(LogFilePath))
+            {
+                File.AppendAllText(LogFilePath, LoginCheck);//add text to existing file
+            }
         }
 
         private void CloseLoginLabel_Click(object sender, EventArgs e)

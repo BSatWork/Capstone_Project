@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using System.Data;
 
 namespace BOP3_Task_1_DB_and_File_Server_App.Database
 {
@@ -34,11 +35,6 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Database
         public string createdBy = "Somebody";
         public DateTime lastUpdate = DateTime.UtcNow;
         public string lastUpdateBy = "Somebody";
-
-        public void GetAppointmentData(object sender, EventArgs e)
-        {
-            
-        }
 
         public void AddAppointment(Appointment appointment)
         {

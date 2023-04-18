@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using BOP3_Task_1_DB_and_File_Server_App.Database;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,16 +30,40 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             CustomerDBToolTip.SetToolTip(CustomerDBButton, "View or Update the Customer Database");
             ReportsToolTip.SetToolTip(ReportsButton, "Generate Reports");
 
-            string sql = "Select * from appointments;";
+            /*string sql = "Select * from appointments;";
             conn = new MySqlConnection();
             cmd = new MySqlCommand(sql, conn);
 
             using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
             {
                 da.Fill(dataTable);
+            }*/
+
+            DataTable dataTable = new DataTable();
+
+            try
+            {
+                string sql = "SELECT * FROM appointments;";
+
+                MySqlCommand cmd = new MySqlCommand(sql, DBConnection.ConnectToDB);
+
+                using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
+                {
+                    da.Fill(dataTable);
+                }
+
+                AppointmentsDGV.DataSource = dataTable;
+                AppointmentsDGV.DataMember = dataTable.TableName;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format("An error occurred {0}", ex.Message), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                conn?.Close();
             }
 
-            AppointmentsDGV.DataSource = dataTable;
             //Todo check the appt database for qty of ALL appointments and if there's an upcoming appt within 15 min.
 
             ApptCount.Text = "0";

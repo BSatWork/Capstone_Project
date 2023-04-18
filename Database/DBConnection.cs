@@ -55,7 +55,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Database
             }
         }
 
-        public SelectRows(DataTable datatable, string connection, string query)
+        /*public SelectRows(DataTable datatable, string connection, string query)
         {
             MySqlConnection conn = new MySqlConnection(connection);
             MySqlDataAdapter adapter = new MySqlDataAdapter
@@ -64,6 +64,6 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Database
             };
             adapter.Fill(datatable);
             return datatable;
-        }
+        }*/
     }
 }

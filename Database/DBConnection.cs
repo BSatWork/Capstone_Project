@@ -16,21 +16,11 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Database
 
         public static void StartConnection()
         {
-
-            // Make the connection.
-            //MySqlConnection ConnectToDB = null;
-
             try
             {
-                // Get the connection string.
-                //string constr = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
-                string constr = "Server=127.0.0.1;Uid=sqlUser;Pwd=Passw0rd!;Database=client_schedule;";
+                string constr = "Server=127.0.0.1;Uid=sqlUser;Pwd=Passw0rd!;Database=client_schedule;"; // Get the connection string.
                 ConnectToDB = new MySqlConnection(constr);
-
-                // Open the connection.
-                ConnectToDB.Open();
-
-                //MessageBox.Show("Connection is open");
+                ConnectToDB.Open(); // Open the connection.
             }
             catch (MySqlException ex)
             {
@@ -54,6 +44,31 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Database
                 MessageBox.Show(ex.Message);
             }
         }
+
+        /*public DataTable SelectRows(DataTable dataTable, string query)
+        {
+            dataTable = new DataTable();
+            
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand(query, ConnectToDB);
+
+                using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
+                {
+                    da.Fill(outDataTable);
+                }
+
+                //AppointmentsDGV.DataSource = dataTable;
+                //AppointmentsDGV.DataMember = dataTable.TableName;
+                return outDataTable;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format("An error occurred {0}", ex.Message), "SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+        }*/
+
 
         /*public SelectRows(DataTable datatable, string connection, string query)
         {

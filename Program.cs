@@ -1,4 +1,5 @@
 ﻿using BOP3_Task_1_DB_and_File_Server_App.Database;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,10 +11,8 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 {
     internal static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
         [STAThread]
+
         static void Main()
         {
             string LogFilePath = "C:\\Users\\LabUser\\Documents\\C969 Project\\LoginLogFile.txt";//For use on the Virtual Lab PC.

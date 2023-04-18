@@ -35,6 +35,11 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Database
         public DateTime lastUpdate = DateTime.UtcNow;
         public string lastUpdateBy = "Somebody";
 
+        public void GetAppointmentData(object sender, EventArgs e)
+        {
+            
+        }
+
         public void AddAppointment(Appointment appointment)
         {
             //AppointmentDB.Add(appointment);

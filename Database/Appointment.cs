@@ -13,10 +13,9 @@ using System.Data;
 
 namespace BOP3_Task_1_DB_and_File_Server_App.Database
 {
-    internal class Appointment
+    public class Appointment
     {
-        public BindingList<Appointment> AppointmentDB = new BindingList<Appointment>();
-        //string sqlCmd = "Select * from ";
+        //public BindingList<Appointment> AppointmentDB = new BindingList<Appointment>();
 
         public int appointmentID;
         public int customerID;
@@ -44,19 +43,19 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Database
 
         public void UpdateAppointment(int existingAppointmentIndex, Appointment updatedAppointment)
         {
-            Appointment existingAppointment = AppointmentDB[existingAppointmentIndex];
+            /*Appointment existingAppointment = AppointmentDB[existingAppointmentIndex];
             int _ = existingAppointmentIndex++;
 
             if (updatedAppointment != existingAppointment)
             {
                 AppointmentDB.Insert(existingAppointmentIndex, updatedAppointment);
                 AppointmentDB.RemoveAt(_);
-            }
+            }*/
         }
 
         public void DeleteAppointment(int appointmentID)
         {
-            Appointment appointment = AppointmentDB[appointmentID];
+            /*Appointment appointment = AppointmentDB[appointmentID];
 
             // Prompt the user for delete confirmation.
             DialogResult delete = MessageBox.Show("This will delete Appoointment ID " + appointment.appointmentID + " which cannot be undone."
@@ -69,16 +68,16 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Database
                     break;
                 case DialogResult.No:
                     break;
-            }
+            }*/
         }
 
         // The following column strings are used to create the column header in the Appointments DGV.
-        public string Appointment_ID_Column { get { return appointmentID.ToString(); } }
+        /*public string Appointment_ID_Column { get { return appointmentID.ToString(); } }
 
         public string Type_Column { get { return type; } } 
 
         public string Start_DateTime_Column { get { return start.ToString(); } }
 
-        public string End_DateTime_Column { get { return end.ToString(); } }
+        public string End_DateTime_Column { get { return end.ToString(); } }*/
     }
 }

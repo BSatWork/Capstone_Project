@@ -43,6 +43,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                 }
 
                 AppointmentsDGV.DataSource = mainScreendataTable;
+                AppointmentsDGV.ClearSelection();
             }
             catch (Exception ex)
             {
@@ -67,7 +68,6 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                 MessageBox.Show(string.Format("An error occurred {0}", ex.Message), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            //apptCount.DefaultView.RowFilter = "max(customerID)";
             appts = apptCount.Rows.Count;
             ApptCount.Text = appts.ToString();
 
@@ -76,9 +76,11 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
         }
 
-        private void AddUpdateDeleteApptButton_Click(object sender, EventArgs e)
+        public void AddUpdateDeleteApptButton_Click(object sender, EventArgs e)
         {
-            _ = new AppointmentForm(this);
+            Appointment appointment = (Appointment)AppointmentsDGV.CurrentRow.DataBoundItem;
+
+            _ = new AppointmentForm(this, appointment);
             this.Hide();
         }
 

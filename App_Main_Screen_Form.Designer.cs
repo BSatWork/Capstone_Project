@@ -30,6 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             this.AppointmentsDGV = new System.Windows.Forms.DataGridView();
+            this.User_ID_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Customer_Name_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Type_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Start_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.End_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AddUpdateDeleteApptButton = new System.Windows.Forms.Button();
             this.ApptCountLabel = new System.Windows.Forms.Label();
             this.ApptCount = new System.Windows.Forms.Label();
@@ -41,11 +46,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.ReportsButton = new System.Windows.Forms.Button();
             this.ReportsToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.User_ID_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Customer_Name_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Type_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Start_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.End_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.AppointmentsDGV)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,6 +69,45 @@
             this.AppointmentsDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.AppointmentsDGV.Size = new System.Drawing.Size(975, 360);
             this.AppointmentsDGV.TabIndex = 0;
+            // 
+            // User_ID_Column
+            // 
+            this.User_ID_Column.DataPropertyName = "userID";
+            this.User_ID_Column.HeaderText = "User ID";
+            this.User_ID_Column.Name = "User_ID_Column";
+            this.User_ID_Column.ReadOnly = true;
+            // 
+            // Customer_Name_Column
+            // 
+            this.Customer_Name_Column.DataPropertyName = "customerName";
+            this.Customer_Name_Column.HeaderText = "Customer Name";
+            this.Customer_Name_Column.Name = "Customer_Name_Column";
+            this.Customer_Name_Column.ReadOnly = true;
+            this.Customer_Name_Column.Width = 300;
+            // 
+            // Type_Column
+            // 
+            this.Type_Column.DataPropertyName = "type";
+            this.Type_Column.HeaderText = "Type";
+            this.Type_Column.Name = "Type_Column";
+            this.Type_Column.ReadOnly = true;
+            this.Type_Column.Width = 150;
+            // 
+            // Start_Column
+            // 
+            this.Start_Column.DataPropertyName = "start";
+            this.Start_Column.HeaderText = "Start";
+            this.Start_Column.Name = "Start_Column";
+            this.Start_Column.ReadOnly = true;
+            this.Start_Column.Width = 200;
+            // 
+            // End_Column
+            // 
+            this.End_Column.DataPropertyName = "end";
+            this.End_Column.HeaderText = "End";
+            this.End_Column.Name = "End_Column";
+            this.End_Column.ReadOnly = true;
+            this.End_Column.Width = 200;
             // 
             // AddUpdateDeleteApptButton
             // 
@@ -184,45 +223,6 @@
             // ReportsToolTip
             // 
             this.ReportsToolTip.IsBalloon = true;
-            // 
-            // User_ID_Column
-            // 
-            this.User_ID_Column.DataPropertyName = "userID";
-            this.User_ID_Column.HeaderText = "User ID";
-            this.User_ID_Column.Name = "User_ID_Column";
-            this.User_ID_Column.ReadOnly = true;
-            // 
-            // Customer_Name_Column
-            // 
-            this.Customer_Name_Column.DataPropertyName = "customerName";
-            this.Customer_Name_Column.HeaderText = "Customer Name";
-            this.Customer_Name_Column.Name = "Customer_Name_Column";
-            this.Customer_Name_Column.ReadOnly = true;
-            this.Customer_Name_Column.Width = 300;
-            // 
-            // Type_Column
-            // 
-            this.Type_Column.DataPropertyName = "type";
-            this.Type_Column.HeaderText = "Type";
-            this.Type_Column.Name = "Type_Column";
-            this.Type_Column.ReadOnly = true;
-            this.Type_Column.Width = 150;
-            // 
-            // Start_Column
-            // 
-            this.Start_Column.DataPropertyName = "start";
-            this.Start_Column.HeaderText = "Start";
-            this.Start_Column.Name = "Start_Column";
-            this.Start_Column.ReadOnly = true;
-            this.Start_Column.Width = 200;
-            // 
-            // End_Column
-            // 
-            this.End_Column.DataPropertyName = "end";
-            this.End_Column.HeaderText = "End";
-            this.End_Column.Name = "End_Column";
-            this.End_Column.ReadOnly = true;
-            this.End_Column.Width = 200;
             // 
             // MainScreen
             // 

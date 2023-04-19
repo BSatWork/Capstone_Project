@@ -17,8 +17,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
     public partial class NewCustomerForm : Form
     {
         public CustomerDatabaseForm customerDBForm;
-        private readonly string sqlCmd;
-        public int maxCustomerID;
+        private int maxID;
 
         public NewCustomerForm(CustomerDatabaseForm customerDBForm)
         {
@@ -27,17 +26,20 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             Activate();
             this.customerDBForm = customerDBForm;
 
-            /*const string DB_CONN_STR = "Server=127.0.0.1;Uid=sqlUser;Pwd=Passw0rd!;Database=client_schedule;";
-            MySqlConnection cn = new MySqlConnection(DB_CONN_STR);*/
+            Customer_ID.Text = GetMaxCustomerID().ToString();
 
-            sqlCmd = "Select max(customerId) from customer";
-            MySqlDataAdapter adapter = new MySqlDataAdapter(sqlCmd, Database.DBConnection.ConnectToDB);
-            adapter.SelectCommand.CommandType = CommandType.Text;
-            DataTable dt = new DataTable();
-            maxCustomerID = adapter.Fill(dt);
-            maxCustomerID = maxCustomerID++;
-            Customer_ID.Text = maxCustomerID.ToString();
+            
 
+
+
+        }
+
+        public int GetMaxCustomerID()
+        {
+            string query = "Select max(customerId) as 'Max ID' from client_schedule.customer";
+            var cmd = new MySqlCommand(query, DBConnection.ConnectToDB);
+            maxID = (int)cmd.ExecuteScalar();
+            return maxID++;
         }
 
         private void Customer_Save_Button_Click(object sender, EventArgs e)

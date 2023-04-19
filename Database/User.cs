@@ -1,6 +1,8 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +21,24 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Database
         public string createdBy = "Somebody";
         public DateTime lastUpdate = DateTime.UtcNow;
         public string lastUpdateBy = "Somebody";
+
+        public DataTable userDT = new DataTable();
+
+        public void GetUserTable()
+        {
+            string query = "Select * from client_schedule.user";
+            MySqlCommand cmd = new MySqlCommand(query, DBConnection.ConnectToDB);
+            MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+            adapter.Fill(userDT);
+        }
+
+        public string GetSingleTableValue(string column, string data)
+        {
+            string query = "Select " + column + " from client_schedule.user where " + column + " = '" + data + "'";
+            var cmd = new MySqlCommand(query, DBConnection.ConnectToDB);
+            string value = cmd.ExecuteScalar().ToString();
+            return value;
+        }
 
         public void AddUser()
         {

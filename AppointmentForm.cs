@@ -14,24 +14,15 @@ namespace BOP3_Task_1_DB_and_File_Server_App
     public partial class AppointmentForm : Form
     {
         public MainScreen appMainScreen;
-        //public BindingList<User> UserTable = new BindingList<User>();
-        //public BindingList<Appointment> AppointmentTable = new BindingList<Appointment>();
 
-        //private int DBuserID;
-        //private string DBuserName;
-        //private string DBpassword;
-
-        //private DB User...
-        //public DB Appointment...
-
-        public AppointmentForm(MainScreen mainScreen)   //Todo Include pulling in the ApptDGV DB in here.
+        public AppointmentForm(MainScreen mainScreen, Appointment appointment = null)
         {
             InitializeComponent();
             Show();
             Activate();
             appMainScreen = mainScreen;
             
-            if (!string.IsNullOrEmpty(UserIDComboBox.Text))
+            if (!string.IsNullOrEmpty(ApptUserIDComboBox.Text))
             {
                 ApptCancelButton.Visible = false;
                 ApptDeleteButton.Visible = true;
@@ -41,7 +32,11 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                 ApptDeleteButton.Visible = false;
                 ApptCancelButton.Visible = true;
 
-                //Todo Pull the selected DGV row data and populate the fields.
+                ApptUserIDComboBox.Text = appointment.userID.ToString();
+                ApptTypeComboBox.Text = appointment.type.ToString();
+                CustomerComboBox.Text = appointment.customerID.ToString();
+                ApptStartDateTime.Value = appointment.start;
+                ApptEndDateTime.Value = appointment.end;
             }
 
         }
@@ -49,7 +44,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
         private void ApptSave_Click(object sender, EventArgs e)
         {
             // If all fields have been validated, then continue processing.  Otherwise, inform the user.
-            if (UserIDComboBox.BackColor == System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192))))) &&
+            if (ApptUserIDComboBox.BackColor == System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192))))) &&
                 !string.IsNullOrEmpty(ApptTypeComboBox.Text) && !string.IsNullOrEmpty(CustomerComboBox.Text)
                 )
             {

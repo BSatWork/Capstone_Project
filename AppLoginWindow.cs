@@ -19,7 +19,6 @@ namespace BOP3_Task_1_DB_and_File_Server_App
     {
         private readonly string LoginError = "Invalid Login Credentials.  Please try again.";
         private string LoginCheck;
-        public DBConnection DBConn = new DBConnection();
 
         public AppLoginForm()
         {
@@ -42,9 +41,6 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
                 LoginError = "Ungültige Login-Details. Bitte versuche es erneut.";
             }
-
-            //Todo Get an instance of User table to use for validating the login credentials
-            
         }
 
         private void UserNameInputBox_TextChanged(object sender, EventArgs e)
@@ -59,7 +55,11 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            if (UserNameInputBox.Text.ToUpper() == "TEST" && PasswordInputBox.Text.ToUpper() == "TEST") //Todo update to verify whether the User Name and Password combination is present in the User DB.
+            User validateUserName = new User();
+            User validatePassword = new User();
+
+            if (validateUserName.GetSingleTableValue("userName", UserNameInputBox.Text) == UserNameInputBox.Text &&     //Verify if the User Name is in the User table.
+                validatePassword.GetSingleTableValue("password", PasswordInputBox.Text) == PasswordInputBox.Text)       //Verify if the Password is in the User table.
             {
                 Hide();
                 _ = new MainScreen();

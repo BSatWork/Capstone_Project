@@ -15,7 +15,8 @@ namespace BOP3_Task_1_DB_and_File_Server_App
     public partial class CustomerDatabaseForm : Form
     {
         public MainScreen appMainScreen;
-        private string query;
+        private readonly string query;
+        private readonly int customers;
 
         public CustomerDatabaseForm(MainScreen mainScreen)
         {
@@ -28,18 +29,18 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
             try
             {
-                string query = "Select
-client_schedule.customer.customerId as Customer,
-client_schedule.customer.customerName as Name,
-client_schedule.address.address as Address,
-client_schedule.address.address2 as Address,
-client_schedule.city.city as City,
-client_schedule.country.country as Country,
-client_schedule.address.phone
-From client_schedule.customer
-Left Join client_schedule.address on customer.addressId = address.addressId
-Left Join client_schedule.city on address.cityId = city.cityId
-Left Join client_schedule.country on city.countryId = country.countryId ";
+                query = "Select " +
+                        //"client_schedule.customer.customerId as Customer, " +
+                        "client_schedule.customer.customerName as Name, " +
+                        "client_schedule.address.address as Address, " +
+                        "client_schedule.address.address2 as Address, " +
+                        "client_schedule.city.city as City, " +
+                        "client_schedule.country.country as Country, " +
+                        "client_schedule.address.phone " +
+                        "From client_schedule.customer " +
+                        "Left Join client_schedule.address on customer.addressId = address.addressId " +
+                        "Left Join client_schedule.city on address.cityId = city.cityId " +
+                        "Left Join client_schedule.country on city.countryId = country.countryId";
 
                 MySqlCommand cmd = new MySqlCommand(query, DBConnection.ConnectToDB);
 
@@ -55,22 +56,37 @@ Left Join client_schedule.country on city.countryId = country.countryId ";
                 MessageBox.Show(string.Format("An error occurred {0}", ex.Message), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+            DataTable customerCount = new DataTable();
+
+            try
+            {
+                string query = "Select customerID from client_schedule.customer;";
+
+                MySqlCommand cmd = new MySqlCommand(query, DBConnection.ConnectToDB);
+
+                using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
+                {
+                    da.Fill(customerCount);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format("An error occurred {0}", ex.Message), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            customers = customerCount.Rows.Count;
+            CustomerCount.Text = customers.ToString();
+
+
+
+
+
         }
 
         private void CustomerDBCloseButton_Click(object sender, EventArgs e)
         {
-            /*DialogResult delete = MessageBox.Show("Closing this window will go back to the Main Screen with no updates."
-                    + "  Is this intended?", "Close Confirmation", MessageBoxButtons.YesNo);
-
-            switch (delete)
-            {
-                case DialogResult.Yes:*/
-                    Close();
-                    appMainScreen.Show();
-                    /*break;
-                case DialogResult.No:
-                    break;
-            }*/
+            Close();
+            appMainScreen.Show();
         }
 
         private void NewCustomerButton_Click(object sender, EventArgs e)

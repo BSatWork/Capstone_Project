@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DateTimePicker ApptStartDateTime;
-            System.Windows.Forms.DateTimePicker ApptEndDateTime;
+            this.ApptStartDateTime = new System.Windows.Forms.DateTimePicker();
+            this.ApptEndDateTime = new System.Windows.Forms.DateTimePicker();
             this.ApptSaveButton = new System.Windows.Forms.Button();
             this.ApptDeleteButton = new System.Windows.Forms.Button();
             this.ApptTypeLabel = new System.Windows.Forms.Label();
@@ -40,34 +40,32 @@
             this.ApptUserIDLabel = new System.Windows.Forms.Label();
             this.ApptTypeComboBox = new System.Windows.Forms.ComboBox();
             this.CustomerComboBox = new System.Windows.Forms.ComboBox();
-            this.UserIDComboBox = new System.Windows.Forms.ComboBox();
-            ApptStartDateTime = new System.Windows.Forms.DateTimePicker();
-            ApptEndDateTime = new System.Windows.Forms.DateTimePicker();
+            this.ApptUserIDComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // ApptStartDateTime
             // 
-            ApptStartDateTime.CustomFormat = "MM/dd/yyyy hh:mm tt";
-            ApptStartDateTime.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            ApptStartDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            ApptStartDateTime.Location = new System.Drawing.Point(205, 182);
-            ApptStartDateTime.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            ApptStartDateTime.Name = "ApptStartDateTime";
-            ApptStartDateTime.Size = new System.Drawing.Size(194, 21);
-            ApptStartDateTime.TabIndex = 20;
-            ApptStartDateTime.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.ApptStartDateTime.CustomFormat = "MM/dd/yyyy hh:mm tt";
+            this.ApptStartDateTime.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ApptStartDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.ApptStartDateTime.Location = new System.Drawing.Point(205, 182);
+            this.ApptStartDateTime.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.ApptStartDateTime.Name = "ApptStartDateTime";
+            this.ApptStartDateTime.Size = new System.Drawing.Size(194, 21);
+            this.ApptStartDateTime.TabIndex = 20;
+            this.ApptStartDateTime.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             // 
             // ApptEndDateTime
             // 
-            ApptEndDateTime.CustomFormat = "MM/dd/yyyy hh:mm tt";
-            ApptEndDateTime.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            ApptEndDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            ApptEndDateTime.Location = new System.Drawing.Point(205, 232);
-            ApptEndDateTime.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            ApptEndDateTime.Name = "ApptEndDateTime";
-            ApptEndDateTime.Size = new System.Drawing.Size(194, 21);
-            ApptEndDateTime.TabIndex = 22;
-            ApptEndDateTime.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.ApptEndDateTime.CustomFormat = "MM/dd/yyyy hh:mm tt";
+            this.ApptEndDateTime.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ApptEndDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.ApptEndDateTime.Location = new System.Drawing.Point(205, 232);
+            this.ApptEndDateTime.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.ApptEndDateTime.Name = "ApptEndDateTime";
+            this.ApptEndDateTime.Size = new System.Drawing.Size(194, 21);
+            this.ApptEndDateTime.TabIndex = 22;
+            this.ApptEndDateTime.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             // 
             // ApptSaveButton
             // 
@@ -177,15 +175,15 @@
             this.CustomerComboBox.Size = new System.Drawing.Size(194, 27);
             this.CustomerComboBox.TabIndex = 37;
             // 
-            // UserIDComboBox
+            // ApptUserIDComboBox
             // 
-            this.UserIDComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.UserIDComboBox.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UserIDComboBox.FormattingEnabled = true;
-            this.UserIDComboBox.Location = new System.Drawing.Point(205, 30);
-            this.UserIDComboBox.Name = "UserIDComboBox";
-            this.UserIDComboBox.Size = new System.Drawing.Size(194, 27);
-            this.UserIDComboBox.TabIndex = 38;
+            this.ApptUserIDComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ApptUserIDComboBox.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ApptUserIDComboBox.FormattingEnabled = true;
+            this.ApptUserIDComboBox.Location = new System.Drawing.Point(205, 30);
+            this.ApptUserIDComboBox.Name = "ApptUserIDComboBox";
+            this.ApptUserIDComboBox.Size = new System.Drawing.Size(194, 27);
+            this.ApptUserIDComboBox.TabIndex = 38;
             // 
             // AppointmentForm
             // 
@@ -193,13 +191,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(453, 337);
             this.ControlBox = false;
-            this.Controls.Add(this.UserIDComboBox);
+            this.Controls.Add(this.ApptUserIDComboBox);
             this.Controls.Add(this.CustomerComboBox);
             this.Controls.Add(this.ApptTypeComboBox);
             this.Controls.Add(this.ApptUserIDLabel);
             this.Controls.Add(this.ApptCancelButton);
-            this.Controls.Add(ApptEndDateTime);
-            this.Controls.Add(ApptStartDateTime);
+            this.Controls.Add(this.ApptEndDateTime);
+            this.Controls.Add(this.ApptStartDateTime);
             this.Controls.Add(this.ApptStartDateLabel);
             this.Controls.Add(this.ApptCustomerIDLabel);
             this.Controls.Add(this.ApptTypeLabel);
@@ -229,6 +227,8 @@
         private System.Windows.Forms.Label ApptUserIDLabel;
         private System.Windows.Forms.ComboBox ApptTypeComboBox;
         private System.Windows.Forms.ComboBox CustomerComboBox;
-        private System.Windows.Forms.ComboBox UserIDComboBox;
+        private System.Windows.Forms.ComboBox ApptUserIDComboBox;
+        private System.Windows.Forms.DateTimePicker ApptStartDateTime;
+        private System.Windows.Forms.DateTimePicker ApptEndDateTime;
     }
 }

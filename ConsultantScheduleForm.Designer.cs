@@ -32,22 +32,12 @@
             this.ConsultantScheduleCloseButton = new System.Windows.Forms.Button();
             this.CustomerDBToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.AddUpdateDeleteApptToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.Last_Update_By_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Last_Update_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Created_By_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CreateDate_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.End_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Start_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.URL = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Type_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Contact_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Location_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Description_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Title_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Customer_Name_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Customer_ID_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Appointment_ID_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ConsultantScheduleDGV = new System.Windows.Forms.DataGridView();
+            this.Customer_ID_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Customer_Name_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Type_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Start_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.End_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.ConsultantScheduleDGV)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,147 +70,17 @@
             this.AddUpdateDeleteApptToolTip.IsBalloon = true;
             this.AddUpdateDeleteApptToolTip.ReshowDelay = 100;
             // 
-            // Last_Update_By_Column
-            // 
-            this.Last_Update_By_Column.DataPropertyName = "Last_Update_By_Column";
-            this.Last_Update_By_Column.HeaderText = "Last Update By";
-            this.Last_Update_By_Column.Name = "Last_Update_By_Column";
-            this.Last_Update_By_Column.ReadOnly = true;
-            this.Last_Update_By_Column.Visible = false;
-            // 
-            // Last_Update_Column
-            // 
-            this.Last_Update_Column.DataPropertyName = "Last_Update_Column";
-            this.Last_Update_Column.HeaderText = "Last Update";
-            this.Last_Update_Column.Name = "Last_Update_Column";
-            this.Last_Update_Column.ReadOnly = true;
-            this.Last_Update_Column.Visible = false;
-            // 
-            // Created_By_Column
-            // 
-            this.Created_By_Column.DataPropertyName = "Created_By_Column";
-            this.Created_By_Column.HeaderText = "Created By";
-            this.Created_By_Column.Name = "Created_By_Column";
-            this.Created_By_Column.ReadOnly = true;
-            this.Created_By_Column.Visible = false;
-            // 
-            // CreateDate_Column
-            // 
-            this.CreateDate_Column.DataPropertyName = "CreateDate_Column";
-            this.CreateDate_Column.HeaderText = "Create Date";
-            this.CreateDate_Column.Name = "CreateDate_Column";
-            this.CreateDate_Column.ReadOnly = true;
-            this.CreateDate_Column.Visible = false;
-            // 
-            // End_Column
-            // 
-            this.End_Column.DataPropertyName = "End_Column";
-            this.End_Column.HeaderText = "End";
-            this.End_Column.Name = "End_Column";
-            this.End_Column.ReadOnly = true;
-            this.End_Column.Width = 200;
-            // 
-            // Start_Column
-            // 
-            this.Start_Column.DataPropertyName = "Start_Column";
-            this.Start_Column.HeaderText = "Start";
-            this.Start_Column.Name = "Start_Column";
-            this.Start_Column.ReadOnly = true;
-            this.Start_Column.Width = 200;
-            // 
-            // URL
-            // 
-            this.URL.DataPropertyName = "URL";
-            this.URL.HeaderText = "URL_Column";
-            this.URL.Name = "URL";
-            this.URL.ReadOnly = true;
-            this.URL.Visible = false;
-            // 
-            // Type_Column
-            // 
-            this.Type_Column.DataPropertyName = "Type_Column";
-            this.Type_Column.HeaderText = "Type";
-            this.Type_Column.Name = "Type_Column";
-            this.Type_Column.ReadOnly = true;
-            this.Type_Column.Width = 200;
-            // 
-            // Contact_Column
-            // 
-            this.Contact_Column.DataPropertyName = "Contact_Column";
-            this.Contact_Column.HeaderText = "Contact";
-            this.Contact_Column.Name = "Contact_Column";
-            this.Contact_Column.ReadOnly = true;
-            this.Contact_Column.Visible = false;
-            // 
-            // Location_Column
-            // 
-            this.Location_Column.DataPropertyName = "Location_Column";
-            this.Location_Column.HeaderText = "Location";
-            this.Location_Column.Name = "Location_Column";
-            this.Location_Column.ReadOnly = true;
-            this.Location_Column.Visible = false;
-            // 
-            // Description_Column
-            // 
-            this.Description_Column.DataPropertyName = "Description_Column";
-            this.Description_Column.HeaderText = "Description";
-            this.Description_Column.Name = "Description_Column";
-            this.Description_Column.ReadOnly = true;
-            this.Description_Column.Visible = false;
-            // 
-            // Title_Column
-            // 
-            this.Title_Column.DataPropertyName = "Title_Column";
-            this.Title_Column.HeaderText = "Title";
-            this.Title_Column.Name = "Title_Column";
-            this.Title_Column.ReadOnly = true;
-            this.Title_Column.Visible = false;
-            // 
-            // Customer_Name_Column
-            // 
-            this.Customer_Name_Column.DataPropertyName = "Customer_Name_Column";
-            this.Customer_Name_Column.HeaderText = "Customer Name";
-            this.Customer_Name_Column.Name = "Customer_Name_Column";
-            this.Customer_Name_Column.ReadOnly = true;
-            this.Customer_Name_Column.Width = 250;
-            // 
-            // Customer_ID_Column
-            // 
-            this.Customer_ID_Column.DataPropertyName = "Customer_ID_Column";
-            this.Customer_ID_Column.HeaderText = "Customer ID";
-            this.Customer_ID_Column.Name = "Customer_ID_Column";
-            this.Customer_ID_Column.ReadOnly = true;
-            // 
-            // Appointment_ID_Column
-            // 
-            this.Appointment_ID_Column.DataPropertyName = "Appointment_ID_Column";
-            this.Appointment_ID_Column.HeaderText = "Appt ID";
-            this.Appointment_ID_Column.Name = "Appointment_ID_Column";
-            this.Appointment_ID_Column.ReadOnly = true;
-            this.Appointment_ID_Column.Visible = false;
-            this.Appointment_ID_Column.Width = 85;
-            // 
             // ConsultantScheduleDGV
             // 
             this.ConsultantScheduleDGV.AllowUserToAddRows = false;
             this.ConsultantScheduleDGV.AllowUserToDeleteRows = false;
             this.ConsultantScheduleDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ConsultantScheduleDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Appointment_ID_Column,
             this.Customer_ID_Column,
             this.Customer_Name_Column,
-            this.Title_Column,
-            this.Description_Column,
-            this.Location_Column,
-            this.Contact_Column,
             this.Type_Column,
-            this.URL,
             this.Start_Column,
-            this.End_Column,
-            this.CreateDate_Column,
-            this.Created_By_Column,
-            this.Last_Update_Column,
-            this.Last_Update_By_Column});
+            this.End_Column});
             this.ConsultantScheduleDGV.Location = new System.Drawing.Point(30, 29);
             this.ConsultantScheduleDGV.Margin = new System.Windows.Forms.Padding(4);
             this.ConsultantScheduleDGV.MultiSelect = false;
@@ -230,6 +90,45 @@
             this.ConsultantScheduleDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ConsultantScheduleDGV.Size = new System.Drawing.Size(975, 360);
             this.ConsultantScheduleDGV.TabIndex = 12;
+            // 
+            // Customer_ID_Column
+            // 
+            this.Customer_ID_Column.DataPropertyName = "customerID";
+            this.Customer_ID_Column.HeaderText = "Customer ID";
+            this.Customer_ID_Column.Name = "Customer_ID_Column";
+            this.Customer_ID_Column.ReadOnly = true;
+            // 
+            // Customer_Name_Column
+            // 
+            this.Customer_Name_Column.DataPropertyName = "customerName";
+            this.Customer_Name_Column.HeaderText = "Customer Name";
+            this.Customer_Name_Column.Name = "Customer_Name_Column";
+            this.Customer_Name_Column.ReadOnly = true;
+            this.Customer_Name_Column.Width = 250;
+            // 
+            // Type_Column
+            // 
+            this.Type_Column.DataPropertyName = "type";
+            this.Type_Column.HeaderText = "Type";
+            this.Type_Column.Name = "Type_Column";
+            this.Type_Column.ReadOnly = true;
+            this.Type_Column.Width = 200;
+            // 
+            // Start_Column
+            // 
+            this.Start_Column.DataPropertyName = "start";
+            this.Start_Column.HeaderText = "Start";
+            this.Start_Column.Name = "Start_Column";
+            this.Start_Column.ReadOnly = true;
+            this.Start_Column.Width = 200;
+            // 
+            // End_Column
+            // 
+            this.End_Column.DataPropertyName = "end";
+            this.End_Column.HeaderText = "End";
+            this.End_Column.Name = "End_Column";
+            this.End_Column.ReadOnly = true;
+            this.End_Column.Width = 200;
             // 
             // ConsultantScheduleForm
             // 
@@ -241,7 +140,6 @@
             this.Controls.Add(this.ConsultantScheduleDGV);
             this.Name = "ConsultantScheduleForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            //this.Text = "Consultant Schedule";
             ((System.ComponentModel.ISupportInitialize)(this.ConsultantScheduleDGV)).EndInit();
             this.ResumeLayout(false);
 
@@ -251,21 +149,11 @@
         private System.Windows.Forms.Button ConsultantScheduleCloseButton;
         private System.Windows.Forms.ToolTip CustomerDBToolTip;
         private System.Windows.Forms.ToolTip AddUpdateDeleteApptToolTip;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Last_Update_By_Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Last_Update_Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Created_By_Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CreateDate_Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn End_Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Start_Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn URL;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Type_Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Contact_Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Location_Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Description_Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Title_Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Customer_Name_Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Customer_ID_Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Appointment_ID_Column;
         private System.Windows.Forms.DataGridView ConsultantScheduleDGV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Customer_ID_Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Customer_Name_Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Type_Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Start_Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn End_Column;
     }
 }

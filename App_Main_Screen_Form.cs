@@ -78,7 +78,12 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
         public void AddUpdateDeleteApptButton_Click(object sender, EventArgs e)
         {
-            Appointment appointment = (Appointment)AppointmentsDGV.CurrentRow.DataBoundItem;
+            Appointment appointment = null;
+
+            if (AppointmentsDGV.CurrentRow.Selected)
+            {
+                appointment = (Appointment)AppointmentsDGV.CurrentRow.DataBoundItem;
+            }
 
             _ = new AppointmentForm(this, appointment);
             this.Hide();

@@ -1,17 +1,8 @@
 ﻿using BOP3_Task_1_DB_and_File_Server_App.Database;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace BOP3_Task_1_DB_and_File_Server_App
 {
@@ -58,17 +49,18 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             User validateUserName = new User();
             User validatePassword = new User();
 
-            if (validateUserName.GetSingleTableValue("userName", UserNameInputBox.Text) == UserNameInputBox.Text &&     //Verify if the User Name is in the User table.
-                validatePassword.GetSingleTableValue("password", PasswordInputBox.Text) == PasswordInputBox.Text)       //Verify if the Password is in the User table.
+            if (UserNameInputBox.Text == "" || PasswordInputBox.Text == "" ||
+                validateUserName.GetSingleTableValue("userName", UserNameInputBox.Text) != UserNameInputBox.Text ||     //Verify if the User Name is in the User table.
+                validatePassword.GetSingleTableValue("password", PasswordInputBox.Text) != PasswordInputBox.Text)       //Verify if the Password is in the User table.
+            {
+                LoginErrorLabel.Text = LoginError;
+                LoginCheck = "Failed Login Attempt with User " + UserNameInputBox.Text + " at " + DateTime.UtcNow + "\n";
+            }
+            else
             {
                 Hide();
                 _ = new MainScreen();
                 LoginCheck = "User " + UserNameInputBox.Text + " logged in successfully at " + DateTime.UtcNow + "\n";
-            }
-            else
-            {
-                LoginErrorLabel.Text = LoginError;
-                LoginCheck = "Failed Login Attempt with User " + UserNameInputBox.Text + " at " + DateTime.UtcNow + "\n";
             }
 
             LoginAttempt(LoginCheck);

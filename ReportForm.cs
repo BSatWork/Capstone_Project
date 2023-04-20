@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BOP3_Task_1_DB_and_File_Server_App.Database;
+using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +15,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
     public partial class ReportForm : Form
     {
         public MainScreen appMainScreen;
+        private readonly string query;
 
         public ReportForm(MainScreen mainScreen)
         {
@@ -25,23 +28,110 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             ConsultantScheduleToolTip.SetToolTip(ConsultantScheduleButton, "Select a Consultant below to show their schedule.");
             TotalApptsThisYearToolTip.SetToolTip(TotalApptsThisYearButton, "Shows a total count of appointments for the current calendar year.");
 
-            //Todo Create an instance of the Appointment table
-            
+            DataTable dataTable = new DataTable();
+
+            try
+            {
+                query = "Select distinct appointment.userId from client_schedule.appointment";
+
+                MySqlCommand cmd = new MySqlCommand(query, DBConnection.ConnectToDB);
+
+                using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
+                {
+                    da.Fill(dataTable);
+                }
+
+                ConsultantComboBox.DataSource = dataTable;
+                ConsultantComboBox.DisplayMember = "userId";
+                ConsultantComboBox.SelectedIndex = -1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format("An error occurred {0}", ex.Message), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void NumberApptTypesByMonthButton_Click(object sender, EventArgs e)
         {
-            string Type = ApptTypeComboBox.Text;
-            string Month = MonthsComboBox.Text;
-            int TotalAppointments = 52;//Todo Update this to actually pull the count of Appt types by the selected Type and Month.
+            string type = ApptTypeComboBox.Text;
+            string month = MonthsComboBox.Text;
+            string monthnumber = string.Empty;
 
-            if (string.IsNullOrEmpty(Type) || string.IsNullOrEmpty(Month))
+            if (string.IsNullOrEmpty(type) || string.IsNullOrEmpty(month))
             {
                 MessageBox.Show("Please select an appointment type and month before running this report.", "Selection Validation");
             }
             else
             {
-                MessageBox.Show("There are a total of " + TotalAppointments + " " + Type + " appointments scheduled in " + Month + ".", "Appts by Month", MessageBoxButtons.OK);
+                if (month == "January")
+                {
+                    monthnumber = "01";
+                }
+                else if (month == "February")
+                {
+                    monthnumber = "02";
+                }
+                else if (month == "March")
+                {
+                    monthnumber = "03";
+                }
+                else if (month == "April")
+                {
+                    monthnumber = "04";
+                }
+                else if (month == "May")
+                {
+                    monthnumber = "05";
+                }
+                else if (month == "June")
+                {
+                    monthnumber = "06";
+                }
+                else if (month == "July")
+                {
+                    monthnumber = "07";
+                }
+                else if (month == "August")
+                {
+                    monthnumber = "08";
+                }
+                else if (month == "September")
+                {
+                    monthnumber = "09";
+                }
+                else if (month == "October")
+                {
+                    monthnumber = "10";
+                }
+                else if (month == "November")
+                {
+                    monthnumber = "11";
+                }
+                else if (month == "December")
+                {
+                    monthnumber = "12";
+                }
+
+                DataTable TotalAppointments = new DataTable();
+                string query = "Select Count(appointment.userId) as Count from client_schedule.appointment where type = '" + type + "' and month(start) = '" + monthnumber + "'";
+
+                MySqlCommand cmd = new MySqlCommand(query, DBConnection.ConnectToDB);
+
+                using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
+                {
+                    da.Fill(TotalAppointments);
+                }
+
+                if (string.IsNullOrEmpty(TotalAppointments.ToString()))
+                {
+                    int outputTotal = 0;
+                    MessageBox.Show("There are a total of " + outputTotal + " " + type + " appointments scheduled in " + month + ".", "Appts by Month", MessageBoxButtons.OK);
+                }
+                else
+                {
+                    MessageBox.Show("There are a total of " + TotalAppointments + " " + type + " appointments scheduled in " + month + ".", "Appts by Month", MessageBoxButtons.OK);
+
+                }
             }
         }
 
@@ -63,15 +153,38 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
         private void TotalApptsThisYearButton_Click(object sender, EventArgs e)
         {
-            int TotalAppointments = 52; //Todo Replace 52 with the Total count of remaining Appts for this year.
+            DataTable TotalAppointments = new DataTable();
+            string query = "Select count(appointmentId) from client_schedule.appointment";
 
-            MessageBox.Show("There are a total of " + TotalAppointments + " remaining appointments this year.", "Appts This Year", MessageBoxButtons.OK);
+            MySqlCommand cmd = new MySqlCommand(query, DBConnection.ConnectToDB);
+
+            using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
+            {
+                da.Fill(TotalAppointments);
+            }
+
+            MessageBox.Show("There are a total of " + TotalAppointments + " remaining appointments this year.", "Remaining Appointments This Year", MessageBoxButtons.OK);
         }
 
         private void ReportFormCloseButton_Click(object sender, EventArgs e)
         {
             Close();
             appMainScreen.Show();
+        }
+
+        private void ApptTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ReportApptTypeLabel.Hide();
+        }
+
+        private void ConsultantComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ReportUserIDLabel.Hide();
+        }
+
+        private void MonthsComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ReportMonthLabel.Hide();
         }
     }
 }

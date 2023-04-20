@@ -30,7 +30,6 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             try
             {
                 query = "Select " +
-                        //"client_schedule.customer.customerId as Customer, " +
                         "client_schedule.customer.customerName as Name, " +
                         "client_schedule.address.address as Address, " +
                         "client_schedule.address.address2 as Address, " +
@@ -50,6 +49,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                 }
 
                 CustomerDBDGV.DataSource = dataTable;
+                CustomerDBDGV.ClearSelection();
             }
             catch (Exception ex)
             {

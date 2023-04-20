@@ -22,15 +22,15 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             Activate();
             appMainScreen = mainScreen;
             
-            if (!string.IsNullOrEmpty(ApptUserIDComboBox.Text))
+            if (appointment == null)
             {
-                ApptCancelButton.Visible = false;
-                ApptDeleteButton.Visible = true;
+                ApptDeleteButton.Visible = false;
+                ApptCancelButton.Visible = true; 
             }
             else
             {
-                ApptDeleteButton.Visible = false;
-                ApptCancelButton.Visible = true;
+                ApptCancelButton.Visible = false;
+                ApptDeleteButton.Visible = true;
 
                 ApptUserIDComboBox.Text = appointment.userID.ToString();
                 ApptTypeComboBox.Text = appointment.type.ToString();
@@ -38,14 +38,12 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                 ApptStartDateTime.Value = appointment.start;
                 ApptEndDateTime.Value = appointment.end;
             }
-
         }
 
         private void ApptSave_Click(object sender, EventArgs e)
         {
             // If all fields have been validated, then continue processing.  Otherwise, inform the user.
-            if (ApptUserIDComboBox.BackColor == System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192))))) &&
-                !string.IsNullOrEmpty(ApptTypeComboBox.Text) && !string.IsNullOrEmpty(CustomerComboBox.Text)
+            if (!string.IsNullOrEmpty(ApptUserIDComboBox.Text) && !string.IsNullOrEmpty(ApptTypeComboBox.Text) && !string.IsNullOrEmpty(CustomerComboBox.Text)
                 )
             {
                 //Todo Save the Appt data to the DB

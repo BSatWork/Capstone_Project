@@ -27,9 +27,11 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Database
         public void GetUserTable()
         {
             string query = "Select * from client_schedule.user";
-            MySqlCommand cmd = new MySqlCommand(query, DBConnection.ConnectToDB);
-            MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
-            adapter.Fill(userDT);
+            _ = DBConnection.GetSQLTable(query);
+            //DataTable userDataTable = DBConnection.GetSQLTable(query);
+            //MySqlCommand cmd = new MySqlCommand(query, DBConnection.ConnectToDB);
+            //MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+            //adapter.Fill(userDT);
         }
 
         public string GetSingleTableValue(string column, string data)

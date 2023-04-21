@@ -45,6 +45,44 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Database
             }
         }
 
+        public static DataTable GetSQLTable(string query)
+        {
+            DataTable datatable = new DataTable();
+
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand(query, DBConnection.ConnectToDB);
+
+                using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
+                {
+                    da.Fill(datatable);
+                }
+                return datatable;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format("An error occurred {0}", ex.Message), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+        }
+
+        public string GetSQLTableValue(string table, string column, string datafilter)
+        {
+            string query = "Select " + column + " from client_schedule." + table + " where " + column + " = '" + datafilter + "'";
+
+            try
+            {
+                var cmd = new MySqlCommand(query, DBConnection.ConnectToDB);
+                string value = cmd.ExecuteScalar().ToString();
+                return value;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format("An error occurred {0}", ex.Message), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+        }
+
         /*public DataTable SelectRows(DataTable dataTable, string query)
         {
             dataTable = new DataTable();

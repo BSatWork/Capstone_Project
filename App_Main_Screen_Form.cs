@@ -28,28 +28,14 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             AddUpdateDeleteApptToolTip.SetToolTip(AddUpdateDeleteApptButton, "To Update or Delete, Select an Appointment First");
             CustomerDBToolTip.SetToolTip(CustomerDBButton, "View or Update the Customer Database");
             ReportsToolTip.SetToolTip(ReportsButton, "Generate Reports");
-            
-            DataTable mainScreendataTable = new DataTable();
 
-            try
-            {
-                string query = "Select appointment.userId, customer.customerName, appointment.type, appointment.start, appointment.end from client_schedule.appointment Left Join client_schedule.customer on appointment.customerId = customer.customerId;;";
+            // Populate the Appointments table.
+            query = "Select appointment.userId, customer.customerName, appointment.type, appointment.start, appointment.end from client_schedule.appointment Left Join client_schedule.customer on appointment.customerId = customer.customerId;;";
+            DataTable mainScreendataTable = DBConnection.GetSQLTable(query);
+            AppointmentsDGV.DataSource = mainScreendataTable;
+            AppointmentsDGV.ClearSelection();
 
-                MySqlCommand cmd = new MySqlCommand(query, DBConnection.ConnectToDB);
-
-                using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
-                {
-                    da.Fill(mainScreendataTable);
-                }
-
-                AppointmentsDGV.DataSource = mainScreendataTable;
-                AppointmentsDGV.ClearSelection();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(string.Format("An error occurred {0}", ex.Message), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
+            // Populate the Count of Appointments label.
             DataTable apptCount = new DataTable();
 
             try

@@ -10,6 +10,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
         public AppLoginForm appLogin;
         public string query;
         public string userId;
+        public int appointmentId;
 
         public MainScreen(string userName)
         {
@@ -23,13 +24,15 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             // Populate the Appointments table.
             query = "Select appointment.appointmentId, appointment.userId, customer.customerName, appointment.type, appointment.start, appointment.end " +
                     "from client_schedule.appointment " +
-                    "Left Join client_schedule.customer on appointment.customerId = customer.customerId";
+                    "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
+                    "Where appointment.start > '" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss tt") + "'";
             DataTable mainScreendataTable = DBConnection.GetSQLTable(query);
             AppointmentsDGV.DataSource = mainScreendataTable;
             AppointmentsDGV.ClearSelection();
+            CalendarView.SelectedIndex = 0;
 
             // Populate the Count of Appointments label.
-            query = "Select Count(appointmentID) " +
+            query = "Select Count(appointmentId) " +
                     "From client_schedule.appointment";
             string apptCount = DBConnection.GetSQLTableValue(query);
             ApptCount.Text = apptCount;
@@ -41,16 +44,17 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                     "Where user.userName = '" + userName + "'";
             userId = DBConnection.GetSQLTableValue(query);
             
-            query = "Select Count(appointmentID) " +
+            query = "Select Count(appointmentId) " +
                     "From client_schedule.appointment " +
                     "Where appointment.start between '" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss tt") + "' and ('" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss tt") + "' + interval(15) minute) " +
                     "And appointment.userId = '" + userId + "'";
             string upcomingAppointments = DBConnection.GetSQLTableValue(query);
-            int upcomingAppointment = Int32.Parse(upcomingAppointments);
-            
-            if (upcomingAppointment > 0)
+            int upcomingAppointment = upcomingAppointments.IndexOf((char)0);
+
+            if (upcomingAppointment != -1)
             {
                 MessageBox.Show("!ATTENTION! You have an appt in the next 15 minutes." + "\n" + "\n" + "See the highlighted appt for details.");
+                AppointmentsDGV.Rows[upcomingAppointment].Selected = true;
             }
         }
 
@@ -60,19 +64,22 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
             if (AppointmentsDGV.CurrentRow.Selected)
             {
-                //appointment = (Appointment)AppointmentsDGV.CurrentRow.DataBoundItem;
-                //appointment.appointmentId = AppointmentsDGV.SelectedCells[0].RowIndex;
-                //appointment.userId = AppointmentsDGV.SelectedCells[1].RowIndex;
-                //appointment.customerName = AppointmentsDGV.SelectedCells[2].RowIndex.ToString();
-                //appointment.type = AppointmentsDGV.SelectedCells[3].RowIndex.ToString();
-                MessageBox.Show("AppointmentsDGV selected row column 0 = " + AppointmentsDGV.SelectedRows[1].Cells[0].Value + "\n" +
-                                "AppointmentsDGV selected row column 1 = " + AppointmentsDGV.SelectedRows[1].Cells[1].Value + "\n" +
-                                "AppointmentsDGV.selected row column 2 = " + AppointmentsDGV.SelectedRows[1].Cells[2].Value + "\n" +
-                                "AppointmentsDGV.selected row column 3 = " + AppointmentsDGV.SelectedRows[1].Cells[3].Value);
-                //appointment.end = AppointmentsDGV.SelectedCells[6].RowIndex.ToString();
+                appointment = new Appointment
+                {
+                    appointmentId = (int)AppointmentsDGV.CurrentRow.Cells[0].Value,
+                    userId = (int)AppointmentsDGV.CurrentRow.Cells[1].Value,
+                    customerName = AppointmentsDGV.CurrentRow.Cells[2].Value.ToString(),
+                    type = AppointmentsDGV.CurrentRow.Cells[3].Value.ToString(),
+                    start = (DateTime)AppointmentsDGV.CurrentRow.Cells[4].Value,
+                    end = (DateTime)AppointmentsDGV.CurrentRow.Cells[5].Value
+                };
+            }
+            else
+            {
+                appointmentId = -1;
             }
 
-            _ = new AppointmentForm(this, appointment);
+            _ = new AppointmentForm(appointmentId, this, appointment);
             this.Hide();
         }
 
@@ -89,17 +96,105 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
         private void CalendarView_SelectedIndexChanged(object sender, EventArgs e)
         {
+            string todaysDay = DateTime.Today.ToString("dddd");
+            int endOfWeek = 0;
+            if (todaysDay == "Sunday")
+            {
+                endOfWeek = Int32.Parse(DateTime.Today.ToString("dd"));
+            }
+            if (todaysDay == "Monday")
+            {
+                endOfWeek = Int32.Parse(DateTime.Today.ToString("dd")) + 6;
+            }
+            if (todaysDay == "Tuesday")
+            {
+                endOfWeek = Int32.Parse(DateTime.Today.ToString("dd")) + 5;
+            }
+            if (todaysDay == "Wednesday")
+            {
+                endOfWeek = Int32.Parse(DateTime.Today.ToString("dd")) + 4;
+            }
+            if (todaysDay == "Thursday")
+            {
+                endOfWeek = Int32.Parse(DateTime.Today.ToString("dd")) + 3;
+            }
+            if (todaysDay == "Friday")
+            {
+                endOfWeek = Int32.Parse(DateTime.Today.ToString("dd")) + 2;
+            }
+            if (todaysDay == "Saturday")
+            {
+                endOfWeek = Int32.Parse(DateTime.Today.ToString("dd")) + 1;
+            }
+
+            string weekEnd = "";
+            if (endOfWeek > 9)
+            {
+                weekEnd = endOfWeek.ToString();
+            }
+            else if (endOfWeek < 10)
+            {
+                weekEnd = "0" + endOfWeek.ToString();
+            }
+
+            int todaysMonth = Int32.Parse(DateTime.Today.ToString("MM"));
+            string nextMonth;
+            if (todaysMonth == 12)
+            {
+                nextMonth = "01";
+            }
+            else if (todaysMonth < 10)
+            {
+                nextMonth = "0" + (todaysMonth + 1).ToString();
+            }
+            else
+            {
+                nextMonth = todaysMonth.ToString();
+            }
+            
+            int todaysYear = Int32.Parse(DateTime.Today.ToString("yyyy"));
+            string nextYear;
+            if (todaysYear == 12)
+            {
+                nextYear = (todaysYear + 1).ToString();
+            }
+            else
+            {
+                nextYear = todaysYear.ToString();
+            }
+
             if (CalendarView.SelectedIndex == 0)        // All
             {
-                //Todo Show All appointments
+                // Populate the Appointments table with all appointments.
+                query = "Select appointment.appointmentId, appointment.userId, customer.customerName, appointment.type, appointment.start, appointment.end " +
+                        "from client_schedule.appointment " +
+                        "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
+                        "Where appointment.start > '" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss tt") + "'";
+                DataTable mainScreendataTable = DBConnection.GetSQLTable(query);
+                AppointmentsDGV.DataSource = mainScreendataTable;
+                AppointmentsDGV.ClearSelection();
             }
-            else if (CalendarView.SelectedIndex == 1)   // 30 days
+            else if (CalendarView.SelectedIndex == 1)   // Current Week
             {
-                //Todo Show only the appointments within the next 30 days.
+                // Populate the Appointments table with only the appointments for the current week.
+                query = "Select appointment.appointmentId, appointment.userId, customer.customerName, appointment.type, appointment.start, appointment.end " +
+                        "from client_schedule.appointment " +
+                        "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
+                        "Where appointment.start between '" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss tt") + "' and '" + DateTime.Now.ToString($"{nextYear}-MM-{weekEnd} 00:00:00") + "'";
+                DataTable mainScreendataTable = DBConnection.GetSQLTable(query);
+                AppointmentsDGV.DataSource = mainScreendataTable;
+                AppointmentsDGV.ClearSelection();
             }
-            else if (CalendarView.SelectedIndex == 2)   // 7 days
+            else if (CalendarView.SelectedIndex == 2)   // Current Month
             {
-                //Todo Show All appointments within the next 7 days.
+                // Populate the Appointments table with only the appointments for the current week.
+                query = "Select appointment.appointmentId, appointment.userId, customer.customerName, appointment.type, appointment.start, appointment.end " +
+                        "from client_schedule.appointment " +
+                        "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
+                        "Where appointment.start between '" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss tt") + "' and '" + DateTime.Now.ToString($"{nextYear}-{nextMonth}-01 00:00:00") + "'";
+                DataTable mainScreendataTable = DBConnection.GetSQLTable(query);
+                AppointmentsDGV.DataSource = mainScreendataTable;
+                AppointmentsDGV.ClearSelection();
             }
         }
 

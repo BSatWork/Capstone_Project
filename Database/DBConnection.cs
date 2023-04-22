@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿//All SQL connections and database activity will happen through use of this class.
+using MySql.Data.MySqlClient;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -13,9 +14,9 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Database
         {
             try
             {
-                string constr = "Server=127.0.0.1;Uid=sqlUser;Pwd=Passw0rd!;Database=client_schedule;"; // Get the connection string.
+                string constr = "Server=127.0.0.1;Uid=sqlUser;Pwd=Passw0rd!;Database=client_schedule;";
                 ConnectToDB = new MySqlConnection(constr);
-                ConnectToDB.Open(); // Open the connection.
+                ConnectToDB.Open();
             }
             catch (MySqlException ex)
             {
@@ -27,7 +28,6 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Database
         {
             try
             {
-                // Close the connection
                 if (ConnectToDB != null)
                 {
                     ConnectToDB.Close();
@@ -99,41 +99,5 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Database
                 MessageBox.Show(string.Format("An error occurred {0}", ex.Message), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        /*public DataTable SelectRows(DataTable dataTable, string query)
-        {
-            dataTable = new DataTable();
-            
-            try
-            {
-                MySqlCommand cmd = new MySqlCommand(query, ConnectToDB);
-
-                using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
-                {
-                    da.Fill(outDataTable);
-                }
-
-                //AppointmentsDGV.DataSource = dataTable;
-                //AppointmentsDGV.DataMember = dataTable.TableName;
-                return outDataTable;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(string.Format("An error occurred {0}", ex.Message), "SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return null;
-            }
-        }*/
-
-
-        /*public SelectRows(DataTable datatable, string connection, string query)
-        {
-            MySqlConnection conn = new MySqlConnection(connection);
-            MySqlDataAdapter adapter = new MySqlDataAdapter
-            {
-                SelectCommand = new MySqlCommand(query, conn)
-            };
-            adapter.Fill(datatable);
-            return datatable;
-        }*/
     }
 }

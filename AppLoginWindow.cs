@@ -10,6 +10,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
     {
         private readonly string LoginError = "Invalid Login Credentials.  Please try again.";
         private string LoginCheck;
+        public string query;
 
         public AppLoginForm()
         {
@@ -46,12 +47,14 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            User validateUserName = new User();
-            User validatePassword = new User();
+            //Verify if the User Name and password combination is in the User table.
+            query = "Select Count(userName) " +
+                    "From client_schedule.user " +
+                    $"Where BINARY userName = '{UserNameInputBox.Text}' " +
+                    $"And BINARY password =  '{PasswordInputBox.Text}' ";
+            int credentialsCheck = Int32.Parse(DBConnection.GetSQLTableValue(query));
 
-            if (UserNameInputBox.Text == "" || PasswordInputBox.Text == "" ||
-                validateUserName.GetSingleTableValue("userName", UserNameInputBox.Text) != UserNameInputBox.Text ||     //Verify if the User Name is in the User table.
-                validatePassword.GetSingleTableValue("password", PasswordInputBox.Text) != PasswordInputBox.Text)       //Verify if the Password is in the User table.
+            if (credentialsCheck == 0)
             {
                 LoginErrorLabel.Text = LoginError;
                 LoginCheck = "Failed Login Attempt with User " + UserNameInputBox.Text + " at " + DateTime.UtcNow + "\n";

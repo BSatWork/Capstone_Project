@@ -54,6 +54,7 @@
             this.ApptStartDateTime.Size = new System.Drawing.Size(194, 21);
             this.ApptStartDateTime.TabIndex = 20;
             this.ApptStartDateTime.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.ApptStartDateTime.ValueChanged += new System.EventHandler(this.ApptStartDateTime_ValueChanged);
             // 
             // ApptEndDateTime
             // 
@@ -66,6 +67,7 @@
             this.ApptEndDateTime.Size = new System.Drawing.Size(194, 21);
             this.ApptEndDateTime.TabIndex = 22;
             this.ApptEndDateTime.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.ApptEndDateTime.ValueChanged += new System.EventHandler(this.ApptEndDateTime_ValueChanged);
             // 
             // ApptSaveButton
             // 

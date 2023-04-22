@@ -1,25 +1,11 @@
-﻿using BOP3_Task_1_DB_and_File_Server_App.Database;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using MySql.Data;
-using MySql.Data.MySqlClient;
-using System.Data;
+﻿using System;
 
 namespace BOP3_Task_1_DB_and_File_Server_App.Database
 {
-    public class Appointment
+    public class Appointment : Customer
     {
-        //public BindingList<Appointment> AppointmentDB = new BindingList<Appointment>();
-
-        public int appointmentID;
-        public int customerID;
-        public int userID;
+        public int appointmentId;
+        public int userId;
         public string type;
         public DateTime start;
         public DateTime end;
@@ -30,19 +16,24 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Database
         public string location = "Location";
         public string contact = "Contact";
         public string url = "URL";
-        public DateTime createDate = DateTime.UtcNow;
-        public string createdBy = "Somebody";
-        public DateTime lastUpdate = DateTime.UtcNow;
-        public string lastUpdateBy = "Somebody";
+        public new DateTime createDate = DateTime.UtcNow;
+        public new string createdBy = "Somebody";
+        public new DateTime lastUpdate = DateTime.UtcNow;
+        public new string lastUpdateBy = "Somebody";
 
         public void AddAppointment(Appointment appointment)
         {
+            
+            
             //AppointmentDB.Add(appointment);
-
         }
 
         public void UpdateAppointment(int existingAppointmentIndex, Appointment updatedAppointment)
         {
+            
+            
+            
+            
             /*Appointment existingAppointment = AppointmentDB[existingAppointmentIndex];
             int _ = existingAppointmentIndex++;
 
@@ -70,14 +61,5 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Database
                     break;
             }*/
         }
-
-        // The following column strings are used to create the column header in the Appointments DGV.
-        /*public string Appointment_ID_Column { get { return appointmentID.ToString(); } }
-
-        public string Type_Column { get { return type; } } 
-
-        public string Start_DateTime_Column { get { return start.ToString(); } }
-
-        public string End_DateTime_Column { get { return end.ToString(); } }*/
     }
 }

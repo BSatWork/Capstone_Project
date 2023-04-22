@@ -1,13 +1,6 @@
 ﻿using BOP3_Task_1_DB_and_File_Server_App.Database;
-using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BOP3_Task_1_DB_and_File_Server_App
@@ -28,27 +21,11 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             ConsultantScheduleToolTip.SetToolTip(ConsultantScheduleButton, "Select a Consultant below to show their schedule.");
             TotalApptsThisYearToolTip.SetToolTip(TotalApptsThisYearButton, "Shows a total count of appointments for the current calendar year.");
 
-            DataTable dataTable = new DataTable();
-
-            try
-            {
-                query = "Select distinct appointment.userId from client_schedule.appointment";
-
-                MySqlCommand cmd = new MySqlCommand(query, DBConnection.ConnectToDB);
-
-                using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
-                {
-                    da.Fill(dataTable);
-                }
-
-                ConsultantComboBox.DataSource = dataTable;
-                ConsultantComboBox.DisplayMember = "userId";
-                ConsultantComboBox.SelectedIndex = -1;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(string.Format("An error occurred {0}", ex.Message), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            query = "Select distinct appointment.userId from client_schedule.appointment";
+            DataTable ConsultantList = DBConnection.GetSQLTable(query);
+            ConsultantComboBox.DataSource = ConsultantList;
+            ConsultantComboBox.DisplayMember = "userId";
+            ConsultantComboBox.SelectedIndex = -1;
         }
 
         private void NumberApptTypesByMonthButton_Click(object sender, EventArgs e)
@@ -112,26 +89,15 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                     monthnumber = "12";
                 }
 
-                DataTable TotalAppointments = new DataTable();
                 string query = "Select Count(appointment.userId) as Count from client_schedule.appointment where type = '" + type + "' and month(start) = '" + monthnumber + "'";
-
-                MySqlCommand cmd = new MySqlCommand(query, DBConnection.ConnectToDB);
-
-                using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
-                {
-                    da.Fill(TotalAppointments);
-                }
+                string TotalAppointments = DBConnection.GetSQLTableValue(query);
 
                 if (string.IsNullOrEmpty(TotalAppointments.ToString()))
                 {
-                    int outputTotal = 0;
-                    MessageBox.Show("There are a total of " + outputTotal + " " + type + " appointments scheduled in " + month + ".", "Appts by Month", MessageBoxButtons.OK);
+                    TotalAppointments = "0";
                 }
-                else
-                {
-                    MessageBox.Show("There are a total of " + TotalAppointments + " " + type + " appointments scheduled in " + month + ".", "Appts by Month", MessageBoxButtons.OK);
-
-                }
+                
+                MessageBox.Show("There are a total of " + TotalAppointments + " " + type + " appointments scheduled in " + month + ".", "Appts by Month", MessageBoxButtons.OK);
             }
         }
 
@@ -148,21 +114,12 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                 _ = new ConsultantScheduleForm(this, Consultant);
                 this.Hide();
             }
-
         }
 
         private void TotalApptsThisYearButton_Click(object sender, EventArgs e)
         {
-            DataTable TotalAppointments = new DataTable();
-            string query = "Select count(appointmentId) from client_schedule.appointment";
-
-            MySqlCommand cmd = new MySqlCommand(query, DBConnection.ConnectToDB);
-
-            using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
-            {
-                da.Fill(TotalAppointments);
-            }
-
+            string query = "Select Count(appointmentId) from client_schedule.appointment";
+            string TotalAppointments = DBConnection.GetSQLTableValue(query);
             MessageBox.Show("There are a total of " + TotalAppointments + " remaining appointments this year.", "Remaining Appointments This Year", MessageBoxButtons.OK);
         }
 
@@ -175,11 +132,6 @@ namespace BOP3_Task_1_DB_and_File_Server_App
         private void ApptTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             ReportApptTypeLabel.Hide();
-        }
-
-        private void ConsultantComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ReportUserIDLabel.Hide();
         }
 
         private void MonthsComboBox_SelectedIndexChanged(object sender, EventArgs e)

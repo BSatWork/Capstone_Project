@@ -1,12 +1,5 @@
 ﻿using BOP3_Task_1_DB_and_File_Server_App.Database;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BOP3_Task_1_DB_and_File_Server_App
@@ -14,6 +7,8 @@ namespace BOP3_Task_1_DB_and_File_Server_App
     public partial class AppointmentForm : Form
     {
         public MainScreen appMainScreen;
+        public string query;
+        public int appointmentId;
 
         public AppointmentForm(MainScreen mainScreen, Appointment appointment = null)
         {
@@ -21,20 +16,31 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             Show();
             Activate();
             appMainScreen = mainScreen;
-            
+
+            ApptUserIDComboBox.DataSource = DBConnection.GetSQLTable("Select distinct appointment.userId from client_schedule.appointment");
+            ApptUserIDComboBox.DisplayMember = "userId";
+            ApptUserIDComboBox.SelectedIndex = -1;
+            //ApptTypeComboBox.DataSource is populated by default in my design.
+            ApptCustomerComboBox.DataSource = DBConnection.GetSQLTable("Select distinct customer.customerName from client_schedule.customer");
+            ApptCustomerComboBox.DisplayMember = "customerName";
+            ApptCustomerComboBox.SelectedIndex = -1;
+            ApptStartDateTime.Value = DateTime.Now;
+            ApptEndDateTime.Value = DateTime.Now;
+
             if (appointment == null)
             {
                 ApptDeleteButton.Visible = false;
-                ApptCancelButton.Visible = true; 
+                ApptCancelButton.Visible = true;
             }
             else
             {
                 ApptCancelButton.Visible = false;
                 ApptDeleteButton.Visible = true;
 
-                ApptUserIDComboBox.Text = appointment.userID.ToString();
+                appointmentId = appointment.appointmentId;
+                ApptUserIDComboBox.Text = appointment.userId.ToString();
+                ApptCustomerComboBox.Text = appointment.customerName.ToString();
                 ApptTypeComboBox.Text = appointment.type.ToString();
-                CustomerComboBox.Text = appointment.customerID.ToString();
                 ApptStartDateTime.Value = appointment.start;
                 ApptEndDateTime.Value = appointment.end;
             }
@@ -43,10 +49,21 @@ namespace BOP3_Task_1_DB_and_File_Server_App
         private void ApptSave_Click(object sender, EventArgs e)
         {
             // If all fields have been validated, then continue processing.  Otherwise, inform the user.
-            if (!string.IsNullOrEmpty(ApptUserIDComboBox.Text) && !string.IsNullOrEmpty(ApptTypeComboBox.Text) && !string.IsNullOrEmpty(CustomerComboBox.Text)
+            if (!string.IsNullOrEmpty(ApptUserIDComboBox.Text) && !string.IsNullOrEmpty(ApptTypeComboBox.Text) && !string.IsNullOrEmpty(ApptCustomerComboBox.Text)
                 )
             {
+                Appointment NewAppointment = new Appointment();
+                
                 //Todo Save the Appt data to the DB
+                ApptUserIDComboBox.Text = NewAppointment.userId.ToString();
+                ApptCustomerComboBox.Text = NewAppointment.customerName.ToString();
+                ApptTypeComboBox.Text = NewAppointment.type.ToString();
+                ApptStartDateTime.Value = NewAppointment.start;
+                ApptEndDateTime.Value = NewAppointment.end;
+
+                query = "Insert Into client_schedule.appointment " +
+                        "Values(" + NewAppointment + ")";
+                DBConnection.SaveToSQLTable(query);
 
                 Close();
                 appMainScreen.Show();
@@ -61,11 +78,15 @@ namespace BOP3_Task_1_DB_and_File_Server_App
         {
             DialogResult delete = MessageBox.Show("Deleting an appt cannot be undone." + Environment.NewLine +
                                                   "Are you sure?", "Delete Confirmation", MessageBoxButtons.YesNo);
-
+            
             switch (delete)
             {
                 case DialogResult.Yes:
                     //Todo Delete the Appt from the DB.
+                    query = "Delete from client_schedule.appointment " +
+                    "where appointmentId = '" + appointmentId + "'";
+                    DBConnection.DeleteSQLTableRow(query);
+
                     Close();
                     appMainScreen.Show();
                     break;

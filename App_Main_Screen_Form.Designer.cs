@@ -30,11 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.AppointmentsDGV = new System.Windows.Forms.DataGridView();
-            this.User_ID_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Customer_Name_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Type_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Start_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.End_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AddUpdateDeleteApptButton = new System.Windows.Forms.Button();
             this.ApptCountLabel = new System.Windows.Forms.Label();
             this.ApptCount = new System.Windows.Forms.Label();
@@ -46,6 +41,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.ReportsButton = new System.Windows.Forms.Button();
             this.ReportsToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.Appointment_ID_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.User_ID_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Customer_Name_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Type_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Start_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.End_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.AppointmentsDGV)).BeginInit();
             this.SuspendLayout();
             // 
@@ -55,6 +56,7 @@
             this.AppointmentsDGV.AllowUserToDeleteRows = false;
             this.AppointmentsDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.AppointmentsDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Appointment_ID_Column,
             this.User_ID_Column,
             this.Customer_Name_Column,
             this.Type_Column,
@@ -69,45 +71,8 @@
             this.AppointmentsDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.AppointmentsDGV.Size = new System.Drawing.Size(975, 360);
             this.AppointmentsDGV.TabIndex = 0;
-            // 
-            // User_ID_Column
-            // 
-            this.User_ID_Column.DataPropertyName = "userID";
-            this.User_ID_Column.HeaderText = "User ID";
-            this.User_ID_Column.Name = "User_ID_Column";
-            this.User_ID_Column.ReadOnly = true;
-            // 
-            // Customer_Name_Column
-            // 
-            this.Customer_Name_Column.DataPropertyName = "customerName";
-            this.Customer_Name_Column.HeaderText = "Customer Name";
-            this.Customer_Name_Column.Name = "Customer_Name_Column";
-            this.Customer_Name_Column.ReadOnly = true;
-            this.Customer_Name_Column.Width = 300;
-            // 
-            // Type_Column
-            // 
-            this.Type_Column.DataPropertyName = "type";
-            this.Type_Column.HeaderText = "Type";
-            this.Type_Column.Name = "Type_Column";
-            this.Type_Column.ReadOnly = true;
-            this.Type_Column.Width = 150;
-            // 
-            // Start_Column
-            // 
-            this.Start_Column.DataPropertyName = "start";
-            this.Start_Column.HeaderText = "Start";
-            this.Start_Column.Name = "Start_Column";
-            this.Start_Column.ReadOnly = true;
-            this.Start_Column.Width = 200;
-            // 
-            // End_Column
-            // 
-            this.End_Column.DataPropertyName = "end";
-            this.End_Column.HeaderText = "End";
-            this.End_Column.Name = "End_Column";
-            this.End_Column.ReadOnly = true;
-            this.End_Column.Width = 200;
+            this.AppointmentsDGV.Columns[4].DefaultCellStyle.Format = "yyyy-MM-dd hh:mm tt";
+            this.AppointmentsDGV.Columns[5].DefaultCellStyle.Format = "yyyy-MM-dd hh:mm tt";
             // 
             // AddUpdateDeleteApptButton
             // 
@@ -224,6 +189,53 @@
             // 
             this.ReportsToolTip.IsBalloon = true;
             // 
+            // Appointment_ID_Column
+            // 
+            this.Appointment_ID_Column.DataPropertyName = "appointmentId";
+            this.Appointment_ID_Column.HeaderText = "Appointment ID";
+            this.Appointment_ID_Column.Name = "Appointment_ID_Column";
+            this.Appointment_ID_Column.ReadOnly = true;
+            this.Appointment_ID_Column.Visible = false;
+            // 
+            // User_ID_Column
+            // 
+            this.User_ID_Column.DataPropertyName = "userId";
+            this.User_ID_Column.HeaderText = "User ID";
+            this.User_ID_Column.Name = "User_ID_Column";
+            this.User_ID_Column.ReadOnly = true;
+            // 
+            // Customer_Name_Column
+            // 
+            this.Customer_Name_Column.DataPropertyName = "customerName";
+            this.Customer_Name_Column.HeaderText = "Customer Name";
+            this.Customer_Name_Column.Name = "Customer_Name_Column";
+            this.Customer_Name_Column.ReadOnly = true;
+            this.Customer_Name_Column.Width = 300;
+            // 
+            // Type_Column
+            // 
+            this.Type_Column.DataPropertyName = "type";
+            this.Type_Column.HeaderText = "Type";
+            this.Type_Column.Name = "Type_Column";
+            this.Type_Column.ReadOnly = true;
+            this.Type_Column.Width = 150;
+            // 
+            // Start_Column
+            // 
+            this.Start_Column.DataPropertyName = "start";
+            this.Start_Column.HeaderText = "Start";
+            this.Start_Column.Name = "Start_Column";
+            this.Start_Column.ReadOnly = true;
+            this.Start_Column.Width = 200;
+            // 
+            // End_Column
+            // 
+            this.End_Column.DataPropertyName = "end";
+            this.End_Column.HeaderText = "End";
+            this.End_Column.Name = "End_Column";
+            this.End_Column.ReadOnly = true;
+            this.End_Column.Width = 200;
+            // 
             // MainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -267,6 +279,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button ReportsButton;
         private System.Windows.Forms.ToolTip ReportsToolTip;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Appointment_ID_Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn User_ID_Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn Customer_Name_Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn Type_Column;

@@ -28,10 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.ConsultantScheduleCloseButton = new System.Windows.Forms.Button();
-            this.CustomerDBToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.AddUpdateDeleteApptToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.ConsultantScheduleDGV = new System.Windows.Forms.DataGridView();
             this.Customer_ID_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Customer_Name_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,20 +53,6 @@
             this.ConsultantScheduleCloseButton.UseVisualStyleBackColor = false;
             this.ConsultantScheduleCloseButton.Click += new System.EventHandler(this.ConsultantScheduleCloseButton_Click);
             // 
-            // CustomerDBToolTip
-            // 
-            this.CustomerDBToolTip.AutoPopDelay = 10000;
-            this.CustomerDBToolTip.InitialDelay = 100;
-            this.CustomerDBToolTip.IsBalloon = true;
-            this.CustomerDBToolTip.ReshowDelay = 100;
-            // 
-            // AddUpdateDeleteApptToolTip
-            // 
-            this.AddUpdateDeleteApptToolTip.AutoPopDelay = 10000;
-            this.AddUpdateDeleteApptToolTip.InitialDelay = 100;
-            this.AddUpdateDeleteApptToolTip.IsBalloon = true;
-            this.AddUpdateDeleteApptToolTip.ReshowDelay = 100;
-            // 
             // ConsultantScheduleDGV
             // 
             this.ConsultantScheduleDGV.AllowUserToAddRows = false;
@@ -81,6 +64,7 @@
             this.Type_Column,
             this.Start_Column,
             this.End_Column});
+            this.ConsultantScheduleDGV.Enabled = false;
             this.ConsultantScheduleDGV.Location = new System.Drawing.Point(30, 29);
             this.ConsultantScheduleDGV.Margin = new System.Windows.Forms.Padding(4);
             this.ConsultantScheduleDGV.MultiSelect = false;
@@ -147,8 +131,6 @@
 
         #endregion
         private System.Windows.Forms.Button ConsultantScheduleCloseButton;
-        private System.Windows.Forms.ToolTip CustomerDBToolTip;
-        private System.Windows.Forms.ToolTip AddUpdateDeleteApptToolTip;
         private System.Windows.Forms.DataGridView ConsultantScheduleDGV;
         private System.Windows.Forms.DataGridViewTextBoxColumn Customer_ID_Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn Customer_Name_Column;

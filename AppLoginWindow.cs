@@ -59,7 +59,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             else
             {
                 Hide();
-                _ = new MainScreen();
+                _ = new MainScreen(UserNameInputBox.Text);
                 LoginCheck = "User " + UserNameInputBox.Text + " logged in successfully at " + DateTime.UtcNow + "\n";
             }
 

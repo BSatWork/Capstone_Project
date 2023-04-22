@@ -39,7 +39,7 @@
             this.ApptCancelButton = new System.Windows.Forms.Button();
             this.ApptUserIDLabel = new System.Windows.Forms.Label();
             this.ApptTypeComboBox = new System.Windows.Forms.ComboBox();
-            this.CustomerComboBox = new System.Windows.Forms.ComboBox();
+            this.ApptCustomerComboBox = new System.Windows.Forms.ComboBox();
             this.ApptUserIDComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
@@ -157,23 +157,25 @@
             this.ApptTypeComboBox.FormattingEnabled = true;
             this.ApptTypeComboBox.Items.AddRange(new object[] {
             "Initial Consultation",
+            "Presentation",
+            "Scrum",
             "Follow-up",
             "Emergency",
-            "Contract Closing"});
+            "Project Closing"});
             this.ApptTypeComboBox.Location = new System.Drawing.Point(205, 81);
             this.ApptTypeComboBox.Name = "ApptTypeComboBox";
             this.ApptTypeComboBox.Size = new System.Drawing.Size(194, 27);
             this.ApptTypeComboBox.TabIndex = 36;
             // 
-            // CustomerComboBox
+            // ApptCustomerComboBox
             // 
-            this.CustomerComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CustomerComboBox.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CustomerComboBox.FormattingEnabled = true;
-            this.CustomerComboBox.Location = new System.Drawing.Point(205, 130);
-            this.CustomerComboBox.Name = "CustomerComboBox";
-            this.CustomerComboBox.Size = new System.Drawing.Size(194, 27);
-            this.CustomerComboBox.TabIndex = 37;
+            this.ApptCustomerComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ApptCustomerComboBox.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ApptCustomerComboBox.FormattingEnabled = true;
+            this.ApptCustomerComboBox.Location = new System.Drawing.Point(205, 130);
+            this.ApptCustomerComboBox.Name = "ApptCustomerComboBox";
+            this.ApptCustomerComboBox.Size = new System.Drawing.Size(194, 27);
+            this.ApptCustomerComboBox.TabIndex = 37;
             // 
             // ApptUserIDComboBox
             // 
@@ -192,7 +194,7 @@
             this.ClientSize = new System.Drawing.Size(453, 337);
             this.ControlBox = false;
             this.Controls.Add(this.ApptUserIDComboBox);
-            this.Controls.Add(this.CustomerComboBox);
+            this.Controls.Add(this.ApptCustomerComboBox);
             this.Controls.Add(this.ApptTypeComboBox);
             this.Controls.Add(this.ApptUserIDLabel);
             this.Controls.Add(this.ApptCancelButton);
@@ -226,7 +228,7 @@
         private System.Windows.Forms.Button ApptCancelButton;
         private System.Windows.Forms.Label ApptUserIDLabel;
         private System.Windows.Forms.ComboBox ApptTypeComboBox;
-        private System.Windows.Forms.ComboBox CustomerComboBox;
+        private System.Windows.Forms.ComboBox ApptCustomerComboBox;
         private System.Windows.Forms.ComboBox ApptUserIDComboBox;
         private System.Windows.Forms.DateTimePicker ApptStartDateTime;
         private System.Windows.Forms.DateTimePicker ApptEndDateTime;

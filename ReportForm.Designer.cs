@@ -41,7 +41,6 @@
             this.ApptTypeComboBox = new System.Windows.Forms.ComboBox();
             this.ReportMonthLabel = new System.Windows.Forms.Label();
             this.ReportApptTypeLabel = new System.Windows.Forms.Label();
-            this.ReportUserIDLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ReportFormCloseButton
@@ -116,7 +115,6 @@
             this.ConsultantComboBox.Name = "ConsultantComboBox";
             this.ConsultantComboBox.Size = new System.Drawing.Size(175, 27);
             this.ConsultantComboBox.TabIndex = 33;
-            this.ConsultantComboBox.SelectedIndexChanged += new System.EventHandler(this.ConsultantComboBox_SelectedIndexChanged);
             // 
             // MonthsComboBox
             // 
@@ -182,25 +180,12 @@
             this.ReportApptTypeLabel.TabIndex = 36;
             this.ReportApptTypeLabel.Text = "Appointment Type";
             // 
-            // ReportUserIDLabel
-            // 
-            this.ReportUserIDLabel.AutoSize = true;
-            this.ReportUserIDLabel.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ReportUserIDLabel.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ReportUserIDLabel.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.ReportUserIDLabel.Location = new System.Drawing.Point(298, 126);
-            this.ReportUserIDLabel.Name = "ReportUserIDLabel";
-            this.ReportUserIDLabel.Size = new System.Drawing.Size(65, 18);
-            this.ReportUserIDLabel.TabIndex = 38;
-            this.ReportUserIDLabel.Text = "User ID";
-            // 
             // ReportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(453, 355);
             this.ControlBox = false;
-            this.Controls.Add(this.ReportUserIDLabel);
             this.Controls.Add(this.ReportMonthLabel);
             this.Controls.Add(this.ReportApptTypeLabel);
             this.Controls.Add(this.ApptTypeComboBox);
@@ -232,6 +217,5 @@
         private System.Windows.Forms.ComboBox ApptTypeComboBox;
         private System.Windows.Forms.Label ReportMonthLabel;
         private System.Windows.Forms.Label ReportApptTypeLabel;
-        private System.Windows.Forms.Label ReportUserIDLabel;
     }
 }

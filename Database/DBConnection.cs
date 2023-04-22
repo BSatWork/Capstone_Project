@@ -1,11 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BOP3_Task_1_DB_and_File_Server_App.Database
@@ -66,11 +61,9 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Database
             }
         }
 
-        public string GetSQLTableValue(string table, string column, string datafilter)
+        public static string GetSQLTableValue(string query)
         {
-            string query = "Select " + column + " from client_schedule." + table + " where " + column + " = '" + datafilter + "'";
-
-            try
+           try
             {
                 var cmd = new MySqlCommand(query, DBConnection.ConnectToDB);
                 string value = cmd.ExecuteScalar().ToString();
@@ -80,6 +73,30 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Database
             {
                 MessageBox.Show(string.Format("An error occurred {0}", ex.Message), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
+            }
+        }
+
+        public static void SaveToSQLTable(string query)
+        {
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand(query, DBConnection.ConnectToDB);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format("An error occurred {0}", ex.Message), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public static void DeleteSQLTableRow(string query)
+        {
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand(query, DBConnection.ConnectToDB);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format("An error occurred {0}", ex.Message), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

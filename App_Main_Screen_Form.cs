@@ -1,16 +1,7 @@
 ﻿using BOP3_Task_1_DB_and_File_Server_App.Database;
-using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace BOP3_Task_1_DB_and_File_Server_App
 {
@@ -18,9 +9,9 @@ namespace BOP3_Task_1_DB_and_File_Server_App
     {
         public AppLoginForm appLogin;
         public string query;
-        private readonly int appts;
+        public string userId;
 
-        public MainScreen()
+        public MainScreen(string userName)
         {
             InitializeComponent();
             Show();
@@ -30,36 +21,37 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             ReportsToolTip.SetToolTip(ReportsButton, "Generate Reports");
 
             // Populate the Appointments table.
-            query = "Select appointment.userId, customer.customerName, appointment.type, appointment.start, appointment.end from client_schedule.appointment Left Join client_schedule.customer on appointment.customerId = customer.customerId;;";
+            query = "Select appointment.appointmentId, appointment.userId, customer.customerName, appointment.type, appointment.start, appointment.end " +
+                    "from client_schedule.appointment " +
+                    "Left Join client_schedule.customer on appointment.customerId = customer.customerId";
             DataTable mainScreendataTable = DBConnection.GetSQLTable(query);
             AppointmentsDGV.DataSource = mainScreendataTable;
             AppointmentsDGV.ClearSelection();
 
             // Populate the Count of Appointments label.
-            DataTable apptCount = new DataTable();
-
-            try
-            {
-                string query = "Select appointmentID from client_schedule.appointment;";
-
-                MySqlCommand cmd = new MySqlCommand(query, DBConnection.ConnectToDB);
-
-                using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
-                {
-                    da.Fill(apptCount);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(string.Format("An error occurred {0}", ex.Message), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            appts = apptCount.Rows.Count;
-            ApptCount.Text = appts.ToString();
+            query = "Select Count(appointmentID) " +
+                    "From client_schedule.appointment";
+            string apptCount = DBConnection.GetSQLTableValue(query);
+            ApptCount.Text = apptCount;
 
             //Todo check the appt database for qty of ALL appointments and if there's an upcoming appt within 15 min.
             //Todo If there's an appt upcoming within 15 min, then MessageBox.Show("The highlighted appointment begins within the next 15 minutes.")
-
+            query = "Select user.userId " +
+                    "From client_schedule.user " +
+                    "Where user.userName = '" + userName + "'";
+            userId = DBConnection.GetSQLTableValue(query);
+            
+            query = "Select Count(appointmentID) " +
+                    "From client_schedule.appointment " +
+                    "Where appointment.start between '" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss tt") + "' and ('" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss tt") + "' + interval(15) minute) " +
+                    "And appointment.userId = '" + userId + "'";
+            string upcomingAppointments = DBConnection.GetSQLTableValue(query);
+            int upcomingAppointment = Int32.Parse(upcomingAppointments);
+            
+            if (upcomingAppointment > 0)
+            {
+                MessageBox.Show("!ATTENTION! You have an appt in the next 15 minutes." + "\n" + "\n" + "See the highlighted appt for details.");
+            }
         }
 
         public void AddUpdateDeleteApptButton_Click(object sender, EventArgs e)
@@ -68,7 +60,16 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
             if (AppointmentsDGV.CurrentRow.Selected)
             {
-                appointment = (Appointment)AppointmentsDGV.CurrentRow.DataBoundItem;
+                //appointment = (Appointment)AppointmentsDGV.CurrentRow.DataBoundItem;
+                //appointment.appointmentId = AppointmentsDGV.SelectedCells[0].RowIndex;
+                //appointment.userId = AppointmentsDGV.SelectedCells[1].RowIndex;
+                //appointment.customerName = AppointmentsDGV.SelectedCells[2].RowIndex.ToString();
+                //appointment.type = AppointmentsDGV.SelectedCells[3].RowIndex.ToString();
+                MessageBox.Show("AppointmentsDGV selected row column 0 = " + AppointmentsDGV.SelectedRows[1].Cells[0].Value + "\n" +
+                                "AppointmentsDGV selected row column 1 = " + AppointmentsDGV.SelectedRows[1].Cells[1].Value + "\n" +
+                                "AppointmentsDGV.selected row column 2 = " + AppointmentsDGV.SelectedRows[1].Cells[2].Value + "\n" +
+                                "AppointmentsDGV.selected row column 3 = " + AppointmentsDGV.SelectedRows[1].Cells[3].Value);
+                //appointment.end = AppointmentsDGV.SelectedCells[6].RowIndex.ToString();
             }
 
             _ = new AppointmentForm(this, appointment);

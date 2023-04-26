@@ -22,13 +22,13 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             ReportsToolTip.SetToolTip(ReportsButton, "Generate Reports");
 
             // Populate the Appointments table.
-            query = "Select appointment.appointmentId, appointment.userId, customer.customerName, appointment.type, appointment.start, appointment.end " +
+            /*query = "Select appointment.appointmentId, appointment.userId, customer.customerName, appointment.type, appointment.start, appointment.end " +
                     "from client_schedule.appointment " +
                     "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
                     "Where appointment.start > '" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss tt") + "'";
             DataTable mainScreendataTable = DBConnection.GetSQLTable(query);
             AppointmentsDGV.DataSource = mainScreendataTable;
-            AppointmentsDGV.ClearSelection();
+            AppointmentsDGV.ClearSelection();*/
             CalendarView.SelectedIndex = 0;
 
             // Populate the Count of Appointments label.
@@ -62,7 +62,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
         {
             Appointment appointment = null;
 
-            if (AppointmentsDGV.CurrentRow.Selected)
+            if (AppointmentsDGV.SelectedRows.Count == 1)
             {
                 appointment = new Appointment
                 {
@@ -102,27 +102,27 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             {
                 endOfWeek = Int32.Parse(DateTime.Today.ToString("dd"));
             }
-            if (todaysDay == "Monday")
+            else if (todaysDay == "Monday")
             {
                 endOfWeek = Int32.Parse(DateTime.Today.ToString("dd")) + 6;
             }
-            if (todaysDay == "Tuesday")
+            else if (todaysDay == "Tuesday")
             {
                 endOfWeek = Int32.Parse(DateTime.Today.ToString("dd")) + 5;
             }
-            if (todaysDay == "Wednesday")
+            else if (todaysDay == "Wednesday")
             {
                 endOfWeek = Int32.Parse(DateTime.Today.ToString("dd")) + 4;
             }
-            if (todaysDay == "Thursday")
+            else if (todaysDay == "Thursday")
             {
                 endOfWeek = Int32.Parse(DateTime.Today.ToString("dd")) + 3;
             }
-            if (todaysDay == "Friday")
+            else if (todaysDay == "Friday")
             {
                 endOfWeek = Int32.Parse(DateTime.Today.ToString("dd")) + 2;
             }
-            if (todaysDay == "Saturday")
+            else if (todaysDay == "Saturday")
             {
                 endOfWeek = Int32.Parse(DateTime.Today.ToString("dd")) + 1;
             }
@@ -154,7 +154,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             
             int todaysYear = Int32.Parse(DateTime.Today.ToString("yyyy"));
             string nextYear;
-            if (todaysYear == 12)
+            if (todaysMonth == 12)
             {
                 nextYear = (todaysYear + 1).ToString();
             }

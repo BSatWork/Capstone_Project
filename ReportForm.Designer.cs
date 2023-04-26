@@ -147,9 +147,11 @@
             this.ApptTypeComboBox.FormattingEnabled = true;
             this.ApptTypeComboBox.Items.AddRange(new object[] {
             "Initial Consultation",
+            "Presentation",
+            "Scrum",
             "Follow-up",
             "Emergency",
-            "Contract Closing"});
+            "Project Closing"});
             this.ApptTypeComboBox.Location = new System.Drawing.Point(28, 122);
             this.ApptTypeComboBox.Name = "ApptTypeComboBox";
             this.ApptTypeComboBox.Size = new System.Drawing.Size(175, 27);

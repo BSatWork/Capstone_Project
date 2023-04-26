@@ -49,11 +49,11 @@
             this.ApptStartDateTime.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ApptStartDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.ApptStartDateTime.Location = new System.Drawing.Point(205, 182);
-            this.ApptStartDateTime.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.ApptStartDateTime.MinDate = new System.DateTime(2023, 1, 1, 12, 0, 0, 0);
             this.ApptStartDateTime.Name = "ApptStartDateTime";
             this.ApptStartDateTime.Size = new System.Drawing.Size(194, 21);
             this.ApptStartDateTime.TabIndex = 20;
-            this.ApptStartDateTime.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.ApptStartDateTime.Value = new System.DateTime(2023, 1, 1, 12, 0, 0, 0);
             this.ApptStartDateTime.ValueChanged += new System.EventHandler(this.ApptStartDateTime_ValueChanged);
             // 
             // ApptEndDateTime
@@ -62,11 +62,11 @@
             this.ApptEndDateTime.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ApptEndDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.ApptEndDateTime.Location = new System.Drawing.Point(205, 232);
-            this.ApptEndDateTime.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.ApptEndDateTime.MinDate = new System.DateTime(2023, 1, 1, 12, 0, 0, 0);
             this.ApptEndDateTime.Name = "ApptEndDateTime";
             this.ApptEndDateTime.Size = new System.Drawing.Size(194, 21);
             this.ApptEndDateTime.TabIndex = 22;
-            this.ApptEndDateTime.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.ApptEndDateTime.Value = new System.DateTime(2023, 1, 1, 12, 0, 0, 0);
             this.ApptEndDateTime.ValueChanged += new System.EventHandler(this.ApptEndDateTime_ValueChanged);
             // 
             // ApptSaveButton

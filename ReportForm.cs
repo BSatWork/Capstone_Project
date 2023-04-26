@@ -21,9 +21,10 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             ConsultantScheduleToolTip.SetToolTip(ConsultantScheduleButton, "Select a Consultant below to show their schedule.");
             TotalApptsThisYearToolTip.SetToolTip(TotalApptsThisYearButton, "Shows a total count of appointments for the current calendar year.");
 
-            query = "Select distinct appointment.userId from client_schedule.appointment";
-            DataTable ConsultantList = DBConnection.GetSQLTable(query);
-            ConsultantComboBox.DataSource = ConsultantList;
+            //query = "Select distinct appointment.userId from client_schedule.appointment";
+            //DataTable ConsultantList = DBConnection.GetSQLTable(query);
+            //ConsultantComboBox.DataSource = ConsultantList;
+            ConsultantComboBox.DataSource = DBConnection.GetSQLTable("Select distinct appointment.userId from client_schedule.appointment");
             ConsultantComboBox.DisplayMember = "userId";
             ConsultantComboBox.SelectedIndex = -1;
         }

@@ -11,7 +11,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
         public string query;
         public int appointmentId;
 
-        public AppointmentForm(int appointmentId, MainScreen mainScreen, Appointment appointment = null)
+        public AppointmentForm(MainScreen mainScreen, int appointmentId)//Appointment appointment = null)
         {
             InitializeComponent();
             Show();
@@ -25,10 +25,9 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             ApptCustomerComboBox.DataSource = DBConnection.GetSQLTable("Select distinct customer.customerName from client_schedule.customer");
             ApptCustomerComboBox.DisplayMember = "customerName";
             ApptCustomerComboBox.SelectedIndex = -1;
-            //ApptStartDateTime.Value = DateTime.Now;
-            //ApptEndDateTime.Value = DateTime.Now;
+            ApptStartDateTime.Value = DateTime.Now.AddMinutes(15);
 
-            if (appointment == null)
+            if (appointmentId == 0)
             {
                 ApptDeleteButton.Visible = false;
                 ApptCancelButton.Visible = true;
@@ -38,11 +37,18 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                 ApptCancelButton.Visible = false;
                 ApptDeleteButton.Visible = true;
 
-                ApptUserIDComboBox.Text = appointment.userId.ToString();
+                //appointmentId = appointment.appointmentId;
+                ApptUserIDComboBox.Text = DBConnection.GetSQLTableValue($"Select appointment.userId From client_schedule.appointment Where appointmentId = '{appointmentId}' ").ToString();
+                ApptTypeComboBox.Text = DBConnection.GetSQLTableValue($"Select appointment.type From client_schedule.appointment Where appointmentId = '{appointmentId}' ").ToString();
+                ApptCustomerComboBox.Text = DBConnection.GetSQLTableValue($"Select customer.customerName From client_schedule.customer Left Join client_schedule.appointment on customer.customerId = appointment.customerId Where appointmentId = '{appointmentId}' ").ToString();
+                //ApptStartDateTime.Value = DBConnection.GetSQLTableValue($"Select appointment.start From client_schedule.appointment Where appointmentId = '{appointmentId}' ");
+                //ApptEndDateTime.Value = DBConnection.GetSQLTableValue($"Select appointment.end From client_schedule.appointment Where appointmentId = '{appointmentId}' ");
+
+                /*ApptUserIDComboBox.Text = appointment.userId.ToString();
                 ApptCustomerComboBox.Text = appointment.customerName.ToString();
                 ApptTypeComboBox.Text = appointment.type.ToString();
                 ApptStartDateTime.Value = appointment.start;
-                ApptEndDateTime.Value = appointment.end;
+                ApptEndDateTime.Value = appointment.end;*/
             }
         }
 
@@ -58,11 +64,14 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                 if (!string.IsNullOrEmpty(ApptUserIDComboBox.Text) &&
                 !string.IsNullOrEmpty(ApptTypeComboBox.Text) &&
                 !string.IsNullOrEmpty(ApptCustomerComboBox.Text) &&
-                Int32.Parse(ApptStartDateTime.Value.ToString(@"hh")) > 8 &&
-                Int32.Parse(ApptStartDateTime.Value.ToString(@"hh")) < 17 &&
-                Int32.Parse(ApptEndDateTime.Value.ToString(@"hh")) > 8 &&
-                Int32.Parse(ApptEndDateTime.Value.ToString(@"hh")) < 17)
+                Int32.Parse(ApptStartDateTime.Value.ToString(@"HH")) > 8 &&
+                Int32.Parse(ApptStartDateTime.Value.ToString(@"HH")) < 17 &&
+                Int32.Parse(ApptEndDateTime.Value.ToString(@"HH")) > 8 &&
+                Int32.Parse(ApptEndDateTime.Value.ToString(@"HH")) < 17)
                 {
+                    //Todo Check and see if the appt is existing and just needs updated or if it needs to be saved (inserted).
+                    //Todo After Save, update, or delete, make sure the DGV updates.
+                    
                     Appointment appointment = new Appointment
                     {
                         appointmentId = Int32.Parse(DBConnection.GetSQLTableValue("Select Max(appointment.appointmentId) from client_schedule.appointment")) + 1,
@@ -77,10 +86,22 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                     if (!ApptConflict(appointment.appointmentId, appointment.userId, appointment.start, appointment.end))
                     {
                         query = "Insert Into client_schedule.appointment " +
-                            $"Values('{appointment.appointmentId}', '{appointment.customerId}', '{appointment.userId}', '{appointment.title}', " +
-                            $"'{appointment.description}', '{appointment.location}', '{appointment.contact}', '{appointment.type}', " +
-                            $"'{appointment.url}', '{appointment.start}', '{appointment.end}', '{appointment.createDate}', " +
-                            $"'{appointment.createdBy}', '{appointment.lastUpdate}', '{appointment.lastUpdateBy}')";
+                            "Values(" +
+                            "'" + appointment.appointmentId + "', " +
+                            "'" + appointment.customerId + "', " +
+                            "'" + appointment.userId + "', " + 
+                            "'" + appointment.title + "', " +
+                            "'" + appointment.description + "', " +
+                            "'" + appointment.location + "', " + 
+                            "'" + appointment.contact + "', " +
+                            "'" + appointment.type + "', " +
+                            "'" + appointment.url + "', " +
+                            "'" + appointment.start.ToString("yyyy-MM-dd HH:mm:ss") + "', " +
+                            "'" + appointment.end.ToString("yyyy-MM-dd HH:mm:ss") + "', " +
+                            "'" + appointment.createDate.ToString("yyyy-MM-dd HH:mm:ss") + "', " +
+                            "'" + appointment.createdBy + "', " +
+                            "'" + appointment.lastUpdate.ToString("yyyy-MM-dd HH:mm:ss") + "', " +
+                            "'" + appointment.lastUpdateBy + "') ";
                         DBConnection.SaveToSQLTable(query);
 
                         Close();
@@ -88,28 +109,29 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                     }
                     else
                     {
-                        MessageBox.Show("Please select another Start/End time.  The selected time conflicts with an existing appointment.");
+                        MessageBox.Show("Please select another Start/End time.  The selected time conflicts with an existing appointment." +
+                                        "Input Validation");
                     }
                 }
                 else
                 {
                     MessageBox.Show("Please verify all fields are populated and the start/end times are within the " +
-                                    "open business hours of 8 AM and 5 PM. Then try again.", "Input Validation");
+                                    "open business hours of 8 AM and 5 PM.\n\nThen try again.", "Input Validation");
                 }
             }
         }
 
         private void ApptDelete_Click(object sender, EventArgs e)
         {
-            DialogResult delete = MessageBox.Show("This will delete the selected appointment, which cannot be undone. \n" +
-                                                  "      Are you sure?", "Delete Confirmation", MessageBoxButtons.YesNo);
-
+            DialogResult delete = MessageBox.Show("This will delete the selected appointment, which cannot be undone. \n\n" +
+                                                  "Are you sure?", "Delete Confirmation", MessageBoxButtons.YesNo);
+            
             switch (delete)
             {
                 case DialogResult.Yes:
                     //Todo Delete the Appt from the DB.
                     query = "Delete from client_schedule.appointment " +
-                    "where appointmentId = '" + appointmentId + "' ";
+                    "Where appointmentId = '" + appointmentId + "' ";
                     DBConnection.DeleteSQLTableRow(query);
                     Close();
                     appMainScreen.Show();
@@ -125,10 +147,10 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                     "From client_schedule.appointment " +
                     $"Where appointment.userId = '{userId}' " +
                     $"And appointment.appointmentId <> '{appointmentId}' " +
-                    $"And ('{start}' between appointment.start and appointment.end " +
-                    $"Or '{end}' between appointment.start and appointment.end) " +
-                    $"Or (appointment.start between '{start}' and '{end}' " +
-                    $"Or appointment.end between '{start}' and '{end}') ";
+                    $"And ('{start:yyyy-MM-dd HH:mm:ss}' between appointment.start and appointment.end " +
+                    $"Or '{end:yyyy-MM-dd HH:mm:ss}' between appointment.start and appointment.end) " +
+                    $"Or (appointment.start between '{start:yyyy-MM-dd HH:mm:ss}' and '{end:yyyy-MM-dd HH:mm:ss}' " +
+                    $"Or appointment.end between '{start:yyyy-MM-dd HH:mm:ss}' and '{end:yyyy-MM-dd HH:mm:ss}') ";
             int DBCheck = Int32.Parse(DBConnection.GetSQLTableValue(query));
 
             if (DBCheck > 0)
@@ -143,20 +165,16 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
         private void ApptStartDateTime_ValueChanged(object sender, EventArgs e)
         {
-            if(Int32.Parse(ApptStartDateTime.Value.ToString(@"hh")) < 8 ||
-               Int32.Parse(ApptStartDateTime.Value.ToString(@"hh")) > 17)
-            {
-                MessageBox.Show("Please update your requested start time to be within the open business hours (8 AM - 5 PM).");
-            }
+            ApptEndDateTime.Value = ApptStartDateTime.Value.AddMinutes(15);
         }
 
         private void ApptEndDateTime_ValueChanged(object sender, EventArgs e)
         {
-            if (Int32.Parse(ApptEndDateTime.Value.ToString("hh")) < 8 ||
-               Int32.Parse(ApptEndDateTime.Value.ToString("hh")) > 17)
+            /*if (Int32.Parse(ApptEndDateTime.Value.ToString("HH")) < 8 ||
+               Int32.Parse(ApptEndDateTime.Value.ToString("HH")) > 17)
             {
                 MessageBox.Show("Please update your requested start time to be within the open business hours (8 AM - 5 PM).");
-            }
+            }*/
         }
 
         private void ApptCancelButton_Click(object sender, EventArgs e)

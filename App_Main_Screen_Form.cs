@@ -33,7 +33,8 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
             // Populate the Count of Appointments label.
             query = "Select Count(appointmentId) " +
-                    "From client_schedule.appointment";
+                    "From client_schedule.appointment " +
+                    "Where appointment.start > '" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss tt") + "' ";
             string apptCount = DBConnection.GetSQLTableValue(query);
             ApptCount.Text = apptCount;
 
@@ -60,26 +61,23 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
         public void AddUpdateDeleteApptButton_Click(object sender, EventArgs e)
         {
-            Appointment appointment = null;
+            //Appointment appointment = null;
+            appointmentId = 0;
 
             if (AppointmentsDGV.SelectedRows.Count == 1)
             {
-                appointment = new Appointment
-                {
-                    appointmentId = (int)AppointmentsDGV.CurrentRow.Cells[0].Value,
-                    userId = (int)AppointmentsDGV.CurrentRow.Cells[1].Value,
+                //appointment = new Appointment
+                //{
+                appointmentId = (int)AppointmentsDGV.CurrentRow.Cells[0].Value;
+                    /*userId = (int)AppointmentsDGV.CurrentRow.Cells[1].Value,
                     customerName = AppointmentsDGV.CurrentRow.Cells[2].Value.ToString(),
                     type = AppointmentsDGV.CurrentRow.Cells[3].Value.ToString(),
                     start = (DateTime)AppointmentsDGV.CurrentRow.Cells[4].Value,
                     end = (DateTime)AppointmentsDGV.CurrentRow.Cells[5].Value
-                };
-            }
-            else
-            {
-                appointmentId = -1;
+                };*/
             }
 
-            _ = new AppointmentForm(appointmentId, this, appointment);
+            _ = new AppointmentForm(this, appointmentId);
             this.Hide();
         }
 

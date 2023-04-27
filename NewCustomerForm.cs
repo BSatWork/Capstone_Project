@@ -18,6 +18,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
     {
         public CustomerDatabaseForm customerDBForm;
         private int maxID;
+        private string query;
 
         public NewCustomerForm(CustomerDatabaseForm customerDBForm)
         {
@@ -26,9 +27,11 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             Activate();
             this.customerDBForm = customerDBForm;
 
-            Customer_ID.Text = GetMaxCustomerID().ToString();
+            //Customer_ID.Text = GetMaxCustomerID().ToString();
+            maxID = Int32.Parse(DBConnection.GetSQLTableValue("Select max(customerId) as 'Max ID' from client_schedule.customer")) + 1;
+            Customer_ID.Text = maxID.ToString();
 
-            
+            //Todo Handle Updates
 
 
 
@@ -52,7 +55,40 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                 Customer_Phone.BackColor == System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))))
                 )
             {
-                //Todo Save the Customer data to the DB
+                Customer customer = new Customer
+                {
+                    customerId = Int32.Parse(Customer_ID.Text),
+                    customerName = Customer_Name.Text,
+                    addressID = Int32.Parse(DBConnection.GetSQLTableValue("Select Max(customer.addressId) from client_schedule.customer")) + 1,
+                };
+
+                string maxIDCheck = DBConnection.GetSQLTableValue("Select customer.customerId From client_schedule.customer " +
+                                                                  $"Where customer.customerId = {customer.customerId} ");
+                if (string.IsNullOrEmpty(maxIDCheck))
+                {
+                    //Save the Customer ID in the customer table
+                    query = "Insert Into client_schedule.customer " +
+                            "Values(" +
+                            "'" + customer.customerId + "'" +
+                            "'" + customer.customerName + "'" +
+                            "'" + customer.addressID + "'" +
+                            "'" + customer.active + "'" +
+                            "'" + customer.createDate + "'" +
+                            "'" + customer.createdBy + "'" +
+                            "'" + customer.lastUpdate + "'" +
+                            "'" + customer.lastUpdateBy + "') ";
+                    DBConnection.SaveToSQLTable(query);
+                }
+                else
+                {
+                    MessageBox.Show("This customer already exists in the database.");
+                }
+
+
+
+
+
+                
 
                 Close();
                 customerDBForm.Show();

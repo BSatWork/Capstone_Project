@@ -81,6 +81,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Database
             try
             {
                 MySqlCommand cmd = new MySqlCommand(query, DBConnection.ConnectToDB);
+                cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
@@ -93,6 +94,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Database
             try
             {
                 MySqlCommand cmd = new MySqlCommand(query, DBConnection.ConnectToDB);
+                cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {

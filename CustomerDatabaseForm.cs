@@ -76,11 +76,6 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
             customers = customerCount.Rows.Count;
             CustomerCount.Text = customers.ToString();
-
-
-
-
-
         }
 
         private void CustomerDBCloseButton_Click(object sender, EventArgs e)

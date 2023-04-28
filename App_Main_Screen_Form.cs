@@ -201,5 +201,12 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             _ = new ReportForm(this);
             this.Hide();
         }
+
+        private void MainScreen_Load(object sender, EventArgs e)
+        {
+            Show();
+            Activate();
+            CalendarView.SelectedIndex = 0;
+        }
     }
 }

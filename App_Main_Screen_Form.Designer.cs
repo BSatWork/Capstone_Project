@@ -257,6 +257,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Appointment Scheduler";
+            this.Load += new System.EventHandler(this.MainScreen_Load);
             ((System.ComponentModel.ISupportInitialize)(this.AppointmentsDGV)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

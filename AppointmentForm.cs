@@ -1,6 +1,5 @@
 ﻿using BOP3_Task_1_DB_and_File_Server_App.Database;
 using System;
-using System.Data;
 using System.Windows.Forms;
 
 namespace BOP3_Task_1_DB_and_File_Server_App
@@ -9,7 +8,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
     {
         public MainScreen appMainScreen;
         public string query;
-        public int appointmentId;
+        public int apptId;
 
         public AppointmentForm(MainScreen mainScreen, int appointmentId)//Appointment appointment = null)
         {
@@ -17,6 +16,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             Show();
             Activate();
             appMainScreen = mainScreen;
+            apptId = appointmentId;
 
             ApptUserIDComboBox.DataSource = DBConnection.GetSQLTable("Select distinct user.userId from client_schedule.user");
             ApptUserIDComboBox.DisplayMember = "userId";
@@ -123,15 +123,14 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
         private void ApptDelete_Click(object sender, EventArgs e)
         {
-            DialogResult delete = MessageBox.Show("This will delete the selected appointment, which cannot be undone. \n\n" +
+            DialogResult delete = MessageBox.Show("This will delete the appointment, which cannot be undone. \n\n" +
                                                   "Are you sure?", "Delete Confirmation", MessageBoxButtons.YesNo);
             
             switch (delete)
             {
                 case DialogResult.Yes:
-                    //Todo Delete the Appt from the DB.
                     query = "Delete from client_schedule.appointment " +
-                    "Where appointmentId = '" + appointmentId + "' ";
+                    "Where appointmentId = '" + apptId + "' ";
                     DBConnection.DeleteSQLTableRow(query);
                     Close();
                     appMainScreen.Show();

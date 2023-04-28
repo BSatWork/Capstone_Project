@@ -96,7 +96,7 @@
             // 
             // Customer_Address2
             // 
-            this.Customer_Address2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.Customer_Address2.BackColor = System.Drawing.Color.White;
             this.Customer_Address2.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Customer_Address2.Location = new System.Drawing.Point(145, 150);
             this.Customer_Address2.Name = "Customer_Address2";
@@ -106,7 +106,7 @@
             // 
             // Customer_Address1
             // 
-            this.Customer_Address1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.Customer_Address1.BackColor = System.Drawing.Color.White;
             this.Customer_Address1.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Customer_Address1.Location = new System.Drawing.Point(145, 110);
             this.Customer_Address1.Name = "Customer_Address1";
@@ -116,7 +116,7 @@
             // 
             // Customer_Name
             // 
-            this.Customer_Name.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.Customer_Name.BackColor = System.Drawing.Color.White;
             this.Customer_Name.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Customer_Name.Location = new System.Drawing.Point(145, 70);
             this.Customer_Name.Name = "Customer_Name";
@@ -139,7 +139,7 @@
             this.Customer_Save_Button.Location = new System.Drawing.Point(320, 308);
             this.Customer_Save_Button.Name = "Customer_Save_Button";
             this.Customer_Save_Button.Size = new System.Drawing.Size(75, 41);
-            this.Customer_Save_Button.TabIndex = 25;
+            this.Customer_Save_Button.TabIndex = 23;
             this.Customer_Save_Button.Text = "Save";
             this.Customer_Save_Button.UseVisualStyleBackColor = true;
             this.Customer_Save_Button.Click += new System.EventHandler(this.Customer_Save_Button_Click);
@@ -181,32 +181,32 @@
             // 
             // Customer_Country
             // 
-            this.Customer_Country.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.Customer_Country.BackColor = System.Drawing.Color.White;
             this.Customer_Country.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Customer_Country.Location = new System.Drawing.Point(145, 230);
             this.Customer_Country.Name = "Customer_Country";
             this.Customer_Country.Size = new System.Drawing.Size(251, 26);
-            this.Customer_Country.TabIndex = 27;
+            this.Customer_Country.TabIndex = 21;
             this.Customer_Country.TextChanged += new System.EventHandler(this.Customer_Country_TextChanged);
             // 
             // Customer_City
             // 
-            this.Customer_City.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.Customer_City.BackColor = System.Drawing.Color.White;
             this.Customer_City.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Customer_City.Location = new System.Drawing.Point(145, 190);
             this.Customer_City.Name = "Customer_City";
             this.Customer_City.Size = new System.Drawing.Size(251, 26);
-            this.Customer_City.TabIndex = 26;
+            this.Customer_City.TabIndex = 20;
             this.Customer_City.TextChanged += new System.EventHandler(this.Customer_City_TextChanged);
             // 
             // Customer_Phone
             // 
-            this.Customer_Phone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.Customer_Phone.BackColor = System.Drawing.Color.White;
             this.Customer_Phone.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Customer_Phone.Location = new System.Drawing.Point(145, 270);
             this.Customer_Phone.Name = "Customer_Phone";
             this.Customer_Phone.Size = new System.Drawing.Size(251, 26);
-            this.Customer_Phone.TabIndex = 30;
+            this.Customer_Phone.TabIndex = 22;
             this.Customer_Phone.TextChanged += new System.EventHandler(this.Customer_Phone_TextChanged);
             // 
             // Customer_Phone_Label

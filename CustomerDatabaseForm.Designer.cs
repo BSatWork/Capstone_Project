@@ -30,17 +30,17 @@
         {
             this.CustomerDBCloseButton = new System.Windows.Forms.Button();
             this.CustomerDBDGV = new System.Windows.Forms.DataGridView();
-            this.NewCustomerButton = new System.Windows.Forms.Button();
-            this.DeleteCustomerButton = new System.Windows.Forms.Button();
-            this.UpdateCustomerButton = new System.Windows.Forms.Button();
-            this.CustomerCount = new System.Windows.Forms.Label();
-            this.CustomerCountLabel = new System.Windows.Forms.Label();
             this.DBCustomer_Name_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DBAddress_Address1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DBAddress_Address2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DBCity_City = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DBCountry_Country = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DBAddress_Phone_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NewCustomerButton = new System.Windows.Forms.Button();
+            this.DeleteCustomerButton = new System.Windows.Forms.Button();
+            this.UpdateCustomerButton = new System.Windows.Forms.Button();
+            this.CustomerCount = new System.Windows.Forms.Label();
+            this.CustomerCountLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.CustomerDBDGV)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,6 +80,54 @@
             this.CustomerDBDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.CustomerDBDGV.Size = new System.Drawing.Size(1200, 360);
             this.CustomerDBDGV.TabIndex = 10;
+            // 
+            // DBCustomer_Name_Column
+            // 
+            this.DBCustomer_Name_Column.DataPropertyName = "Name";
+            this.DBCustomer_Name_Column.HeaderText = "Customer Name";
+            this.DBCustomer_Name_Column.Name = "DBCustomer_Name_Column";
+            this.DBCustomer_Name_Column.ReadOnly = true;
+            this.DBCustomer_Name_Column.Width = 250;
+            // 
+            // DBAddress_Address1
+            // 
+            this.DBAddress_Address1.DataPropertyName = "Address";
+            this.DBAddress_Address1.HeaderText = "Address";
+            this.DBAddress_Address1.Name = "DBAddress_Address1";
+            this.DBAddress_Address1.ReadOnly = true;
+            this.DBAddress_Address1.Width = 250;
+            // 
+            // DBAddress_Address2
+            // 
+            this.DBAddress_Address2.DataPropertyName = "Address1";
+            this.DBAddress_Address2.HeaderText = "Address";
+            this.DBAddress_Address2.Name = "DBAddress_Address2";
+            this.DBAddress_Address2.ReadOnly = true;
+            this.DBAddress_Address2.Width = 250;
+            // 
+            // DBCity_City
+            // 
+            this.DBCity_City.DataPropertyName = "City";
+            this.DBCity_City.HeaderText = "City";
+            this.DBCity_City.Name = "DBCity_City";
+            this.DBCity_City.ReadOnly = true;
+            this.DBCity_City.Width = 115;
+            // 
+            // DBCountry_Country
+            // 
+            this.DBCountry_Country.DataPropertyName = "Country";
+            this.DBCountry_Country.HeaderText = "Country";
+            this.DBCountry_Country.Name = "DBCountry_Country";
+            this.DBCountry_Country.ReadOnly = true;
+            this.DBCountry_Country.Width = 115;
+            // 
+            // DBAddress_Phone_Column
+            // 
+            this.DBAddress_Phone_Column.DataPropertyName = "Phone";
+            this.DBAddress_Phone_Column.HeaderText = "Phone";
+            this.DBAddress_Phone_Column.Name = "DBAddress_Phone_Column";
+            this.DBAddress_Phone_Column.ReadOnly = true;
+            this.DBAddress_Phone_Column.Width = 115;
             // 
             // NewCustomerButton
             // 
@@ -139,54 +187,6 @@
             this.CustomerCountLabel.TabIndex = 15;
             this.CustomerCountLabel.Text = "Customer Count:";
             // 
-            // DBCustomer_Name_Column
-            // 
-            this.DBCustomer_Name_Column.DataPropertyName = "Name";
-            this.DBCustomer_Name_Column.HeaderText = "Customer Name";
-            this.DBCustomer_Name_Column.Name = "DBCustomer_Name_Column";
-            this.DBCustomer_Name_Column.ReadOnly = true;
-            this.DBCustomer_Name_Column.Width = 250;
-            // 
-            // DBAddress_Address1
-            // 
-            this.DBAddress_Address1.DataPropertyName = "Address";
-            this.DBAddress_Address1.HeaderText = "Address";
-            this.DBAddress_Address1.Name = "DBAddress_Address1";
-            this.DBAddress_Address1.ReadOnly = true;
-            this.DBAddress_Address1.Width = 250;
-            // 
-            // DBAddress_Address2
-            // 
-            this.DBAddress_Address2.DataPropertyName = "Address1";
-            this.DBAddress_Address2.HeaderText = "Address";
-            this.DBAddress_Address2.Name = "DBAddress_Address2";
-            this.DBAddress_Address2.ReadOnly = true;
-            this.DBAddress_Address2.Width = 250;
-            // 
-            // DBCity_City
-            // 
-            this.DBCity_City.DataPropertyName = "City";
-            this.DBCity_City.HeaderText = "City";
-            this.DBCity_City.Name = "DBCity_City";
-            this.DBCity_City.ReadOnly = true;
-            this.DBCity_City.Width = 115;
-            // 
-            // DBCountry_Country
-            // 
-            this.DBCountry_Country.DataPropertyName = "Country";
-            this.DBCountry_Country.HeaderText = "Country";
-            this.DBCountry_Country.Name = "DBCountry_Country";
-            this.DBCountry_Country.ReadOnly = true;
-            this.DBCountry_Country.Width = 115;
-            // 
-            // DBAddress_Phone_Column
-            // 
-            this.DBAddress_Phone_Column.DataPropertyName = "Phone";
-            this.DBAddress_Phone_Column.HeaderText = "Phone";
-            this.DBAddress_Phone_Column.Name = "DBAddress_Phone_Column";
-            this.DBAddress_Phone_Column.ReadOnly = true;
-            this.DBAddress_Phone_Column.Width = 115;
-            // 
             // CustomerDatabaseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -203,6 +203,7 @@
             this.Name = "CustomerDatabaseForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Customer Database";
+            this.Load += new System.EventHandler(this.CustomerDatabaseForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.CustomerDBDGV)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

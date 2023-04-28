@@ -2,9 +2,10 @@
 
 namespace BOP3_Task_1_DB_and_File_Server_App.Database
 {
-    public class Appointment : Customer
+    public class Appointment
     {
         public int appointmentId;
+        public int customerId;
         public int userId;
         public string type;
         public DateTime start;
@@ -16,9 +17,9 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Database
         public string location = "Location";
         public string contact = "Contact";
         public string url = "URL";
-        public new DateTime createDate = DateTime.UtcNow;
-        public new string createdBy = "Somebody";
-        public new DateTime lastUpdate = DateTime.UtcNow;
-        public new string lastUpdateBy = "Somebody";
+        public DateTime createDate = DateTime.Parse("2019-01-01 00:00:00");
+        public string createdBy = "Test";
+        public DateTime lastUpdate = DateTime.Parse("2019-01-01 00:00:00");
+        public string lastUpdateBy = "Test";
     }
 }

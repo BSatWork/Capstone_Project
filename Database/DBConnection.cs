@@ -1,6 +1,7 @@
 ﻿//All SQL connections and database activity will happen through use of this class.
 using MySql.Data.MySqlClient;
 using System;
+using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
@@ -66,9 +67,18 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Database
            try
             {
                 var cmd = new MySqlCommand(query, DBConnection.ConnectToDB);
-                string value = cmd.ExecuteScalar().ToString();
-                return value;
-            }
+
+                try
+                {
+                    string value = (string)cmd.ExecuteScalar();
+                    return value;
+                }
+                catch
+                {
+                    string value = cmd.ExecuteScalar().ToString();
+                    return value;
+                }
+                            }
             catch (Exception ex)
             {
                 MessageBox.Show(string.Format("An error occurred {0}", ex.Message), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

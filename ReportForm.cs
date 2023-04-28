@@ -8,7 +8,6 @@ namespace BOP3_Task_1_DB_and_File_Server_App
     public partial class ReportForm : Form
     {
         public MainScreen appMainScreen;
-        private readonly string query;
 
         public ReportForm(MainScreen mainScreen)
         {

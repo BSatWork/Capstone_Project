@@ -1,6 +1,5 @@
 ﻿using BOP3_Task_1_DB_and_File_Server_App.Database;
 using System;
-using System.Data;
 using System.Windows.Forms;
 
 namespace BOP3_Task_1_DB_and_File_Server_App
@@ -8,6 +7,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
     public partial class ReportForm : Form
     {
         public MainScreen appMainScreen;
+        public string query;
 
         public ReportForm(MainScreen mainScreen)
         {
@@ -89,7 +89,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                     monthnumber = "12";
                 }
 
-                string query = "Select Count(appointment.userId) as Count from client_schedule.appointment where type = '" + type + "' and month(start) = '" + monthnumber + "'";
+                query = "Select Count(appointment.userId) as Count from client_schedule.appointment where type = '" + type + "' and month(start) = '" + monthnumber + "'";
                 string TotalAppointments = DBConnection.GetSQLTableValue(query);
 
                 if (string.IsNullOrEmpty(TotalAppointments.ToString()))
@@ -118,7 +118,8 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
         private void TotalApptsThisYearButton_Click(object sender, EventArgs e)
         {
-            string query = "Select Count(appointmentId) from client_schedule.appointment";
+            query = "Select Count(appointmentId) from client_schedule.appointment " +
+                    "Where appointment.start > '" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:00") + "'";
             string TotalAppointments = DBConnection.GetSQLTableValue(query);
             MessageBox.Show("There are a total of " + TotalAppointments + " remaining appointments this year.", "Remaining Appointments This Year", MessageBoxButtons.OK);
         }

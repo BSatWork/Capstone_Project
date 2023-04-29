@@ -17,17 +17,45 @@ namespace BOP3_Task_1_DB_and_File_Server_App
     public partial class NewCustomerForm : Form
     {
         public CustomerDatabaseForm customerDBForm;
-        private string query;
+        public string query;
+        public int existingCustomerId;
+        public bool newCustomer;
 
-        public NewCustomerForm(CustomerDatabaseForm customerDBForm)
+        public NewCustomerForm(CustomerDatabaseForm customerDBForm, int customerId)
         {
             InitializeComponent();
             Show();
             Activate();
             this.customerDBForm = customerDBForm;
 
-            int maxID = Int32.Parse(DBConnection.GetSQLTableValue("Select max(customerId) as 'Max ID' from client_schedule.customer")) + 1;
-            Customer_ID.Text = maxID.ToString();
+            if (customerId == 0)
+            {
+                newCustomer = true;
+                int maxID = Int32.Parse(DBConnection.GetSQLTableValue("Select max(customerId) as 'Max ID' from client_schedule.customer")) + 1;
+                Customer_ID.Text = maxID.ToString();
+            }
+            else
+            {
+                existingCustomerId = customerId;
+                Customer_ID.Text = existingCustomerId.ToString();
+
+                query = "Select customer.customerName, " +
+                        "address.address, address.address2, " +
+                        "city.city, country.country, " +
+                        "address.phone " +
+                        "From client_schedule.customer " +
+                        "Left Join client_schedule.address on customer.addressId = address.addressId " +
+                        "Left Join client_schedule.city on address.cityId = city.cityId " +
+                        "Left Join client_schedule.country on city.countryId = country.countryId ";
+                DataTable customerData = DBConnection.GetSQLTable(query);
+                
+                Customer_Name.Text = customerData.Rows[0]["customerName"].ToString();
+                Customer_Address1.Text = customerData.Rows[0]["address"].ToString();
+                Customer_Address2.Text = customerData.Rows[0]["address2"].ToString();
+                Customer_City.Text = customerData.Rows[0]["city"].ToString();
+                Customer_Country.Text = customerData.Rows[0]["country"].ToString();
+                Customer_Phone.Text = customerData.Rows[0]["phone"].ToString();
+            }
         }
 
         private void Customer_Save_Button_Click(object sender, EventArgs e)
@@ -68,67 +96,89 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                     countryId = city.countryId,
                     country = Customer_Country.Text
                 };
-
-                string maxCustomerIDCheck = DBConnection.GetSQLTableValue("Select customer.customerId From client_schedule.customer " +
-                                                                  $"Where customer.customerId = {customer.customerId} ");
-                if (string.IsNullOrEmpty(maxCustomerIDCheck))
+                    
+                if (newCustomer)
                 {
-                    //Save to the country table
-                    query = "Insert Into client_schedule.country " +
-                            "Values(" +
-                            "'" + country.countryId + "', " +
-                            "'" + country.country + "', " +
-                            "'" + country.createDate.ToString("yyyy-MM-dd HH:mm:ss") + "', " +
-                            "'" + country.createdBy + "', " +
-                            "'" + country.lastUpdate.ToString("yyyy-MM-dd HH:mm:ss") + "', " +
-                            "'" + country.lastUpdateBy + "') ";
-                    DBConnection.SaveToSQLTable(query);
+                    string maxCustomerIDCheck = DBConnection.GetSQLTableValue("Select customer.customerId From client_schedule.customer " +
+                                                                              $"Where customer.customerId = {customer.customerId} ");
+                    if (string.IsNullOrEmpty(maxCustomerIDCheck))
+                    {
+                        //Save to the country table
+                        query = "Insert Into client_schedule.country " +
+                                "Values(" +
+                                "'" + country.countryId + "', " +
+                                "'" + country.country + "', " +
+                                "'" + country.createDate.ToString("yyyy-MM-dd HH:mm:00") + "', " +
+                                "'" + country.createdBy + "', " +
+                                "'" + country.lastUpdate.ToString("yyyy-MM-dd HH:mm:00") + "', " +
+                                "'" + country.lastUpdateBy + "') ";
+                        DBConnection.SaveToSQLTable(query);
 
-                    //Save to the city table
-                    query = "Insert Into client_schedule.city " +
-                            "Values(" +
-                            "'" + city.cityId + "', " +
-                            "'" + city.city + "', " +
-                            "'" + city.countryId + "', " +
-                            "'" + city.createDate.ToString("yyyy-MM-dd HH:mm:ss") + "', " +
-                            "'" + city.createdBy + "', " +
-                            "'" + city.lastUpdate.ToString("yyyy-MM-dd HH:mm:ss") + "', " +
-                            "'" + city.lastUpdateBy + "') ";
-                    DBConnection.SaveToSQLTable(query);
+                        //Save to the city table
+                        query = "Insert Into client_schedule.city " +
+                                "Values(" +
+                                "'" + city.cityId + "', " +
+                                "'" + city.city + "', " +
+                                "'" + city.countryId + "', " +
+                                "'" + city.createDate.ToString("yyyy-MM-dd HH:mm:00") + "', " +
+                                "'" + city.createdBy + "', " +
+                                "'" + city.lastUpdate.ToString("yyyy-MM-dd HH:mm:00") + "', " +
+                                "'" + city.lastUpdateBy + "') ";
+                        DBConnection.SaveToSQLTable(query);
 
-                    //Save to the address table
-                    query = "Insert Into client_schedule.address " +
-                            "Values(" +
-                            "'" + address.addressId + "', " +
-                            "'" + address.addressLine1 + "', " +
-                            "'" + address.addressLine2 + "', " +
-                            "'" + address.cityId + "', " +
-                            "'" + address.postalCode + "', " +
-                            "'" + address.phone + "', " +
-                            "'" + address.createDate.ToString("yyyy-MM-dd HH:mm:ss") + "', " +
-                            "'" + address.createdBy + "', " +
-                            "'" + address.lastUpdate.ToString("yyyy-MM-dd HH:mm:ss") + "', " +
-                            "'" + address.lastUpdateBy + "') ";
-                    DBConnection.SaveToSQLTable(query);
+                        //Save to the address table
+                        query = "Insert Into client_schedule.address " +
+                                "Values(" +
+                                "'" + address.addressId + "', " +
+                                "'" + address.addressLine1 + "', " +
+                                "'" + address.addressLine2 + "', " +
+                                "'" + address.cityId + "', " +
+                                "'" + address.postalCode + "', " +
+                                "'" + address.phone + "', " +
+                                "'" + address.createDate.ToString("yyyy-MM-dd HH:mm:00") + "', " +
+                                "'" + address.createdBy + "', " +
+                                "'" + address.lastUpdate.ToString("yyyy-MM-dd HH:mm:00") + "', " +
+                                "'" + address.lastUpdateBy + "') ";
+                        DBConnection.SaveToSQLTable(query);
 
-                    //Save to the customer table
-                    query = "Insert Into client_schedule.customer " +
-                            "Values(" +
-                            "'" + customer.customerId + "', " +
-                            "'" + customer.customerName + "', " +
-                            "'" + customer.addressId + "', " +
-                            "'" + customer.active + "', " +
-                            "'" + customer.createDate.ToString("yyyy-MM-dd HH:mm:ss") + "', " +
-                            "'" + customer.createdBy + "', " +
-                            "'" + customer.lastUpdate.ToString("yyyy-MM-dd HH:mm:ss") + "', " +
-                            "'" + customer.lastUpdateBy + "') ";
-                    DBConnection.SaveToSQLTable(query);
+                        //Save to the customer table
+                        query = "Insert Into client_schedule.customer " +
+                                "Values(" +
+                                "'" + customer.customerId + "', " +
+                                "'" + customer.customerName + "', " +
+                                "'" + customer.addressId + "', " +
+                                "'" + customer.active + "', " +
+                                "'" + customer.createDate.ToString("yyyy-MM-dd HH:mm:00") + "', " +
+                                "'" + customer.createdBy + "', " +
+                                "'" + customer.lastUpdate.ToString("yyyy-MM-dd HH:mm:00") + "', " +
+                                "'" + customer.lastUpdateBy + "') ";
+                        DBConnection.SaveToSQLTable(query);
+                    }
+                    else
+                    {
+                        MessageBox.Show("This customer already exists in the database.");
+                    }
+                    //Todo After Save/Update, make sure the CustomerDBDGV updates.
+                    Close();
+                    customerDBForm.Show();
                 }
                 else
                 {
-                    MessageBox.Show("This customer already exists in the database.");
-                }
+                    //Todo Update customer in the DB.
 
+
+
+
+
+
+
+
+
+
+
+
+                }
+                //Todo After Save/Update, make sure the CustomerDBDGV updates.
                 Close();
                 customerDBForm.Show();
             }

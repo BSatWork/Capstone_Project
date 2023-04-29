@@ -1,7 +1,6 @@
 ﻿//All SQL connections and database activity will happen through use of this class.
 using MySql.Data.MySqlClient;
 using System;
-using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 

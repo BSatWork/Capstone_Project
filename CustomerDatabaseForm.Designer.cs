@@ -203,7 +203,6 @@
             this.Name = "CustomerDatabaseForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Customer Database";
-            this.Load += new System.EventHandler(this.CustomerDatabaseForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.CustomerDBDGV)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

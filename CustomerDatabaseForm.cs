@@ -9,6 +9,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
     {
         public MainScreen appMainScreen;
         public string query;
+        public int customerId = 0;
 
         public CustomerDatabaseForm(MainScreen mainScreen)
         {
@@ -17,23 +18,19 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             Activate();
             appMainScreen = mainScreen;
 
-            /*query = "Select " +
-                        "client_schedule.customer.customerName as Name, " +
-                        "client_schedule.address.address as Address, " +
-                        "client_schedule.address.address2 as Address, " +
-                        "client_schedule.city.city as City, " +
-                        "client_schedule.country.country as Country, " +
-                        "client_schedule.address.phone " +
-                        "From client_schedule.customer " +
-                        "Left Join client_schedule.address on customer.addressId = address.addressId " +
-                        "Left Join client_schedule.city on address.cityId = city.cityId " +
-                        "Left Join client_schedule.country on city.countryId = country.countryId ";
-            DataTable dataTable = DBConnection.GetSQLTable(query);
-            CustomerDBDGV.DataSource = dataTable;
-            CustomerDBDGV.ClearSelection();
-
-            string customerCount = DBConnection.GetSQLTableValue("Select Count(customerID) from client_schedule.customer ");
-            CustomerCount.Text = customerCount;*/
+            query = "Select " +
+                    "client_schedule.customer.customerId, " +
+                    "client_schedule.customer.customerName as Name, " +
+                    "client_schedule.address.address as Address, " +
+                    "client_schedule.address.address2 as Address, " +
+                    "client_schedule.city.city as City, " +
+                    "client_schedule.country.country as Country, " +
+                    "client_schedule.address.phone " +
+                    "From client_schedule.customer " +
+                    "Left Join client_schedule.address on customer.addressId = address.addressId " +
+                    "Left Join client_schedule.city on address.cityId = city.cityId " +
+                    "Left Join client_schedule.country on city.countryId = country.countryId ";
+            GetCustomerData(query);
         }
 
         private void CustomerDBCloseButton_Click(object sender, EventArgs e)
@@ -44,7 +41,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
         private void NewCustomerButton_Click(object sender, EventArgs e)
         {
-            _ = new NewCustomerForm(this);
+            _ = new NewCustomerForm(this, customerId);
             this.Hide();
         }
 
@@ -62,7 +59,9 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                 }
                 else
                 {
-                    
+                    customerId = (int)CustomerDBDGV.CurrentRow.Cells[0].Value;
+                    _ = new NewCustomerForm(this, customerId);
+                    this.Hide();
                 }
             }
         }
@@ -103,28 +102,15 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             } 
         }
 
-        private void CustomerDatabaseForm_Load(object sender, EventArgs e)
+        public string GetCustomerData(string query)
         {
-            Show();
-            Activate();
-            //CustomerDBDGV.Refresh();
-            query = "Select " +
-                        "client_schedule.customer.customerName as Name, " +
-                        "client_schedule.address.address as Address, " +
-                        "client_schedule.address.address2 as Address, " +
-                        "client_schedule.city.city as City, " +
-                        "client_schedule.country.country as Country, " +
-                        "client_schedule.address.phone " +
-                        "From client_schedule.customer " +
-                        "Left Join client_schedule.address on customer.addressId = address.addressId " +
-                        "Left Join client_schedule.city on address.cityId = city.cityId " +
-                        "Left Join client_schedule.country on city.countryId = country.countryId ";
             DataTable dataTable = DBConnection.GetSQLTable(query);
             CustomerDBDGV.DataSource = dataTable;
             CustomerDBDGV.ClearSelection();
 
             string customerCount = DBConnection.GetSQLTableValue("Select Count(customerID) from client_schedule.customer ");
             CustomerCount.Text = customerCount;
+            return query;
         }
     }
 }

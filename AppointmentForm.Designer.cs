@@ -41,6 +41,7 @@
             this.ApptTypeComboBox = new System.Windows.Forms.ComboBox();
             this.ApptCustomerComboBox = new System.Windows.Forms.ComboBox();
             this.ApptUserIDComboBox = new System.Windows.Forms.ComboBox();
+            this.ApptScreenCloseButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ApptStartDateTime
@@ -67,7 +68,6 @@
             this.ApptEndDateTime.Size = new System.Drawing.Size(194, 21);
             this.ApptEndDateTime.TabIndex = 22;
             this.ApptEndDateTime.Value = new System.DateTime(2023, 1, 1, 12, 0, 0, 0);
-            this.ApptEndDateTime.ValueChanged += new System.EventHandler(this.ApptEndDateTime_ValueChanged);
             // 
             // ApptSaveButton
             // 
@@ -189,12 +189,28 @@
             this.ApptUserIDComboBox.Size = new System.Drawing.Size(194, 27);
             this.ApptUserIDComboBox.TabIndex = 38;
             // 
+            // ApptScreenCloseButton
+            // 
+            this.ApptScreenCloseButton.BackColor = System.Drawing.SystemColors.Control;
+            this.ApptScreenCloseButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.ApptScreenCloseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ApptScreenCloseButton.Font = new System.Drawing.Font("Tahoma", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ApptScreenCloseButton.Location = new System.Drawing.Point(406, -3);
+            this.ApptScreenCloseButton.Margin = new System.Windows.Forms.Padding(0);
+            this.ApptScreenCloseButton.Name = "ApptScreenCloseButton";
+            this.ApptScreenCloseButton.Size = new System.Drawing.Size(52, 23);
+            this.ApptScreenCloseButton.TabIndex = 40;
+            this.ApptScreenCloseButton.Text = "Close";
+            this.ApptScreenCloseButton.UseVisualStyleBackColor = false;
+            this.ApptScreenCloseButton.Click += new System.EventHandler(this.ApptScreenCloseButton_Click);
+            // 
             // AppointmentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(453, 337);
             this.ControlBox = false;
+            this.Controls.Add(this.ApptScreenCloseButton);
             this.Controls.Add(this.ApptUserIDComboBox);
             this.Controls.Add(this.ApptCustomerComboBox);
             this.Controls.Add(this.ApptTypeComboBox);
@@ -234,5 +250,6 @@
         private System.Windows.Forms.ComboBox ApptUserIDComboBox;
         private System.Windows.Forms.DateTimePicker ApptStartDateTime;
         private System.Windows.Forms.DateTimePicker ApptEndDateTime;
+        private System.Windows.Forms.Button ApptScreenCloseButton;
     }
 }

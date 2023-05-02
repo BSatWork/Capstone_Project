@@ -8,6 +8,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
     public partial class CustomerDatabaseForm : Form
     {
         public MainScreen appMainScreen;
+        public string customerDataQuery;
         public string query;
         public int customerId = 0;
 
@@ -18,19 +19,20 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             Activate();
             appMainScreen = mainScreen;
 
-            query = "Select " +
-                    "client_schedule.customer.customerId, " +
-                    "client_schedule.customer.customerName as Name, " +
-                    "client_schedule.address.address as Address, " +
-                    "client_schedule.address.address2 as Address, " +
-                    "client_schedule.city.city as City, " +
-                    "client_schedule.country.country as Country, " +
-                    "client_schedule.address.phone " +
-                    "From client_schedule.customer " +
-                    "Left Join client_schedule.address on customer.addressId = address.addressId " +
-                    "Left Join client_schedule.city on address.cityId = city.cityId " +
-                    "Left Join client_schedule.country on city.countryId = country.countryId ";
-            GetCustomerData(query);
+            customerDataQuery = "Select " +
+                                "client_schedule.customer.customerId, " +
+                                "client_schedule.customer.customerName as Name, " +
+                                "client_schedule.address.address as Address, " +
+                                "client_schedule.address.address2 as Address, " +
+                                "client_schedule.city.city as City, " +
+                                "client_schedule.country.country as Country, " +
+                                "client_schedule.address.phone " +
+                                "From client_schedule.customer " +
+                                "Left Join client_schedule.address on customer.addressId = address.addressId " +
+                                "Left Join client_schedule.city on address.cityId = city.cityId " +
+                                "Left Join client_schedule.country on city.countryId = country.countryId " +
+                                "Order by Name Asc ";
+            GetCustomerData(customerDataQuery);
         }
 
         private void CustomerDBCloseButton_Click(object sender, EventArgs e)
@@ -68,38 +70,59 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
         private void DeleteCustomerButton_Click(object sender, EventArgs e)
         {
-            if (CustomerDBDGV.Rows.Count == 0)
+            customerId = (int)CustomerDBDGV.CurrentRow.Cells[0].Value;
+            int customerApptCount = int.Parse(DBConnection.GetSQLTableValue("Select Count(customerId) From client_schedule.appointment " +
+                                    $"Where customerId = {customerId} " +
+                                    $"And appointment.start > '{DateTime.Now:yyyy-MM-dd hh:mm:00}' "));
+
+            if (customerApptCount > 0)
             {
-                MessageBox.Show("There are no customers to delete.", "Delete Customer Validation");
+                MessageBox.Show("This customer has an active appt and cannot be deleted from the database.", "Customer Appt Check");
             }
             else
             {
-                if (!CustomerDBDGV.CurrentRow.Selected)
+                if (CustomerDBDGV.Rows.Count == 0)
                 {
-                    MessageBox.Show("Please select a customer to delete.", "Delete Customer Validation");
+                    MessageBox.Show("There are no customers to delete.", "Delete Customer Validation");
                 }
                 else
                 {
-                    //Customer customer = CustomerDBDGV.CurrentRow.DataBoundItem;   //Todo Define the Customer DB DGV
-
-                    DialogResult delete = MessageBox.Show("This will delete the selected customer, which cannot be undone.\n\n" +
-                                                          "Are you sure?", "Delete Confirmation", MessageBoxButtons.YesNo);
-
-                    switch (delete)
+                    if (!CustomerDBDGV.CurrentRow.Selected)
                     {
-                        case DialogResult.Yes:
-                            //Todo Delete the customer row.
-                            /*query = "Delete from client_schedule.customer Where customerId = '';" + customerId + "' " +
-                                    "Delete from client_schedule.address Where addressId = '';" + addressId + "' " +
-                                    "Delete from client_schedule.city Where cityId = '';" + cityId + "' " +
-                                    "Delete from client_schedule.country Where countryId = '" + countryId + "' ";*/
-                            DBConnection.DeleteSQLTableRow(query);
-                            break;
-                        case DialogResult.No:
-                            break;
+                        MessageBox.Show("Please select a customer to delete.", "Delete Customer Validation");
+                    }
+                    else
+                    {
+                        DialogResult delete = MessageBox.Show("This will delete the selected customer, which cannot be undone.\n\n" +
+                                                              "Are you sure?", "Delete Confirmation", MessageBoxButtons.YesNo);
+
+                        switch (delete)
+                        {
+                            case DialogResult.Yes:
+                                int addressId = int.Parse(DBConnection.GetSQLTableValue("Select address.addressId From client_schedule.address " +
+                                    $"Left Join client_schedule.customer on customer.addressId = address.addressId " +
+                                    $"Where customer.customerId = {customerId} "));
+                                int cityId = int.Parse(DBConnection.GetSQLTableValue("Select city.cityId From client_schedule.city " +
+                                    $"Left Join client_schedule.address on address.cityId = city.cityId " +
+                                    $"Where address.addressId = {addressId} "));
+                                int countryId = int.Parse(DBConnection.GetSQLTableValue("Select country.countryId From client_schedule.country " +
+                                    $"Left Join client_schedule.city on city.countryId = country.countryId " +
+                                    $"Where city.cityId = {cityId} "));
+
+                                //Todo Delete the customer row.
+                                query = $"Delete from client_schedule.customer Where customerId = {customerId}; " +
+                                        $"Delete from client_schedule.address Where addressId = {addressId}; " +
+                                        $"Delete from client_schedule.city Where cityId = {cityId}; " +
+                                        $"Delete from client_schedule.country Where countryId = {countryId}; ";
+                                DBConnection.DeleteSQLTableRow(query);
+                                GetCustomerData(customerDataQuery);
+                                break;
+                            case DialogResult.No:
+                                break;
+                        }
                     }
                 }
-            } 
+            }
         }
 
         public string GetCustomerData(string query)

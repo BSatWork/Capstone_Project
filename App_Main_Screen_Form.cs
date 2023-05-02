@@ -72,31 +72,31 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             int endOfWeek = 0;
             if (todaysDay == "Sunday")
             {
-                endOfWeek = Int32.Parse(DateTime.Today.ToString("dd"));
+                endOfWeek = int.Parse(DateTime.Today.ToString("dd"));
             }
             else if (todaysDay == "Monday")
             {
-                endOfWeek = Int32.Parse(DateTime.Today.ToString("dd")) + 6;
+                endOfWeek = int.Parse(DateTime.Today.ToString("dd")) + 6;
             }
             else if (todaysDay == "Tuesday")
             {
-                endOfWeek = Int32.Parse(DateTime.Today.ToString("dd")) + 5;
+                endOfWeek = int.Parse(DateTime.Today.ToString("dd")) + 5;
             }
             else if (todaysDay == "Wednesday")
             {
-                endOfWeek = Int32.Parse(DateTime.Today.ToString("dd")) + 4;
+                endOfWeek = int.Parse(DateTime.Today.ToString("dd")) + 4;
             }
             else if (todaysDay == "Thursday")
             {
-                endOfWeek = Int32.Parse(DateTime.Today.ToString("dd")) + 3;
+                endOfWeek = int.Parse(DateTime.Today.ToString("dd")) + 3;
             }
             else if (todaysDay == "Friday")
             {
-                endOfWeek = Int32.Parse(DateTime.Today.ToString("dd")) + 2;
+                endOfWeek = int.Parse(DateTime.Today.ToString("dd")) + 2;
             }
             else if (todaysDay == "Saturday")
             {
-                endOfWeek = Int32.Parse(DateTime.Today.ToString("dd")) + 1;
+                endOfWeek = int.Parse(DateTime.Today.ToString("dd")) + 1;
             }
 
             string weekEnd = "";
@@ -109,7 +109,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                 weekEnd = "0" + endOfWeek.ToString();
             }
 
-            int todaysMonth = Int32.Parse(DateTime.Today.ToString("MM"));
+            int todaysMonth = int.Parse(DateTime.Today.ToString("MM"));
             string nextMonth;
             if (todaysMonth == 12)
             {
@@ -124,7 +124,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                 nextMonth = todaysMonth.ToString();
             }
             
-            int todaysYear = Int32.Parse(DateTime.Today.ToString("yyyy"));
+            int todaysYear = int.Parse(DateTime.Today.ToString("yyyy"));
             string nextYear;
             if (todaysMonth == 12)
             {
@@ -141,7 +141,8 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                 query = "Select appointment.appointmentId, appointment.userId, customer.customerName, appointment.type, appointment.start, appointment.end " +
                         "from client_schedule.appointment " +
                         "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
-                        "Where appointment.start > '" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:00") + "'";
+                        $"Where appointment.start > '{DateTime.Now:yyyy-MM-dd hh:mm:00}' " +
+                        "Order by start asc ";
             }
             else if (CalendarView.SelectedIndex == 1)   // Current Week
             {
@@ -149,7 +150,8 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                 query = "Select appointment.appointmentId, appointment.userId, customer.customerName, appointment.type, appointment.start, appointment.end " +
                         "from client_schedule.appointment " +
                         "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
-                        "Where appointment.start between '" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:00") + "' and '" + DateTime.Now.ToString($"{nextYear}-MM-{weekEnd} 00:00:00") + "'";
+                        "Where appointment.start between '" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:00") + "' and '" + DateTime.Now.ToString($"{nextYear}-MM-{weekEnd} 00:00:00") + "' " +
+                        "Order by start asc ";
             }
             else if (CalendarView.SelectedIndex == 2)   // Current Month
             {
@@ -157,7 +159,8 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                 query = "Select appointment.appointmentId, appointment.userId, customer.customerName, appointment.type, appointment.start, appointment.end " +
                         "from client_schedule.appointment " +
                         "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
-                        "Where appointment.start between '" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:00") + "' and '" + DateTime.Now.ToString($"{nextYear}-{nextMonth}-01 00:00:00") + "'";
+                        "Where appointment.start between '" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:00") + "' and '" + DateTime.Now.ToString($"{nextYear}-{nextMonth}-01 00:00:00") + "' " +
+                        "Order by start asc ";
             }
             GetAppointmentData(query);
         }
@@ -176,7 +179,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
             query = "Select Count(appointmentId) " +
                 "From client_schedule.appointment " +
-                "Where appointment.start > '" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:00") + "' ";
+                $"Where appointment.start > '{DateTime.Now:yyyy-MM-dd hh:mm:00}' ";
             string apptCount = DBConnection.GetSQLTableValue(query);
             ApptCount.Text = apptCount;
             return query;

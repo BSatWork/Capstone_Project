@@ -77,7 +77,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Database
                     string value = cmd.ExecuteScalar().ToString();
                     return value;
                 }
-                            }
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(string.Format("An error occurred {0}", ex.Message), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

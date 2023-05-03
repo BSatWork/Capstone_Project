@@ -1,16 +1,7 @@
 ﻿using BOP3_Task_1_DB_and_File_Server_App.Database;
-using MySql.Data;
-using MySql.Data.Common;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
 
 namespace BOP3_Task_1_DB_and_File_Server_App
 {
@@ -180,29 +171,29 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                 }
                 else //Update the Customer's data.
                 {
-                    //Todo Finish this code to update the customer correctly.
                     Customer customer = new Customer
                     {
                         customerId = int.Parse(Customer_ID.Text),
                         customerName = Customer_Name.Text,
                     };
-                    customer.addressId = int.Parse(DBConnection.GetSQLTableValue("Select customer.addressId) From client_schedule.customer Where customerId = " + customer.customerId));
+                    customer.addressId = int.Parse(DBConnection.GetSQLTableValue("Select customer.addressId From client_schedule.customer Where customer.customerId = " + customer.customerId));
 
                     Address address = new Address
                     {
                         addressId = customer.addressId,
                         addressLine1 = Customer_Address1.Text,
                         addressLine2 = Customer_Address2.Text,
-                        cityId = int.Parse(DBConnection.GetSQLTableValue("Select Max(city.cityId) From client_schedule.city")) + 1,
                         phone = Customer_Phone.Text
                     };
+                    address.cityId = int.Parse(DBConnection.GetSQLTableValue("Select address.cityId From client_schedule.address Where address.addressId = " + address.addressId));
 
                     City city = new City
                     {
                         cityId = address.cityId,
-                        city = Customer_City.Text,
-                        countryId = int.Parse(DBConnection.GetSQLTableValue("Select Max(country.countryId) From client_schedule.country")) + 1
+                        city = Customer_City.Text
                     };
+                    city.countryId = int.Parse(DBConnection.GetSQLTableValue("Select city.countryId From client_schedule.city Where city.cityId = " + city.cityId));
+
 
                     Country country = new Country
                     {

@@ -102,6 +102,7 @@
     <Compile Include="Database\Address.cs" />
     <Compile Include="Database\Appointment.cs" />
     <Compile Include="Database\City.cs" />
+    <Compile Include="Database\ConvertTimeZoneToLocal.cs" />
     <Compile Include="Database\Country.cs" />
     <Compile Include="Database\Customer.cs" />
     <Compile Include="Database\User.cs" />

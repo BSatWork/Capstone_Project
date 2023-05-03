@@ -39,6 +39,13 @@ namespace BOP3_Task_1_DB_and_File_Server_App
         {
             Close();
             appMainScreen.Show();
+            // Refresh the Appointments table with all appointments.
+            query = "Select appointment.appointmentId, appointment.userId, customer.customerName, appointment.type, appointment.start, appointment.end " +
+                    "from client_schedule.appointment " +
+                    "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
+                    $"Where appointment.start > '{DateTime.Now:yyyy-MM-dd hh:mm:00}' " +
+                    "Order by start asc ";
+            appMainScreen.GetAppointmentData(query);
         }
 
         private void NewCustomerButton_Click(object sender, EventArgs e)

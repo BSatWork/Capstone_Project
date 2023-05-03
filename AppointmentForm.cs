@@ -7,7 +7,6 @@ namespace BOP3_Task_1_DB_and_File_Server_App
     public partial class AppointmentForm : Form
     {
         public MainScreen appMainScreen;
-
         public string query;
         public int apptId;
         public bool apptUpdate;
@@ -75,7 +74,8 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                 int.Parse(ApptStartDateTime.Value.ToString(@"HH")) > 8 &&
                 int.Parse(ApptStartDateTime.Value.ToString(@"HH")) < 17 &&
                 int.Parse(ApptEndDateTime.Value.ToString(@"HH")) > 8 &&
-                int.Parse(ApptEndDateTime.Value.ToString(@"HH")) < 17)
+                int.Parse(ApptEndDateTime.Value.ToString(@"HH")) < 17 &&
+                (int.Parse(ApptEndDateTime.Value.ToString(@"dd")) == int.Parse(ApptStartDateTime.Value.ToString(@"dd"))))
                 {
                     Appointment appointment = new Appointment
                     {
@@ -114,14 +114,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
                             Close();
                             appMainScreen.Show();
-
-                            // Refresh the Appointments table with all appointments.
-                            query = "Select appointment.appointmentId, appointment.userId, customer.customerName, appointment.type, appointment.start, appointment.end " +
-                                    "from client_schedule.appointment " +
-                                    "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
-                                    $"Where appointment.start > '{DateTime.Now:yyyy-MM-dd hh:mm:00}' " +
-                                    "Order by start asc ";
-                            appMainScreen.GetAppointmentData(query);
+                            appMainScreen.GetAppointmentData(appMainScreen.allApptsQuery);
                         }
                         else
                         {
@@ -194,6 +187,10 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                                         $"appointment.end = '{appointment.end:yyyy-MM-dd HH:mm:00}' " +
                                         $"Where appointment.appointmentId = {appointment.appointmentId} ";
                                 DBConnection.SaveToSQLTable(query);
+
+                                Close();
+                                appMainScreen.Show();
+                                appMainScreen.GetAppointmentData(appMainScreen.allApptsQuery);
                             }
                             else
                             {
@@ -201,23 +198,12 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                                                 "Input Validation");
                             }
                         }
-
-                        Close();
-                        appMainScreen.Show();
-
-                        // Refresh the Appointments table with all appointments.
-                        query = "Select appointment.appointmentId, appointment.userId, customer.customerName, appointment.type, appointment.start, appointment.end " +
-                                "from client_schedule.appointment " +
-                                "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
-                                $"Where appointment.start > '{DateTime.Now:yyyy-MM-dd hh:mm:00}' " +
-                                "Order by start asc ";
-                        appMainScreen.GetAppointmentData(query);
                     }
                 }
                 else
                 {
                     MessageBox.Show("Please verify all fields are populated and the start/end times are within the " +
-                                    "open business hours of 8 AM and 5 PM.\n\nThen try again.", "Input Validation");
+                                    "open business hours of 8 AM and 5 PM on the same day.\n\nThen try again.", "Input Validation");
                 }
             }
         }
@@ -235,6 +221,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                     DBConnection.DeleteSQLTableRow(query);
                     Close();
                     appMainScreen.Show();
+                    appMainScreen.GetAppointmentData(appMainScreen.allApptsQuery);
                     break;
                 case DialogResult.No:
                     break;
@@ -272,12 +259,14 @@ namespace BOP3_Task_1_DB_and_File_Server_App
         {
             Close();
             appMainScreen.Show();
+            appMainScreen.GetAppointmentData(appMainScreen.allApptsQuery);
         }
 
         private void ApptScreenCloseButton_Click(object sender, EventArgs e)
         {
             Close();
             appMainScreen.Show();
+            appMainScreen.GetAppointmentData(appMainScreen.allApptsQuery);
         }
     }
 }

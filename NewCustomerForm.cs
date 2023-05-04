@@ -17,6 +17,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
         public string existingCountry;
         public string existingPhone;
         public bool newCustomer;
+        public int maxID;
 
         public NewCustomerForm(CustomerDatabaseForm customerDBForm, int customerId)
         {
@@ -28,7 +29,14 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             if (customerId == 0)
             {
                 newCustomer = true;
-                int maxID = int.Parse(DBConnection.GetSQLTableValue("Select max(customerId) as 'Max ID' from client_schedule.customer")) + 1;
+                try
+                {
+                    maxID = int.Parse(DBConnection.GetSQLTableValue("Select max(customerId) as 'Max ID' from client_schedule.customer")) + 1;
+                }
+                catch
+                {
+                    maxID = 1;
+                }
                 Customer_ID.Text = maxID.ToString();
             }
             else
@@ -106,68 +114,56 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                         country = Customer_Country.Text
                     };
 
-                    string maxCustomerIDCheck = DBConnection.GetSQLTableValue("Select customer.customerId From client_schedule.customer " +
-                                                                              $"Where customer.customerId = {customer.customerId} ");
-                    if (string.IsNullOrEmpty(maxCustomerIDCheck))
-                    {
-                        //Save to the country table
-                        query = "Insert Into client_schedule.country " +
-                                "Values(" +
-                                $"{country.countryId}, " +
-                                $"'{country.country}', " +
-                                $"'{address.createDate:yyyy-MM-dd HH:mm:00}', " +
-                                $"'{address.createdBy}', " +
-                                $"'{address.lastUpdate:yyyy-MM-dd HH:mm:00}', " +
-                                $"'{address.lastUpdateBy}') ";
-                        DBConnection.SaveToSQLTable(query);
+                    //Save to the country table
+                    query = "Insert Into client_schedule.country " +
+                            "Values(" +
+                            $"{country.countryId}, " +
+                            $"'{country.country}', " +
+                            $"'{address.createDate:yyyy-MM-dd HH:mm:00}', " +
+                            $"'{address.createdBy}', " +
+                            $"'{address.lastUpdate:yyyy-MM-dd HH:mm:00}', " +
+                            $"'{address.lastUpdateBy}') ";
+                    DBConnection.SaveToSQLTable(query);
 
-                        //Save to the city table
-                        query = "Insert Into client_schedule.city " +
-                                "Values(" +
-                                $"{city.cityId}, " +
-                                $"'{city.city}', " +
-                                $"{city.countryId}, " +
-                                $"'{address.createDate:yyyy-MM-dd HH:mm:00}', " +
-                                $"'{address.createdBy}', " +
-                                $"'{address.lastUpdate:yyyy-MM-dd HH:mm:00}', " +
-                                $"'{address.lastUpdateBy}') ";
-                        DBConnection.SaveToSQLTable(query);
+                    //Save to the city table
+                    query = "Insert Into client_schedule.city " +
+                            "Values(" +
+                            $"{city.cityId}, " +
+                            $"'{city.city}', " +
+                            $"{city.countryId}, " +
+                            $"'{address.createDate:yyyy-MM-dd HH:mm:00}', " +
+                            $"'{address.createdBy}', " +
+                            $"'{address.lastUpdate:yyyy-MM-dd HH:mm:00}', " +
+                            $"'{address.lastUpdateBy}') ";
+                    DBConnection.SaveToSQLTable(query);
 
-                        //Save to the address table
-                        query = "Insert Into client_schedule.address " +
-                                "Values(" +
-                                $"{address.addressId}, " +
-                                $"'{address.addressLine1}', " +
-                                $"'{address.addressLine2}', " +
-                                $"{address.cityId}, " +
-                                $"'{address.postalCode}', " +
-                                $"'{address.phone }', " +
-                                $"'{address.createDate:yyyy-MM-dd HH:mm:00}', " +
-                                $"'{address.createdBy}', " +
-                                $"'{address.lastUpdate:yyyy-MM-dd HH:mm:00}', " +
-                                $"'{address.lastUpdateBy}') ";
-                        DBConnection.SaveToSQLTable(query);
+                    //Save to the address table
+                    query = "Insert Into client_schedule.address " +
+                            "Values(" +
+                            $"{address.addressId}, " +
+                            $"'{address.addressLine1}', " +
+                            $"'{address.addressLine2}', " +
+                            $"{address.cityId}, " +
+                            $"'{address.postalCode}', " +
+                            $"'{address.phone }', " +
+                            $"'{address.createDate:yyyy-MM-dd HH:mm:00}', " +
+                            $"'{address.createdBy}', " +
+                            $"'{address.lastUpdate:yyyy-MM-dd HH:mm:00}', " +
+                            $"'{address.lastUpdateBy}') ";
+                    DBConnection.SaveToSQLTable(query);
 
-                        //Save to the customer table
-                        query = "Insert Into client_schedule.customer " +
-                                "Values(" +
-                                $"{customer.customerId}, " +
-                                $"'{customer.customerName}', " +
-                                $"{customer.addressId}, " +
-                                $"'{customer.active}', " +
-                                $"'{address.createDate:yyyy-MM-dd HH:mm:00}', " +
-                                $"'{address.createdBy}', " +
-                                $"'{address.lastUpdate:yyyy-MM-dd HH:mm:00}', " +
-                                $"'{address.lastUpdateBy}') ";
-                        DBConnection.SaveToSQLTable(query);
-                    }
-                    else
-                    {
-                        MessageBox.Show("This customer already exists in the database.");
-                    }
-                    Close();
-                    customerDBForm.Show();
-                    customerDBForm.GetCustomerData(customerDBForm.customerDataQuery);
+                    //Save to the customer table
+                    query = "Insert Into client_schedule.customer " +
+                            "Values(" +
+                            $"{customer.customerId}, " +
+                            $"'{customer.customerName}', " +
+                            $"{customer.addressId}, " +
+                            $"'{customer.active}', " +
+                            $"'{address.createDate:yyyy-MM-dd HH:mm:00}', " +
+                            $"'{address.createdBy}', " +
+                            $"'{address.lastUpdate:yyyy-MM-dd HH:mm:00}', " +
+                            $"'{address.lastUpdateBy}') ";
+                    DBConnection.SaveToSQLTable(query);
                 }
                 else //Update the Customer's data.
                 {
@@ -255,6 +251,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
         {
             Close();
             customerDBForm.Show();
+            customerDBForm.GetCustomerData(customerDBForm.customerDataQuery);
         }
 
         // Form field validation...

@@ -10,7 +10,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
         public MainScreen appMainScreen;
         public string customerDataQuery;
         public string query;
-        public int customerId = 0;
+        public int customerId;
 
         public CustomerDatabaseForm(MainScreen mainScreen)
         {
@@ -50,6 +50,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
         private void NewCustomerButton_Click(object sender, EventArgs e)
         {
+            customerId = 0;
             _ = new NewCustomerForm(this, customerId);
             this.Hide();
         }

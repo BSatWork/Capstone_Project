@@ -9,13 +9,15 @@ namespace BOP3_Task_1_DB_and_File_Server_App
     {
         public ReportForm appReportScreen;
         private readonly string query;
+        private int consultantId;
 
         public ConsultantScheduleForm(ReportForm ReportScreen, string Consultant)
         {
             InitializeComponent();
             Show();
             appReportScreen = ReportScreen;
-            ConsultantScheduleForm.ActiveForm.Text = "Schedule for Consultant " + Consultant;
+            consultantId = int.Parse(Consultant);
+            ConsultantScheduleForm.ActiveForm.Text = "Schedule for Consultant " + consultantId;
 
             query = "Select " +
                     "client_schedule.customer.customerId, " +
@@ -25,7 +27,8 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                     "client_schedule.appointment.end " +
                     "from client_schedule.appointment " +
                     "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
-                    "Where appointment.userId = '" + Consultant.ToString() + "'";
+                    $"Where appointment.userId = {consultantId} " +
+                    $"And appointment.start > '{DateTime.UtcNow:yyyy-MM-dd hh:mm:00}' ";
 
             DataTable consultantSchedule = DBConnection.GetSQLTable(query);
 

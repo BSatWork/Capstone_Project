@@ -11,7 +11,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
         public string allApptsQuery;
         public string query;
         public string userId;
-        public int appointmentId = 0;
+        public int appointmentId;
 
         public MainScreen(string userName)
         {
@@ -26,7 +26,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             allApptsQuery = "Select appointment.appointmentId, appointment.userId, customer.customerName, appointment.type, appointment.start, appointment.end " +
                             "from client_schedule.appointment " +
                             "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
-                            $"Where appointment.start > '{DateTime.Now:yyyy-MM-dd hh:mm:00}' " +
+                            $"Where appointment.start > '{DateTime.UtcNow:yyyy-MM-dd hh:mm:00}' " +
                             "Order by start asc ";
             
             // Populate the Appointments table.
@@ -40,7 +40,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             
             query = "Select Count(appointmentId) " +
                     "From client_schedule.appointment " +
-                    $"Where appointment.start between '{DateTime.Now:yyyy-MM-dd hh:mm:00}' and ('{DateTime.Now:yyyy-MM-dd hh:mm:00}' + interval(15) minute) " +
+                    $"Where appointment.start between '{DateTime.UtcNow:yyyy-MM-dd hh:mm:00}' and ('{DateTime.UtcNow:yyyy-MM-dd hh:mm:00}' + interval(15) minute) " +
                     $"And appointment.userId = {userId} ";
             string upcomingAppointments = DBConnection.GetSQLTableValue(query);
             int upcomingAppointment = upcomingAppointments.IndexOf((char)0);
@@ -50,14 +50,12 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                 MessageBox.Show("!ATTENTION! You have an appt in the next 15 minutes.\n\nSee the highlighted appt for details.");
                 AppointmentsDGV.Rows[upcomingAppointment].Selected = true;
             }
-
-            DateTime time = DateTime.UtcNow;
-            TimeZone zone = TimeZone.CurrentTimeZone;
-            _ = MessageBox.Show("Local Time = " + DateTime.Now + "\n" + "UTC Time = " + DateTime.UtcNow + "\n" + "TimeZone = " + zone.ToLocalTime(time));
         }
 
         public void AddUpdateDeleteApptButton_Click(object sender, EventArgs e)
         {
+            appointmentId = 0;
+
             if (AppointmentsDGV.SelectedRows.Count == 1)
             {
                 appointmentId = (int)AppointmentsDGV.CurrentRow.Cells[0].Value;
@@ -158,7 +156,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                 query = "Select appointment.appointmentId, appointment.userId, customer.customerName, appointment.type, appointment.start, appointment.end " +
                         "from client_schedule.appointment " +
                         "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
-                        "Where appointment.start between '" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:00") + "' and '" + DateTime.Now.ToString($"{nextYear}-MM-{weekEnd} 00:00:00") + "' " +
+                        "Where appointment.start between '" + DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:00") + "' and '" + DateTime.UtcNow.ToString($"{nextYear}-MM-{weekEnd} 00:00:00") + "' " +
                         "Order by start asc ";
             }
             else if (CalendarView.SelectedIndex == 2)   // Current Month
@@ -167,7 +165,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                 query = "Select appointment.appointmentId, appointment.userId, customer.customerName, appointment.type, appointment.start, appointment.end " +
                         "from client_schedule.appointment " +
                         "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
-                        "Where appointment.start between '" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:00") + "' and '" + DateTime.Now.ToString($"{nextYear}-{nextMonth}-01 00:00:00") + "' " +
+                        "Where appointment.start between '" + DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:00") + "' and '" + DateTime.UtcNow.ToString($"{nextYear}-{nextMonth}-01 00:00:00") + "' " +
                         "Order by start asc ";
             }
             GetAppointmentData(query);
@@ -182,12 +180,28 @@ namespace BOP3_Task_1_DB_and_File_Server_App
         public string GetAppointmentData(string query)
         {
             DataTable mainScreendataTable = DBConnection.GetSQLTable(query);
+            /*DateTime startTimes = mainScreendataTable.Select(x => x.mainScreendataTable["start"])
+            foreach (DateTime start in startTimes)
+            {
+                DBConnection.ConvertToLocalTZ(start);
+            }*/
+            
+            /*foreach (DataRow dr in mainScreendataTable.Rows)
+            {
+                dr["start"] = DBConnection.ConvertToLocalTZ((DateTime)dr["start"]);
+            }
+
+            foreach (DataRow dr in mainScreendataTable.Rows)
+            {
+                dr["end"] = DBConnection.ConvertToLocalTZ((DateTime)dr["end"]);
+            }*/
+
             AppointmentsDGV.DataSource = mainScreendataTable;
             AppointmentsDGV.ClearSelection();
 
             query = "Select Count(appointmentId) " +
                 "From client_schedule.appointment " +
-                $"Where appointment.start > '{DateTime.Now:yyyy-MM-dd hh:mm:00}' ";
+                $"Where appointment.start > '{DateTime.UtcNow:yyyy-MM-dd hh:mm:00}' ";
             string apptCount = DBConnection.GetSQLTableValue(query);
             ApptCount.Text = apptCount;
             return query;

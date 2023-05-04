@@ -14,10 +14,11 @@ namespace BOP3_Task_1_DB_and_File_Server_App
         public int existingUserId;
         public string existingType;
         public string existingCustomerName;
+        public DateTime startTime;
         public DateTime existingStart;
         public DateTime existingEnd;
 
-        public AppointmentForm(MainScreen mainScreen, int appointmentId)//Appointment appointment = null)
+        public AppointmentForm(MainScreen mainScreen, int appointmentId)
         {
             InitializeComponent();
             Show();
@@ -32,7 +33,17 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             ApptCustomerComboBox.DataSource = DBConnection.GetSQLTable("Select distinct customer.customerName from client_schedule.customer");
             ApptCustomerComboBox.DisplayMember = "customerName";
             ApptCustomerComboBox.SelectedIndex = -1;
-            ApptStartDateTime.Value = DateTime.Now.AddMinutes(15);
+            
+            startTime = DateTime.Now.AddMinutes(15);
+            if (int.Parse(startTime.ToString("HH")) < 8 ||
+                int.Parse(startTime.ToString("HH")) >= 17)
+            {
+                ApptStartDateTime.Value = DateTime.Today.AddDays(1).AddHours(8);
+            }
+            else
+            {
+                ApptStartDateTime.Value = startTime;
+            }
 
             if (appointmentId == 0) //Save a new appt.
             {
@@ -54,8 +65,8 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                 ApptUserIDComboBox.Text = existingUserId.ToString();
                 ApptTypeComboBox.Text = existingType;
                 ApptCustomerComboBox.Text = existingCustomerName;
-                ApptStartDateTime.Value = existingStart;
-                ApptEndDateTime.Value = existingEnd;
+                ApptStartDateTime.Value = DBConnection.ConvertToLocalTZ(existingStart);
+                ApptEndDateTime.Value = DBConnection.ConvertToLocalTZ(existingEnd);
             }
         }
 
@@ -71,11 +82,11 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                 if (!string.IsNullOrEmpty(ApptUserIDComboBox.Text) &&
                 !string.IsNullOrEmpty(ApptTypeComboBox.Text) &&
                 !string.IsNullOrEmpty(ApptCustomerComboBox.Text) &&
-                int.Parse(ApptStartDateTime.Value.ToString(@"HH")) > 8 &&
-                int.Parse(ApptStartDateTime.Value.ToString(@"HH")) < 17 &&
-                int.Parse(ApptEndDateTime.Value.ToString(@"HH")) > 8 &&
-                int.Parse(ApptEndDateTime.Value.ToString(@"HH")) < 17 &&
-                (int.Parse(ApptEndDateTime.Value.ToString(@"dd")) == int.Parse(ApptStartDateTime.Value.ToString(@"dd"))))
+                int.Parse(ApptStartDateTime.Value.ToString("HH")) >= 8 &&
+                //int.Parse(ApptStartDateTime.Value.ToString("HH")) < 17 &&
+                //int.Parse(ApptEndDateTime.Value.ToString("HH")) > 8 &&
+                int.Parse(ApptEndDateTime.Value.ToString("HH")) < 17 &&
+                (int.Parse(ApptEndDateTime.Value.ToString("dd")) == int.Parse(ApptStartDateTime.Value.ToString("dd"))))
                 {
                     Appointment appointment = new Appointment
                     {
@@ -84,7 +95,14 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
                     if (!apptUpdate)
                     {
-                        appointment.appointmentId = int.Parse(DBConnection.GetSQLTableValue("Select Max(appointment.appointmentId) From client_schedule.appointment")) + 1;
+                        try
+                        {
+                            appointment.appointmentId = int.Parse(DBConnection.GetSQLTableValue("Select Max(appointment.appointmentId) From client_schedule.appointment")) + 1;
+                        }
+                        catch
+                        {
+                            appointment.appointmentId = 1;
+                        }
                         appointment.userId = int.Parse(ApptUserIDComboBox.Text);
                         appointment.customerId = int.Parse(DBConnection.GetSQLTableValue($"Select customer.customerId From client_schedule.customer Where customerName = '{ApptCustomerComboBox.Text}'"));
                         appointment.type = ApptTypeComboBox.Text;
@@ -131,7 +149,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                         else
                         {
                             noUpdates = false;
-                            appointment.userId = Int32.Parse(ApptUserIDComboBox.Text.ToString());
+                            appointment.userId = int.Parse(ApptUserIDComboBox.Text.ToString());
                         }
 
                         if (ApptTypeComboBox.Text == existingType)

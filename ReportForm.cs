@@ -33,7 +33,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
             if (string.IsNullOrEmpty(type) || string.IsNullOrEmpty(month))
             {
-                MessageBox.Show("Please select an appointment type and month before running this report.", "Selection Validation");
+                MessageBox.Show("Please select an appointment type and month before running this report.", "Selection Validation", MessageBoxButtons.OK);
             }
             else
             {

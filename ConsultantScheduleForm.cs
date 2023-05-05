@@ -9,7 +9,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
     {
         public ReportForm appReportScreen;
         private readonly string query;
-        private int consultantId;
+        private readonly int consultantId;
 
         public ConsultantScheduleForm(ReportForm ReportScreen, string Consultant)
         {
@@ -31,6 +31,11 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                     $"And appointment.start > '{DateTime.UtcNow:yyyy-MM-dd hh:mm:00}' ";
 
             DataTable consultantSchedule = DBConnection.GetSQLTable(query);
+            for (int index = 0; index < consultantSchedule.Rows.Count; index++)
+            {
+                consultantSchedule.Rows[index]["start"] = TimeZoneInfo.ConvertTimeFromUtc((DateTime)consultantSchedule.Rows[index]["start"], TimeZoneInfo.Local).ToString();
+                consultantSchedule.Rows[index]["end"] = TimeZoneInfo.ConvertTimeFromUtc((DateTime)consultantSchedule.Rows[index]["end"], TimeZoneInfo.Local).ToString();
+            }
 
             ConsultantScheduleDGV.DataSource = consultantSchedule;
             ConsultantScheduleDGV.ClearSelection();

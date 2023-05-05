@@ -110,20 +110,5 @@ namespace BOP3_Task_1_DB_and_File_Server_App.Database
                 MessageBox.Show(string.Format("An error occurred {0}", ex.Message), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        public static DateTime ConvertToLocalTZ(DateTime utcTime)
-        {
-            TimeZone localTZ = TimeZone.CurrentTimeZone;
-            DateTime localTime = localTZ.ToLocalTime(utcTime);
-            return localTime;
-        }
-
-        /*public static DateTime ConvertToUTCTZ(DateTime localTime)
-        {
-            TimeZone convertedToUtcTime = TimeZone.Get;
-
-
-            return convertedToUtcTime;
-        }*/
     }
 }

@@ -19,8 +19,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             PasswordInputBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(CheckEnter);
             Show();
 
-            //CultureInfo.CurrentCulture = new CultureInfo("de"); //For Testing purposes only.  Comment out for submission!  Do a similar line for TZ test.
-
+            //CultureInfo.CurrentCulture = new CultureInfo("de"); //For Testing purposes only.  Comment out for submission!
             //Language check - German
             if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "de")
             {
@@ -52,7 +51,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                     "From client_schedule.user " +
                     $"Where BINARY userName = '{UserNameInputBox.Text}' " +
                     $"And BINARY password =  '{PasswordInputBox.Text}' ";
-            int credentialsCheck = Int32.Parse(DBConnection.GetSQLTableValue(query));
+            int credentialsCheck = int.Parse(DBConnection.GetSQLTableValue(query));
 
             if (credentialsCheck == 0)
             {

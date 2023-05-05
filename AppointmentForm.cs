@@ -62,34 +62,45 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                 existingUserId = int.Parse(DBConnection.GetSQLTableValue($"Select appointment.userId From client_schedule.appointment Where appointmentId = '{appointmentId}' "));
                 existingType = DBConnection.GetSQLTableValue($"Select appointment.type From client_schedule.appointment Where appointmentId = '{appointmentId}' ").ToString();
                 existingCustomerName = DBConnection.GetSQLTableValue($"Select customer.customerName From client_schedule.customer Left Join client_schedule.appointment on customer.customerId = appointment.customerId Where appointmentId = '{appointmentId}' ").ToString();
-                existingStart = DateTime.Parse(DBConnection.GetSQLTableValue($"Select appointment.start From client_schedule.appointment Where appointmentId = '{appointmentId}' "));
-                existingEnd = DateTime.Parse(DBConnection.GetSQLTableValue($"Select appointment.end From client_schedule.appointment Where appointmentId = '{appointmentId}' "));
+                existingStart = TimeZoneInfo.ConvertTimeFromUtc(DateTime.Parse(DBConnection.GetSQLTableValue($"Select appointment.start From client_schedule.appointment Where appointmentId = '{appointmentId}' ")), TimeZoneInfo.Local);
+                existingEnd = TimeZoneInfo.ConvertTimeFromUtc(DateTime.Parse(DBConnection.GetSQLTableValue($"Select appointment.end From client_schedule.appointment Where appointmentId = '{appointmentId}' ")), TimeZoneInfo.Local);
 
                 ApptUserIDComboBox.Text = existingUserId.ToString();
                 ApptTypeComboBox.Text = existingType;
                 ApptCustomerComboBox.Text = existingCustomerName;
-                ApptStartDateTime.Value = existingStart; // DBConnection.ConvertToLocalTZ(existingStart);
-                ApptEndDateTime.Value = existingEnd; // DBConnection.ConvertToLocalTZ(existingEnd);
+                ApptStartDateTime.Value = existingStart;
+                ApptEndDateTime.Value = existingEnd;
             }
         }
 
         private void ApptSave_Click(object sender, EventArgs e)
         {
+            bool selectionBoxCheck = false;
+            bool timeCheck = false;
+
+            if (!string.IsNullOrEmpty(ApptUserIDComboBox.Text) &&
+                !string.IsNullOrEmpty(ApptTypeComboBox.Text) &&
+                !string.IsNullOrEmpty(ApptCustomerComboBox.Text))
+            {
+                selectionBoxCheck = true;
+            }
+
+            if (int.Parse(ApptStartDateTime.Value.ToString("HH")) >= 8 &&
+                int.Parse(ApptStartDateTime.Value.ToString("HH")) <= 16 &&
+                ApptEndDateTime.Value.TimeOfDay <= TimeSpan.Parse("17:00") &&
+                (int.Parse(ApptEndDateTime.Value.ToString("dd")) == int.Parse(ApptStartDateTime.Value.ToString("dd"))))
+            {
+                timeCheck = true;
+            }
+            
             if (ApptEndDateTime.Value <= ApptStartDateTime.Value)
             {
-                MessageBox.Show("Please make sure the requested End time is after the Start time.  Then Try again.", "Input Validation");
+                MessageBox.Show("Please make sure the requested End time is after the Start time.\n\nThen Try again.", "Input Validation", MessageBoxButtons.OK);
             }
             else
             {
                 // If all fields have been validated, then continue processing.  Otherwise, inform the user.
-                if (!string.IsNullOrEmpty(ApptUserIDComboBox.Text) &&
-                !string.IsNullOrEmpty(ApptTypeComboBox.Text) &&
-                !string.IsNullOrEmpty(ApptCustomerComboBox.Text) &&
-                int.Parse(ApptStartDateTime.Value.ToString("HH")) >= 8 &&
-                //int.Parse(ApptStartDateTime.Value.ToString("HH")) < 17 &&
-                //int.Parse(ApptEndDateTime.Value.ToString("HH")) > 8 &&
-                int.Parse(ApptEndDateTime.Value.ToString("HH")) <= 17 &&
-                (int.Parse(ApptEndDateTime.Value.ToString("dd")) == int.Parse(ApptStartDateTime.Value.ToString("dd"))))
+                if (selectionBoxCheck && timeCheck)
                 {
                     Appointment appointment = new Appointment
                     {
@@ -109,9 +120,9 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                         appointment.userId = int.Parse(ApptUserIDComboBox.Text);
                         appointment.customerId = int.Parse(DBConnection.GetSQLTableValue($"Select customer.customerId From client_schedule.customer Where customerName = '{ApptCustomerComboBox.Text}'"));
                         appointment.type = ApptTypeComboBox.Text;
-                        appointment.start = ApptStartDateTime.Value;
-                        appointment.end = ApptEndDateTime.Value;
-
+                        appointment.start = TimeZoneInfo.ConvertTimeToUtc(ApptStartDateTime.Value);
+                        appointment.end = TimeZoneInfo.ConvertTimeToUtc(ApptEndDateTime.Value);
+                        
                         if (!ApptConflict(appointment.appointmentId, appointment.userId, appointment.start, appointment.end))
                         {
                             query = "Insert Into client_schedule.appointment " +
@@ -139,8 +150,8 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                         }
                         else
                         {
-                            MessageBox.Show("Please select another Start/End time.  The selected time conflicts with an existing appointment." +
-                                            "Input Validation");
+                            MessageBox.Show("Please select another Start/End time.\n\nThe selected time conflicts with an existing appointment.",
+                                            "Input Validation", MessageBoxButtons.OK);
                         }
                     }
                     else
@@ -178,23 +189,22 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
                         if (DateTime.Parse(ApptStartDateTime.Text) == existingStart)
                         {
-                            appointment.start = existingStart;
+                            appointment.start = TimeZoneInfo.ConvertTimeToUtc(existingStart);
                         }
                         else
                         {
                             noUpdates = false;
-                            appointment.start = DateTime.Parse(ApptStartDateTime.Text);
+                            appointment.start = TimeZoneInfo.ConvertTimeToUtc(DateTime.Parse(ApptStartDateTime.Text));
                         }
 
                         if (DateTime.Parse(ApptEndDateTime.Text) == existingEnd)
                         {
-                            appointment.end = existingEnd;
+                            appointment.end = TimeZoneInfo.ConvertTimeToUtc(existingEnd);
                         }
                         else
                         {
                             noUpdates = false;
-
-                            appointment.end = DateTime.Parse(ApptEndDateTime.Text);
+                            appointment.end = TimeZoneInfo.ConvertTimeToUtc(DateTime.Parse(ApptEndDateTime.Text));
                         }
 
                         if (!noUpdates)
@@ -215,8 +225,8 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                             }
                             else
                             {
-                                MessageBox.Show("Please select another Start/End time.  The selected time conflicts with an existing appointment." +
-                                                "Input Validation");
+                                MessageBox.Show("Please select another Start/End time.\n\nThe selected time conflicts with an existing appointment.",
+                                                "Input Validation", MessageBoxButtons.OK);
                             }
                         }
                     }
@@ -224,7 +234,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                 else
                 {
                     MessageBox.Show("Please verify all fields are populated and the start/end times are within the " +
-                                    "open business hours of 8 AM and 5 PM on the same day.\n\nThen try again.", "Input Validation");
+                                    "open business hours of 8 AM and 5 PM on the same day.\n\nThen try again.", "Input Validation", MessageBoxButtons.OK);
                 }
             }
         }

@@ -43,7 +43,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             query = "Select appointment.appointmentId, appointment.userId, customer.customerName, appointment.type, appointment.start, appointment.end " +
                     "from client_schedule.appointment " +
                     "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
-                    $"Where appointment.start > '{DateTime.Now:yyyy-MM-dd hh:mm:00}' " +
+                    $"Where appointment.start > '{DateTime.UtcNow:yyyy-MM-dd hh:mm:00}' " +
                     "Order by start asc ";
             appMainScreen.GetAppointmentData(query);
         }
@@ -81,7 +81,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             customerId = (int)CustomerDBDGV.CurrentRow.Cells[0].Value;
             int customerApptCount = int.Parse(DBConnection.GetSQLTableValue("Select Count(customerId) From client_schedule.appointment " +
                                     $"Where customerId = {customerId} " +
-                                    $"And appointment.start > '{DateTime.Now:yyyy-MM-dd hh:mm:00}' "));
+                                    $"And appointment.start > '{DateTime.UtcNow:yyyy-MM-dd hh:mm:00}' "));
 
             if (customerApptCount > 0)
             {

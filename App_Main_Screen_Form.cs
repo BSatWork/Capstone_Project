@@ -48,7 +48,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
             if (!string.IsNullOrEmpty(getLateApptId))
             {
-                MessageBox.Show("!YOU'RE LATE to an appt that has already started!\n\nSee the first highlighted appt for details.", "Appt Reminder");
+                MessageBox.Show("!YOU'RE LATE to an appt that has already started!\n\nSee the first highlighted appt for details.", "Appt Reminder", MessageBoxButtons.OK);
 
                 //Lambda expression used to identify which appt needs to be highlighted that's in-process appt.
                 row = AppointmentsDGV.Rows
@@ -69,7 +69,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
             if (!string.IsNullOrEmpty(getApptId))
             {
-                MessageBox.Show("!ATTENTION! You have an appt in the next 15 minutes.\n\nSee the second highlighted appt for details.", "Appt Reminder");
+                MessageBox.Show("!ATTENTION! You have an appt in the next 15 minutes.\n\nSee the second highlighted appt for details.", "Appt Reminder", MessageBoxButtons.OK);
 
                 //Lambda expression used to identify which appt needs to be highlighted that's upcoming appt.
                 rowIndex = -1;
@@ -181,12 +181,12 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                 nextYear = todaysYear.ToString();
             }
 
-            if (CalendarView.SelectedIndex == 0)        // All
+            if (CalendarView.SelectedIndex == 0)        // All filter
             {
                 // Populate the Appointments table with all appointments.
                 query = allApptsQuery;
             }
-            else if (CalendarView.SelectedIndex == 1)   // Current Week
+            else if (CalendarView.SelectedIndex == 1)   // Current Week filter
             {
                 // Populate the Appointments table with only the appointments for the current week.
                 query = "Select appointment.appointmentId, appointment.userId, customer.customerName, appointment.type, appointment.start, appointment.end " +
@@ -195,7 +195,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                         "Where appointment.start between '" + DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:00") + "' and '" + DateTime.UtcNow.ToString($"{nextYear}-MM-{weekEnd} 00:00:00") + "' " +
                         "Order by start asc ";
             }
-            else if (CalendarView.SelectedIndex == 2)   // Current Month
+            else if (CalendarView.SelectedIndex == 2)   // Current Month filter
             {
                 // Populate the Appointments table with only the appointments for the current week.
                 query = "Select appointment.appointmentId, appointment.userId, customer.customerName, appointment.type, appointment.start, appointment.end " +
@@ -216,21 +216,11 @@ namespace BOP3_Task_1_DB_and_File_Server_App
         public string GetAppointmentData(string query)
         {
             DataTable mainScreendataTable = DBConnection.GetSQLTable(query);
-            /*DateTime startTimes = mainScreendataTable.Select(x => x.mainScreendataTable["start"])
-            foreach (DateTime start in startTimes)
+            for (int index = 0; index < mainScreendataTable.Rows.Count; index++)
             {
-                DBConnection.ConvertToLocalTZ(start);
-            }*/
-            
-            /*foreach (DataRow dr in mainScreendataTable.Rows)
-            {
-                dr["start"] = DBConnection.ConvertToLocalTZ((DateTime)dr["start"]);
+                mainScreendataTable.Rows[index]["start"] = TimeZoneInfo.ConvertTimeFromUtc((DateTime)mainScreendataTable.Rows[index]["start"], TimeZoneInfo.Local).ToString();
+                mainScreendataTable.Rows[index]["end"] = TimeZoneInfo.ConvertTimeFromUtc((DateTime)mainScreendataTable.Rows[index]["end"], TimeZoneInfo.Local).ToString();
             }
-
-            foreach (DataRow dr in mainScreendataTable.Rows)
-            {
-                dr["end"] = DBConnection.ConvertToLocalTZ((DateTime)dr["end"]);
-            }*/
 
             AppointmentsDGV.DataSource = mainScreendataTable;
             AppointmentsDGV.ClearSelection();

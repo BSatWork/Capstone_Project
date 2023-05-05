@@ -1,6 +1,7 @@
 ﻿using BOP3_Task_1_DB_and_File_Server_App.Database;
 using System;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace BOP3_Task_1_DB_and_File_Server_App
@@ -12,6 +13,8 @@ namespace BOP3_Task_1_DB_and_File_Server_App
         public string query;
         public string userId;
         public int appointmentId;
+        public int rowIndex = -1;
+        public DataGridViewRow row;
 
         public MainScreen(string userName)
         {
@@ -32,23 +35,51 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             // Populate the Appointments table.
             CalendarView.SelectedIndex = 0;
 
-            //Todo If there's an appt upcoming within 15 min, then MessageBox.Show("The highlighted appointment begins within the next 15 minutes.")
             query = "Select user.userId " +
                     "From client_schedule.user " +
                     $"Where user.userName = '{userName}' ";
             userId = DBConnection.GetSQLTableValue(query);
-            
-            query = "Select Count(appointmentId) " +
-                    "From client_schedule.appointment " +
-                    $"Where appointment.start between '{DateTime.UtcNow:yyyy-MM-dd hh:mm:00}' and ('{DateTime.UtcNow:yyyy-MM-dd hh:mm:00}' + interval(15) minute) " +
-                    $"And appointment.userId = {userId} ";
-            string upcomingAppointments = DBConnection.GetSQLTableValue(query);
-            int upcomingAppointment = upcomingAppointments.IndexOf((char)0);
 
-            if (upcomingAppointment != -1)
+            query = "Select appointmentId " +
+                    "From client_schedule.appointment " +
+                    $"Where appointment.end between '{DateTime.UtcNow:yyyy-MM-dd HH:mm:00}' and ('{DateTime.UtcNow:yyyy-MM-dd HH:mm:00}' + interval(14) minute) " +
+                    $"And appointment.userId = {userId} ";
+            string getLateApptId = DBConnection.GetSQLTableValue(query);
+
+            if (!string.IsNullOrEmpty(getLateApptId))
             {
-                MessageBox.Show("!ATTENTION! You have an appt in the next 15 minutes.\n\nSee the highlighted appt for details.");
-                AppointmentsDGV.Rows[upcomingAppointment].Selected = true;
+                MessageBox.Show("!YOU'RE LATE to an appt that has already started!\n\nSee the first highlighted appt for details.", "Appt Reminder");
+
+                //Lambda expression used to identify which appt needs to be highlighted that's in-process appt.
+                row = AppointmentsDGV.Rows
+                    .Cast<DataGridViewRow>()
+                    .Where(r => r.Cells[0].Value.ToString().Equals(getLateApptId))
+                    .First();
+                rowIndex = row.Index;
+
+                AppointmentsDGV.MultiSelect = true;
+                AppointmentsDGV.Rows[rowIndex].Selected = true;
+            }
+
+            query = "Select appointmentId " +
+                    "From client_schedule.appointment " +
+                    $"Where appointment.start between '{DateTime.UtcNow:yyyy-MM-dd HH:mm:00}' and ('{DateTime.UtcNow:yyyy-MM-dd HH:mm:00}' + interval(15) minute) " +
+                    $"And appointment.userId = {userId} ";
+            string getApptId = DBConnection.GetSQLTableValue(query);
+
+            if (!string.IsNullOrEmpty(getApptId))
+            {
+                MessageBox.Show("!ATTENTION! You have an appt in the next 15 minutes.\n\nSee the second highlighted appt for details.", "Appt Reminder");
+
+                //Lambda expression used to identify which appt needs to be highlighted that's upcoming appt.
+                rowIndex = -1;
+                row = AppointmentsDGV.Rows
+                    .Cast<DataGridViewRow>()
+                    .Where(r => r.Cells[0].Value.ToString().Equals(getApptId))
+                    .First();
+                rowIndex = row.Index;
+
+                AppointmentsDGV.Rows[rowIndex].Selected = true;
             }
         }
 
@@ -74,6 +105,11 @@ namespace BOP3_Task_1_DB_and_File_Server_App
         private void MainScreenCloseButton_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void AppointmentDGV_CellValueChanged(object sender, EventArgs e)
+        {
+            AppointmentsDGV.MultiSelect = false;
         }
 
         private void CalendarView_SelectedIndexChanged(object sender, EventArgs e)

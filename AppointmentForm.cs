@@ -33,22 +33,25 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             ApptCustomerComboBox.DataSource = DBConnection.GetSQLTable("Select distinct customer.customerName from client_schedule.customer");
             ApptCustomerComboBox.DisplayMember = "customerName";
             ApptCustomerComboBox.SelectedIndex = -1;
-            
-            startTime = DateTime.Now.AddMinutes(15);
-            if (int.Parse(startTime.ToString("HH")) < 8 ||
-                int.Parse(startTime.ToString("HH")) >= 17)
-            {
-                ApptStartDateTime.Value = DateTime.Today.AddDays(1).AddHours(8);
-            }
-            else
-            {
-                ApptStartDateTime.Value = startTime;
-            }
 
             if (appointmentId == 0) //Save a new appt.
             {
                 ApptDeleteButton.Visible = false;
                 ApptCancelButton.Visible = true;
+
+                startTime = DateTime.Now.AddMinutes(15);
+                if (int.Parse(startTime.ToString("HH")) >= 16 && int.Parse(startTime.ToString("mm")) > 45)
+                {
+                    ApptStartDateTime.Value = DateTime.Today.AddDays(1).AddHours(8);
+                }
+                else if (int.Parse(startTime.ToString("HH")) < 8)
+                {
+                    ApptStartDateTime.Value = DateTime.Today.AddHours(8);
+                }
+                else
+                {
+                    ApptStartDateTime.Value = startTime;
+                }
             }
             else //Update an existing appt.
             {
@@ -65,8 +68,8 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                 ApptUserIDComboBox.Text = existingUserId.ToString();
                 ApptTypeComboBox.Text = existingType;
                 ApptCustomerComboBox.Text = existingCustomerName;
-                ApptStartDateTime.Value = DBConnection.ConvertToLocalTZ(existingStart);
-                ApptEndDateTime.Value = DBConnection.ConvertToLocalTZ(existingEnd);
+                ApptStartDateTime.Value = existingStart; // DBConnection.ConvertToLocalTZ(existingStart);
+                ApptEndDateTime.Value = existingEnd; // DBConnection.ConvertToLocalTZ(existingEnd);
             }
         }
 
@@ -85,7 +88,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                 int.Parse(ApptStartDateTime.Value.ToString("HH")) >= 8 &&
                 //int.Parse(ApptStartDateTime.Value.ToString("HH")) < 17 &&
                 //int.Parse(ApptEndDateTime.Value.ToString("HH")) > 8 &&
-                int.Parse(ApptEndDateTime.Value.ToString("HH")) < 17 &&
+                int.Parse(ApptEndDateTime.Value.ToString("HH")) <= 17 &&
                 (int.Parse(ApptEndDateTime.Value.ToString("dd")) == int.Parse(ApptStartDateTime.Value.ToString("dd"))))
                 {
                     Appointment appointment = new Appointment

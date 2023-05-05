@@ -20,9 +20,6 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             ConsultantScheduleToolTip.SetToolTip(ConsultantScheduleButton, "Select a Consultant below to show their schedule.");
             TotalApptsThisYearToolTip.SetToolTip(TotalApptsThisYearButton, "Shows a total count of appointments for the current calendar year.");
 
-            //query = "Select distinct appointment.userId from client_schedule.appointment";
-            //DataTable ConsultantList = DBConnection.GetSQLTable(query);
-            //ConsultantComboBox.DataSource = ConsultantList;
             ConsultantComboBox.DataSource = DBConnection.GetSQLTable("Select distinct appointment.userId from client_schedule.appointment");
             ConsultantComboBox.DisplayMember = "userId";
             ConsultantComboBox.SelectedIndex = -1;
@@ -118,8 +115,9 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
         private void TotalApptsThisYearButton_Click(object sender, EventArgs e)
         {
+            string endOfYear = DateTime.UtcNow.ToString("yyyy") + "-12-31 23:45:00";
             query = "Select Count(appointmentId) from client_schedule.appointment " +
-                    "Where appointment.start > '" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:00") + "'";
+                    $"Where appointment.start between '" + DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:00") + "' and '" + DateTime.UtcNow.ToString(endOfYear) + "' ";
             string TotalAppointments = DBConnection.GetSQLTableValue(query);
             MessageBox.Show("There are a total of " + TotalAppointments + " remaining appointments this year.", "Remaining Appointments This Year", MessageBoxButtons.OK);
         }

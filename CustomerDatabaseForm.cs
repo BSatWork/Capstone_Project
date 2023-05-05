@@ -59,13 +59,13 @@ namespace BOP3_Task_1_DB_and_File_Server_App
         {
             if (CustomerDBDGV.Rows.Count == 0)
             {
-                MessageBox.Show("There are no customers to Update.", "Update Customer Validation");
+                MessageBox.Show("There are no customers to Update.", "Update Customer Validation", MessageBoxButtons.OK);
             }
             else
             {
                 if (!CustomerDBDGV.CurrentRow.Selected)
                 {
-                    MessageBox.Show("Please select a customer to Update.", "Update Customer Validation");
+                    MessageBox.Show("Please select a customer to Update.", "Update Customer Validation", MessageBoxButtons.OK);
                 }
                 else
                 {
@@ -85,19 +85,19 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
             if (customerApptCount > 0)
             {
-                MessageBox.Show("This customer has an active appt and cannot be deleted from the database.", "Customer Appt Check");
+                MessageBox.Show("This customer has an active appt and cannot be deleted from the database.", "Customer Appt Check", MessageBoxButtons.OK);
             }
             else
             {
                 if (CustomerDBDGV.Rows.Count == 0)
                 {
-                    MessageBox.Show("There are no customers to delete.", "Delete Customer Validation");
+                    MessageBox.Show("There are no customers to delete.", "Delete Customer Validation", MessageBoxButtons.OK);
                 }
                 else
                 {
                     if (!CustomerDBDGV.CurrentRow.Selected)
                     {
-                        MessageBox.Show("Please select a customer to delete.", "Delete Customer Validation");
+                        MessageBox.Show("Please select a customer to delete.", "Delete Customer Validation", MessageBoxButtons.OK);
                     }
                     else
                     {

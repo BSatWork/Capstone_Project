@@ -1,23 +1,26 @@
-﻿using BOP3_Task_1_DB_and_File_Server_App.Database;
+﻿using RYM2_Capstone_Scheduling_App.Database;
 using System;
 using System.Data;
 using System.Windows.Forms;
 
-namespace BOP3_Task_1_DB_and_File_Server_App
+namespace RYM2_Capstone_Scheduling_App
 {
-    public partial class ConsultantScheduleForm : Form
+    public partial class EmployeeScheduleForm : Form
     {
         public ReportForm appReportScreen;
         private readonly string query;
-        private readonly int consultantId;
+        private readonly string EmployeeUserName;
+        private readonly int employeeUserId;
 
-        public ConsultantScheduleForm(ReportForm ReportScreen, string Consultant)
+        public EmployeeScheduleForm(ReportForm ReportScreen, string Employee)
         {
             InitializeComponent();
             Show();
             appReportScreen = ReportScreen;
-            consultantId = int.Parse(Consultant);
-            ConsultantScheduleForm.ActiveForm.Text = "Schedule for Consultant " + consultantId;
+            EmployeeUserName = Employee;
+            EmployeeScheduleForm.ActiveForm.Text = "Schedule for Employee with UserName " + EmployeeUserName;
+
+            employeeUserId = int.Parse(DBConnection.GetSQLTableValue($"Select user.userId From client_schedule.user Where userName = '{EmployeeUserName}'"));
 
             query = "Select " +
                     "client_schedule.customer.customerId, " +
@@ -27,7 +30,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                     "client_schedule.appointment.end " +
                     "from client_schedule.appointment " +
                     "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
-                    $"Where appointment.userId = {consultantId} " +
+                    $"Where appointment.userId = {employeeUserId} " +
                     $"And appointment.start > '{DateTime.UtcNow:yyyy-MM-dd hh:mm:00}' ";
 
             DataTable consultantSchedule = DBConnection.GetSQLTable(query);
@@ -37,8 +40,8 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                 consultantSchedule.Rows[index]["end"] = TimeZoneInfo.ConvertTimeFromUtc((DateTime)consultantSchedule.Rows[index]["end"], TimeZoneInfo.Local).ToString();
             }
 
-            ConsultantScheduleDGV.DataSource = consultantSchedule;
-            ConsultantScheduleDGV.ClearSelection();
+            EmployeeScheduleDGV.DataSource = consultantSchedule;
+            EmployeeScheduleDGV.ClearSelection();
         }
 
         private void ConsultantScheduleCloseButton_Click(object sender, EventArgs e)

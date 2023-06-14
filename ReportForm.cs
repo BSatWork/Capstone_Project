@@ -1,8 +1,8 @@
-﻿using BOP3_Task_1_DB_and_File_Server_App.Database;
+﻿using RYM2_Capstone_Scheduling_App.Database;
 using System;
 using System.Windows.Forms;
 
-namespace BOP3_Task_1_DB_and_File_Server_App
+namespace RYM2_Capstone_Scheduling_App
 {
     public partial class ReportForm : Form
     {
@@ -17,12 +17,12 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             appMainScreen = mainScreen;
 
             NumberApptTypesByMonth.SetToolTip(NumberApptTypesByMonthButton, "Select a Type and Month below to show the resulting count.");
-            ConsultantScheduleToolTip.SetToolTip(ConsultantScheduleButton, "Select a Consultant below to show their schedule.");
+            ConsultantScheduleToolTip.SetToolTip(EmployeeScheduleButton, "Select a Consultant below to show their schedule.");
             TotalApptsThisYearToolTip.SetToolTip(TotalApptsThisYearButton, "Shows a total count of appointments for the current calendar year.");
 
-            ConsultantComboBox.DataSource = DBConnection.GetSQLTable("Select distinct appointment.userId from client_schedule.appointment");
-            ConsultantComboBox.DisplayMember = "userId";
-            ConsultantComboBox.SelectedIndex = -1;
+            EmployeeUserNameComboBox.DataSource = DBConnection.GetSQLTable("Select distinct user.userName from client_schedule.user");
+            EmployeeUserNameComboBox.DisplayMember = "userName";
+            EmployeeUserNameComboBox.SelectedIndex = -1;
         }
 
         private void NumberApptTypesByMonthButton_Click(object sender, EventArgs e)
@@ -100,15 +100,15 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
         private void ConsultantScheduleButton_Click(object sender, EventArgs e)
         {
-            string Consultant = ConsultantComboBox.Text;
+            string EmployeeUserName = EmployeeUserNameComboBox.Text;
 
-            if (string.IsNullOrEmpty(Consultant))
+            if (string.IsNullOrEmpty(EmployeeUserName))
             {
-                MessageBox.Show("Please select a Consultant before running this report.", "Selection Validation");
+                MessageBox.Show("Please select an Employee before running this report.", "Selection Validation");
             }
             else
             {
-                _ = new ConsultantScheduleForm(this, Consultant);
+                _ = new EmployeeScheduleForm(this, EmployeeUserName);
                 this.Hide();
             }
         }

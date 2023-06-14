@@ -1,10 +1,10 @@
-﻿using BOP3_Task_1_DB_and_File_Server_App.Database;
+﻿using RYM2_Capstone_Scheduling_App.Database;
 using System;
 using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 
-namespace BOP3_Task_1_DB_and_File_Server_App
+namespace RYM2_Capstone_Scheduling_App
 {
     public partial class AppLoginForm : Form
     {
@@ -78,8 +78,8 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
         static void LoginAttempt(string LoginCheck)
         {
-            string LogFilePathHome = "C:\\Users\\Owner\\source\\repos\\BSatWork\\BOP3-Task-1---Brady-Patterson\\LoginLogFile.txt";//For use on my home PC.
-            string LogFilePath = "C:\\Users\\LabUser\\Documents\\C969 Project\\LoginLogFile.txt";//For use on the Virtual Lab PC.
+            string LogFilePathHome = "C:\\Users\\Owner\\source\\repos\\BSatWork\\RYM2 Capstone Scheduling App\\LoginLogFile.txt";//For use on my home PC.
+            string LogFilePath = "C:\\Users\\LabUser\\Documents\\Capstone_Project\\LoginLogFile.txt";//For use on the Virtual Lab PC.
             
             if(File.Exists(LogFilePathHome))
             {

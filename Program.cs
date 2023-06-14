@@ -1,9 +1,9 @@
-﻿using BOP3_Task_1_DB_and_File_Server_App.Database;
+﻿using RYM2_Capstone_Scheduling_App.Database;
 using System;
 using System.IO;
 using System.Windows.Forms;
 
-namespace BOP3_Task_1_DB_and_File_Server_App
+namespace RYM2_Capstone_Scheduling_App
 {
     internal static class Program
     {
@@ -11,7 +11,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
         static void Main()
         {
-            string LogFilePath = "C:\\Users\\LabUser\\Documents\\Capstone Project\\LoginLogFile.txt";//For use on the Virtual Lab PC.
+            string LogFilePath = "C:\\Users\\LabUser\\source\\repos\\BSatWork\\RYM2 Capstone Scheduling App\\LoginLogFile.txt";
 
             if (File.Exists(LogFilePath))
             {

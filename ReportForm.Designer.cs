@@ -1,4 +1,4 @@
-﻿namespace BOP3_Task_1_DB_and_File_Server_App
+﻿namespace RYM2_Capstone_Scheduling_App
 {
     partial class ReportForm
     {
@@ -32,11 +32,11 @@
             this.ReportFormCloseButton = new System.Windows.Forms.Button();
             this.NumberApptTypesByMonthButton = new System.Windows.Forms.Button();
             this.NumberApptTypesByMonth = new System.Windows.Forms.ToolTip(this.components);
-            this.ConsultantScheduleButton = new System.Windows.Forms.Button();
+            this.EmployeeScheduleButton = new System.Windows.Forms.Button();
             this.ConsultantScheduleToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.TotalApptsThisYearButton = new System.Windows.Forms.Button();
             this.TotalApptsThisYearToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.ConsultantComboBox = new System.Windows.Forms.ComboBox();
+            this.EmployeeUserNameComboBox = new System.Windows.Forms.ComboBox();
             this.MonthsComboBox = new System.Windows.Forms.ComboBox();
             this.ApptTypeComboBox = new System.Windows.Forms.ComboBox();
             this.ReportMonthLabel = new System.Windows.Forms.Label();
@@ -74,17 +74,17 @@
             // 
             this.NumberApptTypesByMonth.IsBalloon = true;
             // 
-            // ConsultantScheduleButton
+            // EmployeeScheduleButton
             // 
-            this.ConsultantScheduleButton.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ConsultantScheduleButton.Location = new System.Drawing.Point(246, 28);
-            this.ConsultantScheduleButton.Margin = new System.Windows.Forms.Padding(4);
-            this.ConsultantScheduleButton.Name = "ConsultantScheduleButton";
-            this.ConsultantScheduleButton.Size = new System.Drawing.Size(175, 62);
-            this.ConsultantScheduleButton.TabIndex = 30;
-            this.ConsultantScheduleButton.Text = "Consultant Schedule";
-            this.ConsultantScheduleButton.UseVisualStyleBackColor = true;
-            this.ConsultantScheduleButton.Click += new System.EventHandler(this.ConsultantScheduleButton_Click);
+            this.EmployeeScheduleButton.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EmployeeScheduleButton.Location = new System.Drawing.Point(246, 28);
+            this.EmployeeScheduleButton.Margin = new System.Windows.Forms.Padding(4);
+            this.EmployeeScheduleButton.Name = "EmployeeScheduleButton";
+            this.EmployeeScheduleButton.Size = new System.Drawing.Size(175, 62);
+            this.EmployeeScheduleButton.TabIndex = 30;
+            this.EmployeeScheduleButton.Text = "Employee Schedule";
+            this.EmployeeScheduleButton.UseVisualStyleBackColor = true;
+            this.EmployeeScheduleButton.Click += new System.EventHandler(this.ConsultantScheduleButton_Click);
             // 
             // ConsultantScheduleToolTip
             // 
@@ -106,15 +106,15 @@
             // 
             this.TotalApptsThisYearToolTip.IsBalloon = true;
             // 
-            // ConsultantComboBox
+            // EmployeeUserNameComboBox
             // 
-            this.ConsultantComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ConsultantComboBox.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ConsultantComboBox.FormattingEnabled = true;
-            this.ConsultantComboBox.Location = new System.Drawing.Point(246, 122);
-            this.ConsultantComboBox.Name = "ConsultantComboBox";
-            this.ConsultantComboBox.Size = new System.Drawing.Size(175, 27);
-            this.ConsultantComboBox.TabIndex = 33;
+            this.EmployeeUserNameComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.EmployeeUserNameComboBox.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EmployeeUserNameComboBox.FormattingEnabled = true;
+            this.EmployeeUserNameComboBox.Location = new System.Drawing.Point(246, 122);
+            this.EmployeeUserNameComboBox.Name = "EmployeeUserNameComboBox";
+            this.EmployeeUserNameComboBox.Size = new System.Drawing.Size(175, 27);
+            this.EmployeeUserNameComboBox.TabIndex = 33;
             // 
             // MonthsComboBox
             // 
@@ -192,9 +192,9 @@
             this.Controls.Add(this.ReportApptTypeLabel);
             this.Controls.Add(this.ApptTypeComboBox);
             this.Controls.Add(this.MonthsComboBox);
-            this.Controls.Add(this.ConsultantComboBox);
+            this.Controls.Add(this.EmployeeUserNameComboBox);
             this.Controls.Add(this.TotalApptsThisYearButton);
-            this.Controls.Add(this.ConsultantScheduleButton);
+            this.Controls.Add(this.EmployeeScheduleButton);
             this.Controls.Add(this.NumberApptTypesByMonthButton);
             this.Controls.Add(this.ReportFormCloseButton);
             this.Name = "ReportForm";
@@ -210,11 +210,11 @@
         private System.Windows.Forms.Button ReportFormCloseButton;
         private System.Windows.Forms.Button NumberApptTypesByMonthButton;
         private System.Windows.Forms.ToolTip NumberApptTypesByMonth;
-        private System.Windows.Forms.Button ConsultantScheduleButton;
+        private System.Windows.Forms.Button EmployeeScheduleButton;
         private System.Windows.Forms.ToolTip ConsultantScheduleToolTip;
         private System.Windows.Forms.Button TotalApptsThisYearButton;
         private System.Windows.Forms.ToolTip TotalApptsThisYearToolTip;
-        private System.Windows.Forms.ComboBox ConsultantComboBox;
+        private System.Windows.Forms.ComboBox EmployeeUserNameComboBox;
         private System.Windows.Forms.ComboBox MonthsComboBox;
         private System.Windows.Forms.ComboBox ApptTypeComboBox;
         private System.Windows.Forms.Label ReportMonthLabel;

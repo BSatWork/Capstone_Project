@@ -1,8 +1,8 @@
-﻿using BOP3_Task_1_DB_and_File_Server_App.Database;
+﻿using RYM2_Capstone_Scheduling_App.Database;
 using System;
 using System.Windows.Forms;
 
-namespace BOP3_Task_1_DB_and_File_Server_App
+namespace RYM2_Capstone_Scheduling_App
 {
     public partial class AppointmentForm : Form
     {
@@ -12,6 +12,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
         public bool apptUpdate;
         public bool noUpdates = true;
         public int existingUserId;
+        public string existingUserName;
         public string existingType;
         public string existingCustomerName;
         public DateTime startTime;
@@ -26,9 +27,9 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             appMainScreen = mainScreen;
             apptId = appointmentId;
 
-            ApptUserIDComboBox.DataSource = DBConnection.GetSQLTable("Select distinct user.userId from client_schedule.user");
-            ApptUserIDComboBox.DisplayMember = "userId";
-            ApptUserIDComboBox.SelectedIndex = -1;
+            ApptUserNameComboBox.DataSource = DBConnection.GetSQLTable("Select distinct user.userName from client_schedule.user");
+            ApptUserNameComboBox.DisplayMember = "userName";
+            ApptUserNameComboBox.SelectedIndex = -1;
             //ApptTypeComboBox.DataSource is populated by default in my design.
             ApptCustomerComboBox.DataSource = DBConnection.GetSQLTable("Select distinct customer.customerName from client_schedule.customer");
             ApptCustomerComboBox.DisplayMember = "customerName";
@@ -60,12 +61,13 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                 
                 apptUpdate = true;
                 existingUserId = int.Parse(DBConnection.GetSQLTableValue($"Select appointment.userId From client_schedule.appointment Where appointmentId = '{appointmentId}' "));
+                existingUserName = DBConnection.GetSQLTableValue($"Select user.userName From client_schedule.user Where userId = '{existingUserId}' ").ToString(); ;
                 existingType = DBConnection.GetSQLTableValue($"Select appointment.type From client_schedule.appointment Where appointmentId = '{appointmentId}' ").ToString();
                 existingCustomerName = DBConnection.GetSQLTableValue($"Select customer.customerName From client_schedule.customer Left Join client_schedule.appointment on customer.customerId = appointment.customerId Where appointmentId = '{appointmentId}' ").ToString();
                 existingStart = TimeZoneInfo.ConvertTimeFromUtc(DateTime.Parse(DBConnection.GetSQLTableValue($"Select appointment.start From client_schedule.appointment Where appointmentId = '{appointmentId}' ")), TimeZoneInfo.Local);
                 existingEnd = TimeZoneInfo.ConvertTimeFromUtc(DateTime.Parse(DBConnection.GetSQLTableValue($"Select appointment.end From client_schedule.appointment Where appointmentId = '{appointmentId}' ")), TimeZoneInfo.Local);
 
-                ApptUserIDComboBox.Text = existingUserId.ToString();
+                ApptUserNameComboBox.Text = existingUserName;
                 ApptTypeComboBox.Text = existingType;
                 ApptCustomerComboBox.Text = existingCustomerName;
                 ApptStartDateTime.Value = existingStart;
@@ -78,7 +80,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             bool selectionBoxCheck = false;
             bool timeCheck = false;
 
-            if (!string.IsNullOrEmpty(ApptUserIDComboBox.Text) &&
+            if (!string.IsNullOrEmpty(ApptUserNameComboBox.Text) &&
                 !string.IsNullOrEmpty(ApptTypeComboBox.Text) &&
                 !string.IsNullOrEmpty(ApptCustomerComboBox.Text))
             {
@@ -117,13 +119,13 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                         {
                             appointment.appointmentId = 1;
                         }
-                        appointment.userId = int.Parse(ApptUserIDComboBox.Text);
+                        appointment.userId = int.Parse(DBConnection.GetSQLTableValue($"Select user.userId From client_schedule.user Where userName = '{ApptUserNameComboBox.Text}'"));
                         appointment.customerId = int.Parse(DBConnection.GetSQLTableValue($"Select customer.customerId From client_schedule.customer Where customerName = '{ApptCustomerComboBox.Text}'"));
                         appointment.type = ApptTypeComboBox.Text;
                         appointment.start = TimeZoneInfo.ConvertTimeToUtc(ApptStartDateTime.Value);
                         appointment.end = TimeZoneInfo.ConvertTimeToUtc(ApptEndDateTime.Value);
                         
-                        if (!ApptConflict(appointment.appointmentId, appointment.userId, appointment.start, appointment.end))
+                        if (!ApptConflict(appointment.appointmentId, appointment.userId, appointment.customerId, appointment.start, appointment.end))
                         {
                             query = "Insert Into client_schedule.appointment " +
                                 "Values(" +
@@ -150,20 +152,20 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                         }
                         else
                         {
-                            MessageBox.Show("Please select another Start/End time.\n\nThe selected time conflicts with an existing appointment.",
+                            MessageBox.Show("Please select another Start/End time.\n\nThe selected time conflicts with an existing appointment for the employee and/or the customer.",
                                             "Input Validation", MessageBoxButtons.OK);
                         }
                     }
                     else
                     {
-                        if (int.Parse(ApptUserIDComboBox.Text.ToString()) == existingUserId)
+                        if (ApptUserNameComboBox.Text == existingUserName)
                         {
-                            appointment.userId = existingUserId;
+                            appointment.userId = int.Parse(DBConnection.GetSQLTableValue($"Select user.userId From client_schedule.user Where userName = '{existingUserName}'"));
                         }
                         else
                         {
                             noUpdates = false;
-                            appointment.userId = int.Parse(ApptUserIDComboBox.Text.ToString());
+                            appointment.userId = int.Parse(DBConnection.GetSQLTableValue($"Select user.userId From client_schedule.user Where userName = '{ApptUserNameComboBox.Text}'"));
                         }
 
                         if (ApptTypeComboBox.Text == existingType)
@@ -209,7 +211,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
                         if (!noUpdates)
                         {
-                            if (!ApptConflict(appointment.appointmentId, appointment.userId, appointment.start, appointment.end))
+                            if (!ApptConflict(appointment.appointmentId, appointment.userId, appointment.customerId, appointment.start, appointment.end))
                             {
                                 query = "Update client_schedule.appointment " +
                                         $"Set appointment.userId = {appointment.userId}, " +
@@ -225,7 +227,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                             }
                             else
                             {
-                                MessageBox.Show("Please select another Start/End time.\n\nThe selected time conflicts with an existing appointment.",
+                                MessageBox.Show("Please select another Start/End time.\n\nThe selected time conflicts with an existing appointment for the employee and/or the customer.",
                                                 "Input Validation", MessageBoxButtons.OK);
                             }
                         }
@@ -259,7 +261,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             }
         }
 
-        private bool ApptConflict(int appointmentId, int userId, DateTime start, DateTime end)
+        private bool ApptConflict(int appointmentId, int userId, int customerId, DateTime start, DateTime end)
         {
             query = "Select Count(appointmentId) " +
                     "From client_schedule.appointment " +
@@ -269,9 +271,19 @@ namespace BOP3_Task_1_DB_and_File_Server_App
                     $"Or '{end:yyyy-MM-dd HH:mm:ss}' between appointment.start and appointment.end) " +
                     $"Or (appointment.start between '{start:yyyy-MM-dd HH:mm:ss}' and '{end:yyyy-MM-dd HH:mm:ss}' " +
                     $"Or appointment.end between '{start:yyyy-MM-dd HH:mm:ss}' and '{end:yyyy-MM-dd HH:mm:ss}')) ";
-            int DBCheck = int.Parse(DBConnection.GetSQLTableValue(query));
+            int DBCheckUserId = int.Parse(DBConnection.GetSQLTableValue(query));
 
-            if (DBCheck > 0)
+            query = "Select Count(appointmentId) " +
+                    "From client_schedule.appointment " +
+                    $"Where appointment.customerId = '{customerId}' " +
+                    $"And appointment.appointmentId <> '{appointmentId}' " +
+                    $"And (('{start:yyyy-MM-dd HH:mm:ss}' between appointment.start and appointment.end " +
+                    $"Or '{end:yyyy-MM-dd HH:mm:ss}' between appointment.start and appointment.end) " +
+                    $"Or (appointment.start between '{start:yyyy-MM-dd HH:mm:ss}' and '{end:yyyy-MM-dd HH:mm:ss}' " +
+                    $"Or appointment.end between '{start:yyyy-MM-dd HH:mm:ss}' and '{end:yyyy-MM-dd HH:mm:ss}')) ";
+            int DBCheckCustomerId = int.Parse(DBConnection.GetSQLTableValue(query));
+
+            if (DBCheckUserId > 0 || DBCheckCustomerId > 0)
             {
                 return true;
             }

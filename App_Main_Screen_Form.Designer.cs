@@ -1,4 +1,4 @@
-﻿namespace BOP3_Task_1_DB_and_File_Server_App
+﻿namespace RYM2_Capstone_Scheduling_App
 {
     partial class MainScreen
     {
@@ -30,12 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.AppointmentsDGV = new System.Windows.Forms.DataGridView();
-            this.Appointment_ID_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.User_ID_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Customer_Name_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Type_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Start_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.End_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AddUpdateDeleteApptButton = new System.Windows.Forms.Button();
             this.ApptCountLabel = new System.Windows.Forms.Label();
             this.ApptCount = new System.Windows.Forms.Label();
@@ -44,9 +38,18 @@
             this.CustomerDBToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.CalendarView = new System.Windows.Forms.ComboBox();
             this.MainScreenCloseButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.CalendarViewLabel = new System.Windows.Forms.Label();
             this.ReportsButton = new System.Windows.Forms.Button();
             this.ReportsToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.SearchTextBox = new System.Windows.Forms.TextBox();
+            this.ApptSearchLabel = new System.Windows.Forms.Label();
+            this.Appointment_ID_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.User_ID_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.User_Name_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Customer_Name_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Type_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Start_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.End_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.AppointmentsDGV)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,6 +61,7 @@
             this.AppointmentsDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Appointment_ID_Column,
             this.User_ID_Column,
+            this.User_Name_Column,
             this.Customer_Name_Column,
             this.Type_Column,
             this.Start_Column,
@@ -71,53 +75,6 @@
             this.AppointmentsDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.AppointmentsDGV.Size = new System.Drawing.Size(975, 360);
             this.AppointmentsDGV.TabIndex = 0;
-            // 
-            // Appointment_ID_Column
-            // 
-            this.Appointment_ID_Column.DataPropertyName = "appointmentId";
-            this.Appointment_ID_Column.HeaderText = "Appointment ID";
-            this.Appointment_ID_Column.Name = "Appointment_ID_Column";
-            this.Appointment_ID_Column.ReadOnly = true;
-            this.Appointment_ID_Column.Visible = false;
-            // 
-            // User_ID_Column
-            // 
-            this.User_ID_Column.DataPropertyName = "userId";
-            this.User_ID_Column.HeaderText = "User ID";
-            this.User_ID_Column.Name = "User_ID_Column";
-            this.User_ID_Column.ReadOnly = true;
-            // 
-            // Customer_Name_Column
-            // 
-            this.Customer_Name_Column.DataPropertyName = "customerName";
-            this.Customer_Name_Column.HeaderText = "Customer Name";
-            this.Customer_Name_Column.Name = "Customer_Name_Column";
-            this.Customer_Name_Column.ReadOnly = true;
-            this.Customer_Name_Column.Width = 300;
-            // 
-            // Type_Column
-            // 
-            this.Type_Column.DataPropertyName = "type";
-            this.Type_Column.HeaderText = "Type";
-            this.Type_Column.Name = "Type_Column";
-            this.Type_Column.ReadOnly = true;
-            this.Type_Column.Width = 150;
-            // 
-            // Start_Column
-            // 
-            this.Start_Column.DataPropertyName = "start";
-            this.Start_Column.HeaderText = "Start";
-            this.Start_Column.Name = "Start_Column";
-            this.Start_Column.ReadOnly = true;
-            this.Start_Column.Width = 200;
-            // 
-            // End_Column
-            // 
-            this.End_Column.DataPropertyName = "end";
-            this.End_Column.HeaderText = "End";
-            this.End_Column.Name = "End_Column";
-            this.End_Column.ReadOnly = true;
-            this.End_Column.Width = 200;
             // 
             // AddUpdateDeleteApptButton
             // 
@@ -208,15 +165,15 @@
             this.MainScreenCloseButton.UseVisualStyleBackColor = false;
             this.MainScreenCloseButton.Click += new System.EventHandler(this.MainScreenCloseButton_Click);
             // 
-            // label1
+            // CalendarViewLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(785, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(93, 14);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "Calendar View";
+            this.CalendarViewLabel.AutoSize = true;
+            this.CalendarViewLabel.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CalendarViewLabel.Location = new System.Drawing.Point(785, 25);
+            this.CalendarViewLabel.Name = "CalendarViewLabel";
+            this.CalendarViewLabel.Size = new System.Drawing.Size(93, 14);
+            this.CalendarViewLabel.TabIndex = 10;
+            this.CalendarViewLabel.Text = "Calendar View";
             // 
             // ReportsButton
             // 
@@ -234,14 +191,91 @@
             // 
             this.ReportsToolTip.IsBalloon = true;
             // 
+            // SearchTextBox
+            // 
+            this.SearchTextBox.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SearchTextBox.Location = new System.Drawing.Point(461, 22);
+            this.SearchTextBox.Name = "SearchTextBox";
+            this.SearchTextBox.Size = new System.Drawing.Size(265, 23);
+            this.SearchTextBox.TabIndex = 12;
+            this.SearchTextBox.TextChanged += new System.EventHandler(this.SearchTextBox_TextChanged);
+            // 
+            // ApptSearchLabel
+            // 
+            this.ApptSearchLabel.AutoSize = true;
+            this.ApptSearchLabel.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ApptSearchLabel.Location = new System.Drawing.Point(372, 25);
+            this.ApptSearchLabel.Name = "ApptSearchLabel";
+            this.ApptSearchLabel.Size = new System.Drawing.Size(83, 14);
+            this.ApptSearchLabel.TabIndex = 13;
+            this.ApptSearchLabel.Text = "Appt Search";
+            // 
+            // Appointment_ID_Column
+            // 
+            this.Appointment_ID_Column.DataPropertyName = "appointmentId";
+            this.Appointment_ID_Column.HeaderText = "Appointment ID";
+            this.Appointment_ID_Column.Name = "Appointment_ID_Column";
+            this.Appointment_ID_Column.ReadOnly = true;
+            this.Appointment_ID_Column.Visible = false;
+            // 
+            // User_ID_Column
+            // 
+            this.User_ID_Column.DataPropertyName = "userId";
+            this.User_ID_Column.HeaderText = "User ID";
+            this.User_ID_Column.Name = "User_ID_Column";
+            this.User_ID_Column.ReadOnly = true;
+            this.User_ID_Column.Visible = false;
+            // 
+            // User_Name_Column
+            // 
+            this.User_Name_Column.DataPropertyName = "userName";
+            this.User_Name_Column.HeaderText = "Employee UserName";
+            this.User_Name_Column.Name = "User_Name_Column";
+            this.User_Name_Column.ReadOnly = true;
+            this.User_Name_Column.Width = 150;
+            // 
+            // Customer_Name_Column
+            // 
+            this.Customer_Name_Column.DataPropertyName = "customerName";
+            this.Customer_Name_Column.HeaderText = "Customer Name";
+            this.Customer_Name_Column.Name = "Customer_Name_Column";
+            this.Customer_Name_Column.ReadOnly = true;
+            this.Customer_Name_Column.Width = 250;
+            // 
+            // Type_Column
+            // 
+            this.Type_Column.DataPropertyName = "type";
+            this.Type_Column.HeaderText = "Type";
+            this.Type_Column.Name = "Type_Column";
+            this.Type_Column.ReadOnly = true;
+            this.Type_Column.Width = 150;
+            // 
+            // Start_Column
+            // 
+            this.Start_Column.DataPropertyName = "start";
+            this.Start_Column.HeaderText = "Start";
+            this.Start_Column.Name = "Start_Column";
+            this.Start_Column.ReadOnly = true;
+            this.Start_Column.Width = 200;
+            // 
+            // End_Column
+            // 
+            this.End_Column.DataPropertyName = "end";
+            this.End_Column.HeaderText = "End";
+            this.End_Column.Name = "End_Column";
+            this.End_Column.ReadOnly = true;
+            this.End_Column.Width = 200;
+            // 
             // MainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1034, 461);
             this.ControlBox = false;
+            this.Controls.Add(this.ApptSearchLabel);
+            this.Controls.Add(this.SearchTextBox);
             this.Controls.Add(this.ReportsButton);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.CalendarViewLabel);
             this.Controls.Add(this.MainScreenCloseButton);
             this.Controls.Add(this.CalendarView);
             this.Controls.Add(this.CustomerDBButton);
@@ -274,11 +308,14 @@
         private System.Windows.Forms.ToolTip CustomerDBToolTip;
         private System.Windows.Forms.ComboBox CalendarView;
         private System.Windows.Forms.Button MainScreenCloseButton;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label CalendarViewLabel;
         private System.Windows.Forms.Button ReportsButton;
         private System.Windows.Forms.ToolTip ReportsToolTip;
+        private System.Windows.Forms.TextBox SearchTextBox;
+        private System.Windows.Forms.Label ApptSearchLabel;
         private System.Windows.Forms.DataGridViewTextBoxColumn Appointment_ID_Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn User_ID_Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn User_Name_Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn Customer_Name_Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn Type_Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn Start_Column;

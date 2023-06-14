@@ -1,4 +1,4 @@
-﻿namespace BOP3_Task_1_DB_and_File_Server_App
+﻿namespace RYM2_Capstone_Scheduling_App
 {
     partial class CustomerDatabaseForm
     {

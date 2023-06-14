@@ -1,10 +1,10 @@
-﻿using BOP3_Task_1_DB_and_File_Server_App.Database;
+﻿using RYM2_Capstone_Scheduling_App.Database;
 using System;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace BOP3_Task_1_DB_and_File_Server_App
+namespace RYM2_Capstone_Scheduling_App
 {
     public partial class MainScreen : Form
     {
@@ -26,9 +26,10 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             ReportsToolTip.SetToolTip(ReportsButton, "Generate Reports");
 
             // Query used to refresh the Appts table when returning from other screens.
-            allApptsQuery = "Select appointment.appointmentId, appointment.userId, customer.customerName, appointment.type, appointment.start, appointment.end " +
+            allApptsQuery = "Select appointment.appointmentId, user.userName, customer.customerName, appointment.type, appointment.start, appointment.end " +
                             "from client_schedule.appointment " +
                             "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
+                            "Left Join client_schedule.user on appointment.userId = user.userId " +
                             $"Where appointment.start > '{DateTime.UtcNow:yyyy-MM-dd hh:mm:00}' " +
                             "Order by start asc ";
             
@@ -189,18 +190,20 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             else if (CalendarView.SelectedIndex == 1)   // Current Week filter
             {
                 // Populate the Appointments table with only the appointments for the current week.
-                query = "Select appointment.appointmentId, appointment.userId, customer.customerName, appointment.type, appointment.start, appointment.end " +
+                query = "Select appointment.appointmentId, appointment.userID, user.userName, customer.customerName, appointment.type, appointment.start, appointment.end " +
                         "from client_schedule.appointment " +
                         "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
+                        "Left Join client_schedule.user on appointment.userId = user.userId " +
                         "Where appointment.start between '" + DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:00") + "' and '" + DateTime.UtcNow.ToString($"{nextYear}-MM-{weekEnd} 00:00:00") + "' " +
                         "Order by start asc ";
             }
             else if (CalendarView.SelectedIndex == 2)   // Current Month filter
             {
                 // Populate the Appointments table with only the appointments for the current week.
-                query = "Select appointment.appointmentId, appointment.userId, customer.customerName, appointment.type, appointment.start, appointment.end " +
+                query = "Select appointment.appointmentId, appointment.userID, user.userName, customer.customerName, appointment.type, appointment.start, appointment.end " +
                         "from client_schedule.appointment " +
                         "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
+                        "Left Join client_schedule.user on appointment.userId = user.userId " +
                         "Where appointment.start between '" + DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:00") + "' and '" + DateTime.UtcNow.ToString($"{nextYear}-{nextMonth}-01 00:00:00") + "' " +
                         "Order by start asc ";
             }
@@ -231,6 +234,23 @@ namespace BOP3_Task_1_DB_and_File_Server_App
             string apptCount = DBConnection.GetSQLTableValue(query);
             ApptCount.Text = apptCount;
             return query;
+        }
+
+        private void SearchTextBox_TextChanged(object sender, EventArgs e)
+        {
+            string searchText = SearchTextBox.Text;
+            query = "Select appointment.appointmentId, appointment.userID, user.userName, customer.customerName, appointment.type, appointment.start, appointment.end " +
+                    "from client_schedule.appointment " +
+                    "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
+                    "Left Join client_schedule.user on appointment.userId = user.userId " +
+                    $"Where user.userName Like '%{searchText}%' " +
+                    $"Or customer.customerName like '%{searchText}%' " +
+                    $"Or appointment.type like '%{searchText}%' " +
+                    $"Or appointment.start like '%{searchText}%' " +
+                    $"Or appointment.end like '%{searchText}%' " +
+                    $"And appointment.start > '{DateTime.UtcNow:yyyy-MM-dd hh:mm:00}' " +
+                    "Order by appointment.start asc ";
+            GetAppointmentData(query);
         }
     }
 }

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RYM2 Capstone Scheduling App", "RYM2 Capstone Scheduling App.csproj", "{C2C64672-5BEA-4DEF-B3EE-59B8F6409428}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RYM2_Capstone_Scheduling_App", "RYM2_Capstone_Scheduling_App.csproj", "{C2C64672-5BEA-4DEF-B3EE-59B8F6409428}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

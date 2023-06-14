@@ -11,7 +11,7 @@ namespace BOP3_Task_1_DB_and_File_Server_App
 
         static void Main()
         {
-            string LogFilePath = "C:\\Users\\LabUser\\Documents\\C969 Project\\LoginLogFile.txt";//For use on the Virtual Lab PC.
+            string LogFilePath = "C:\\Users\\LabUser\\Documents\\Capstone Project\\LoginLogFile.txt";//For use on the Virtual Lab PC.
 
             if (File.Exists(LogFilePath))
             {

@@ -5,6 +5,8 @@ namespace RYM2_Capstone_Scheduling_App.Database
     public class User
     {
         public int userId;
+        public string firstName;
+        public string lastName;
         public string userName;
         public string password;
 

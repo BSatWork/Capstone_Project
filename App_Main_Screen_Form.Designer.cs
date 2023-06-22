@@ -45,7 +45,7 @@
             this.ApptSearchLabel = new System.Windows.Forms.Label();
             this.Appointment_ID_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.User_ID_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.User_Name_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Employee_Name_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Customer_Name_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Type_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Start_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,12 +61,12 @@
             this.AppointmentsDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Appointment_ID_Column,
             this.User_ID_Column,
-            this.User_Name_Column,
+            this.Employee_Name_Column,
             this.Customer_Name_Column,
             this.Type_Column,
             this.Start_Column,
             this.End_Column});
-            this.AppointmentsDGV.Location = new System.Drawing.Point(30, 55);
+            this.AppointmentsDGV.Location = new System.Drawing.Point(36, 52);
             this.AppointmentsDGV.Margin = new System.Windows.Forms.Padding(4);
             this.AppointmentsDGV.MultiSelect = false;
             this.AppointmentsDGV.Name = "AppointmentsDGV";
@@ -194,7 +194,7 @@
             // SearchTextBox
             // 
             this.SearchTextBox.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SearchTextBox.Location = new System.Drawing.Point(461, 22);
+            this.SearchTextBox.Location = new System.Drawing.Point(446, 22);
             this.SearchTextBox.Name = "SearchTextBox";
             this.SearchTextBox.Size = new System.Drawing.Size(265, 23);
             this.SearchTextBox.TabIndex = 12;
@@ -204,7 +204,7 @@
             // 
             this.ApptSearchLabel.AutoSize = true;
             this.ApptSearchLabel.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ApptSearchLabel.Location = new System.Drawing.Point(372, 25);
+            this.ApptSearchLabel.Location = new System.Drawing.Point(357, 25);
             this.ApptSearchLabel.Name = "ApptSearchLabel";
             this.ApptSearchLabel.Size = new System.Drawing.Size(83, 14);
             this.ApptSearchLabel.TabIndex = 13;
@@ -226,13 +226,13 @@
             this.User_ID_Column.ReadOnly = true;
             this.User_ID_Column.Visible = false;
             // 
-            // User_Name_Column
+            // Employee_Name_Column
             // 
-            this.User_Name_Column.DataPropertyName = "userName";
-            this.User_Name_Column.HeaderText = "Employee UserName";
-            this.User_Name_Column.Name = "User_Name_Column";
-            this.User_Name_Column.ReadOnly = true;
-            this.User_Name_Column.Width = 150;
+            this.Employee_Name_Column.DataPropertyName = "First_&_Last_Name";
+            this.Employee_Name_Column.HeaderText = "Employee Name";
+            this.Employee_Name_Column.Name = "Employee_Name_Column";
+            this.Employee_Name_Column.ReadOnly = true;
+            this.Employee_Name_Column.Width = 250;
             // 
             // Customer_Name_Column
             // 
@@ -256,7 +256,7 @@
             this.Start_Column.HeaderText = "Start";
             this.Start_Column.Name = "Start_Column";
             this.Start_Column.ReadOnly = true;
-            this.Start_Column.Width = 200;
+            this.Start_Column.Width = 150;
             // 
             // End_Column
             // 
@@ -264,7 +264,7 @@
             this.End_Column.HeaderText = "End";
             this.End_Column.Name = "End_Column";
             this.End_Column.ReadOnly = true;
-            this.End_Column.Width = 200;
+            this.End_Column.Width = 150;
             // 
             // MainScreen
             // 
@@ -315,7 +315,7 @@
         private System.Windows.Forms.Label ApptSearchLabel;
         private System.Windows.Forms.DataGridViewTextBoxColumn Appointment_ID_Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn User_ID_Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn User_Name_Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Employee_Name_Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn Customer_Name_Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn Type_Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn Start_Column;

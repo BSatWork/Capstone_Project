@@ -26,12 +26,12 @@ namespace RYM2_Capstone_Scheduling_App
             ReportsToolTip.SetToolTip(ReportsButton, "Generate Reports");
 
             // Query used to refresh the Appts table when returning from other screens.
-            allApptsQuery = "Select appointment.appointmentId, user.userName, customer.customerName, appointment.type, appointment.start, appointment.end " +
+            allApptsQuery = "Select appointment.appointmentId, appointment.userId, user.First_Name, user.Last_Name, customer.customerName, appointment.type, appointment.start, appointment.end " +
                             "from client_schedule.appointment " +
                             "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
                             "Left Join client_schedule.user on appointment.userId = user.userId " +
                             $"Where appointment.start > '{DateTime.UtcNow:yyyy-MM-dd hh:mm:00}' " +
-                            "Order by start asc ";
+                            "Order by appointment.start asc ";
             
             // Populate the Appointments table.
             CalendarView.SelectedIndex = 0;
@@ -190,22 +190,22 @@ namespace RYM2_Capstone_Scheduling_App
             else if (CalendarView.SelectedIndex == 1)   // Current Week filter
             {
                 // Populate the Appointments table with only the appointments for the current week.
-                query = "Select appointment.appointmentId, appointment.userID, user.userName, customer.customerName, appointment.type, appointment.start, appointment.end " +
+                query = "Select appointment.appointmentId, appointment.userID, user.First_Name, user.Last_Name, customer.customerName, appointment.type, appointment.start, appointment.end " +
                         "from client_schedule.appointment " +
                         "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
                         "Left Join client_schedule.user on appointment.userId = user.userId " +
                         "Where appointment.start between '" + DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:00") + "' and '" + DateTime.UtcNow.ToString($"{nextYear}-MM-{weekEnd} 00:00:00") + "' " +
-                        "Order by start asc ";
+                        "Order by appointment.start asc ";
             }
             else if (CalendarView.SelectedIndex == 2)   // Current Month filter
             {
                 // Populate the Appointments table with only the appointments for the current week.
-                query = "Select appointment.appointmentId, appointment.userID, user.userName, customer.customerName, appointment.type, appointment.start, appointment.end " +
+                query = "Select appointment.appointmentId, appointment.userID, user.First_Name, user.Last_Name, customer.customerName, appointment.type, appointment.start, appointment.end " +
                         "from client_schedule.appointment " +
                         "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
                         "Left Join client_schedule.user on appointment.userId = user.userId " +
                         "Where appointment.start between '" + DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:00") + "' and '" + DateTime.UtcNow.ToString($"{nextYear}-{nextMonth}-01 00:00:00") + "' " +
-                        "Order by start asc ";
+                        "Order by appointment.start asc ";
             }
             GetAppointmentData(query);
         }
@@ -239,7 +239,7 @@ namespace RYM2_Capstone_Scheduling_App
         private void SearchTextBox_TextChanged(object sender, EventArgs e)
         {
             string searchText = SearchTextBox.Text;
-            query = "Select appointment.appointmentId, appointment.userID, user.userName, customer.customerName, appointment.type, appointment.start, appointment.end " +
+            query = "Select appointment.appointmentId, appointment.userID, user.First_Name, user.Last_Name, customer.customerName, appointment.type, appointment.start, appointment.end " +
                     "from client_schedule.appointment " +
                     "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
                     "Left Join client_schedule.user on appointment.userId = user.userId " +

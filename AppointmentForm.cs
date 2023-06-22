@@ -132,12 +132,7 @@ namespace RYM2_Capstone_Scheduling_App
                                 $"'{appointment.appointmentId}', " +
                                 $"'{appointment.customerId}', " +
                                 $"'{appointment.userId}', " +
-                                $"'{appointment.title}', " +
-                                $"'{appointment.description}', " +
-                                $"'{appointment.location}', " +
-                                $"'{appointment.contact}', " +
                                 $"'{appointment.type}', " +
-                                $"'{appointment.url}', " +
                                 $"'{appointment.start:yyyy-MM-dd HH:mm:00}', " +
                                 $"'{appointment.end:yyyy-MM-dd HH:mm:00}', " +
                                 $"'{appointment.createDate:yyyy-MM-dd HH:mm:00}', " +

@@ -36,17 +36,14 @@
             this.AddUpdateDeleteApptToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.CustomerDBButton = new System.Windows.Forms.Button();
             this.CustomerDBToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.CalendarView = new System.Windows.Forms.ComboBox();
             this.MainScreenCloseButton = new System.Windows.Forms.Button();
-            this.CalendarViewLabel = new System.Windows.Forms.Label();
             this.ReportsButton = new System.Windows.Forms.Button();
             this.ReportsToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SearchTextBox = new System.Windows.Forms.TextBox();
             this.ApptSearchLabel = new System.Windows.Forms.Label();
             this.Appointment_ID_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.User_ID_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.First_Name_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Last_Name_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Employee_Name_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Customer_Name_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Type_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Start_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,8 +59,7 @@
             this.AppointmentsDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Appointment_ID_Column,
             this.User_ID_Column,
-            this.First_Name_Column,
-            this.Last_Name_Column,
+            this.Employee_Name_Column,
             this.Customer_Name_Column,
             this.Type_Column,
             this.Start_Column,
@@ -138,20 +134,6 @@
             this.CustomerDBToolTip.IsBalloon = true;
             this.CustomerDBToolTip.ReshowDelay = 100;
             // 
-            // CalendarView
-            // 
-            this.CalendarView.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CalendarView.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CalendarView.Items.AddRange(new object[] {
-            "All",
-            "Current Week",
-            "Current Month"});
-            this.CalendarView.Location = new System.Drawing.Point(884, 21);
-            this.CalendarView.Name = "CalendarView";
-            this.CalendarView.Size = new System.Drawing.Size(121, 24);
-            this.CalendarView.TabIndex = 5;
-            this.CalendarView.SelectedIndexChanged += new System.EventHandler(this.CalendarView_SelectedIndexChanged);
-            // 
             // MainScreenCloseButton
             // 
             this.MainScreenCloseButton.BackColor = System.Drawing.SystemColors.Control;
@@ -166,16 +148,6 @@
             this.MainScreenCloseButton.Text = "Close";
             this.MainScreenCloseButton.UseVisualStyleBackColor = false;
             this.MainScreenCloseButton.Click += new System.EventHandler(this.MainScreenCloseButton_Click);
-            // 
-            // CalendarViewLabel
-            // 
-            this.CalendarViewLabel.AutoSize = true;
-            this.CalendarViewLabel.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CalendarViewLabel.Location = new System.Drawing.Point(785, 25);
-            this.CalendarViewLabel.Name = "CalendarViewLabel";
-            this.CalendarViewLabel.Size = new System.Drawing.Size(93, 14);
-            this.CalendarViewLabel.TabIndex = 10;
-            this.CalendarViewLabel.Text = "Calendar View";
             // 
             // ReportsButton
             // 
@@ -196,7 +168,7 @@
             // SearchTextBox
             // 
             this.SearchTextBox.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SearchTextBox.Location = new System.Drawing.Point(446, 22);
+            this.SearchTextBox.Location = new System.Drawing.Point(746, 21);
             this.SearchTextBox.Name = "SearchTextBox";
             this.SearchTextBox.Size = new System.Drawing.Size(265, 23);
             this.SearchTextBox.TabIndex = 12;
@@ -206,7 +178,7 @@
             // 
             this.ApptSearchLabel.AutoSize = true;
             this.ApptSearchLabel.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ApptSearchLabel.Location = new System.Drawing.Point(357, 25);
+            this.ApptSearchLabel.Location = new System.Drawing.Point(657, 25);
             this.ApptSearchLabel.Name = "ApptSearchLabel";
             this.ApptSearchLabel.Size = new System.Drawing.Size(83, 14);
             this.ApptSearchLabel.TabIndex = 13;
@@ -228,21 +200,13 @@
             this.User_ID_Column.ReadOnly = true;
             this.User_ID_Column.Visible = false;
             // 
-            // First_Name_Column
+            // Employee_Name_Column
             // 
-            this.First_Name_Column.DataPropertyName = "First_Name";
-            this.First_Name_Column.HeaderText = "Employee First";
-            this.First_Name_Column.Name = "First_Name_Column";
-            this.First_Name_Column.ReadOnly = true;
-            this.First_Name_Column.Width = 125;
-            // 
-            // Last_Name_Column
-            // 
-            this.Last_Name_Column.DataPropertyName = "Last_Name";
-            this.Last_Name_Column.HeaderText = "Employee Last";
-            this.Last_Name_Column.Name = "Last_Name_Column";
-            this.Last_Name_Column.ReadOnly = true;
-            this.Last_Name_Column.Width = 125;
+            this.Employee_Name_Column.DataPropertyName = "employeeName";
+            this.Employee_Name_Column.HeaderText = "Employee Name";
+            this.Employee_Name_Column.Name = "Employee_Name_Column";
+            this.Employee_Name_Column.ReadOnly = true;
+            this.Employee_Name_Column.Width = 250;
             // 
             // Customer_Name_Column
             // 
@@ -285,9 +249,7 @@
             this.Controls.Add(this.ApptSearchLabel);
             this.Controls.Add(this.SearchTextBox);
             this.Controls.Add(this.ReportsButton);
-            this.Controls.Add(this.CalendarViewLabel);
             this.Controls.Add(this.MainScreenCloseButton);
-            this.Controls.Add(this.CalendarView);
             this.Controls.Add(this.CustomerDBButton);
             this.Controls.Add(this.ApptCount);
             this.Controls.Add(this.ApptCountLabel);
@@ -316,17 +278,14 @@
         private System.Windows.Forms.ToolTip AddUpdateDeleteApptToolTip;
         private System.Windows.Forms.Button CustomerDBButton;
         private System.Windows.Forms.ToolTip CustomerDBToolTip;
-        private System.Windows.Forms.ComboBox CalendarView;
         private System.Windows.Forms.Button MainScreenCloseButton;
-        private System.Windows.Forms.Label CalendarViewLabel;
         private System.Windows.Forms.Button ReportsButton;
         private System.Windows.Forms.ToolTip ReportsToolTip;
         private System.Windows.Forms.TextBox SearchTextBox;
         private System.Windows.Forms.Label ApptSearchLabel;
         private System.Windows.Forms.DataGridViewTextBoxColumn Appointment_ID_Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn User_ID_Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn First_Name_Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Last_Name_Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Employee_Name_Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn Customer_Name_Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn Type_Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn Start_Column;

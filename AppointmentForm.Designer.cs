@@ -40,7 +40,7 @@
             this.ApptUserNameLabel = new System.Windows.Forms.Label();
             this.ApptTypeComboBox = new System.Windows.Forms.ComboBox();
             this.ApptCustomerComboBox = new System.Windows.Forms.ComboBox();
-            this.ApptUserNameComboBox = new System.Windows.Forms.ComboBox();
+            this.ApptEmployeeComboBox = new System.Windows.Forms.ComboBox();
             this.ApptScreenCloseButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -148,9 +148,9 @@
             this.ApptUserNameLabel.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ApptUserNameLabel.Location = new System.Drawing.Point(45, 34);
             this.ApptUserNameLabel.Name = "ApptUserNameLabel";
-            this.ApptUserNameLabel.Size = new System.Drawing.Size(162, 18);
+            this.ApptUserNameLabel.Size = new System.Drawing.Size(80, 18);
             this.ApptUserNameLabel.TabIndex = 26;
-            this.ApptUserNameLabel.Text = "Employee UserName";
+            this.ApptUserNameLabel.Text = "Employee";
             // 
             // ApptTypeComboBox
             // 
@@ -179,15 +179,15 @@
             this.ApptCustomerComboBox.Size = new System.Drawing.Size(194, 27);
             this.ApptCustomerComboBox.TabIndex = 37;
             // 
-            // ApptUserNameComboBox
+            // ApptEmployeeComboBox
             // 
-            this.ApptUserNameComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ApptUserNameComboBox.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ApptUserNameComboBox.FormattingEnabled = true;
-            this.ApptUserNameComboBox.Location = new System.Drawing.Point(210, 30);
-            this.ApptUserNameComboBox.Name = "ApptUserNameComboBox";
-            this.ApptUserNameComboBox.Size = new System.Drawing.Size(194, 27);
-            this.ApptUserNameComboBox.TabIndex = 38;
+            this.ApptEmployeeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ApptEmployeeComboBox.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ApptEmployeeComboBox.FormattingEnabled = true;
+            this.ApptEmployeeComboBox.Location = new System.Drawing.Point(210, 30);
+            this.ApptEmployeeComboBox.Name = "ApptEmployeeComboBox";
+            this.ApptEmployeeComboBox.Size = new System.Drawing.Size(194, 27);
+            this.ApptEmployeeComboBox.TabIndex = 38;
             // 
             // ApptScreenCloseButton
             // 
@@ -211,7 +211,7 @@
             this.ClientSize = new System.Drawing.Size(453, 337);
             this.ControlBox = false;
             this.Controls.Add(this.ApptScreenCloseButton);
-            this.Controls.Add(this.ApptUserNameComboBox);
+            this.Controls.Add(this.ApptEmployeeComboBox);
             this.Controls.Add(this.ApptCustomerComboBox);
             this.Controls.Add(this.ApptTypeComboBox);
             this.Controls.Add(this.ApptUserNameLabel);
@@ -247,7 +247,7 @@
         private System.Windows.Forms.Label ApptUserNameLabel;
         private System.Windows.Forms.ComboBox ApptTypeComboBox;
         private System.Windows.Forms.ComboBox ApptCustomerComboBox;
-        private System.Windows.Forms.ComboBox ApptUserNameComboBox;
+        private System.Windows.Forms.ComboBox ApptEmployeeComboBox;
         private System.Windows.Forms.DateTimePicker ApptStartDateTime;
         private System.Windows.Forms.DateTimePicker ApptEndDateTime;
         private System.Windows.Forms.Button ApptScreenCloseButton;

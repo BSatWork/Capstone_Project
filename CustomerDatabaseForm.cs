@@ -40,11 +40,12 @@ namespace RYM2_Capstone_Scheduling_App
             Close();
             appMainScreen.Show();
             // Refresh the Appointments table with all appointments.
-            query = "Select appointment.appointmentId, appointment.userId, customer.customerName, appointment.type, appointment.start, appointment.end " +
+            query = "Select appointment.appointmentId, appointment.userId, user.employeeName, customer.customerName, appointment.type, appointment.start, appointment.end " +
                     "from client_schedule.appointment " +
                     "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
+                    "Left Join client_schedule.user on appointment.userId = user.userId " +
                     $"Where appointment.start > '{DateTime.UtcNow:yyyy-MM-dd hh:mm:00}' " +
-                    "Order by start asc ";
+                    "Order by appointment.start asc ";
             appMainScreen.GetAppointmentData(query);
         }
 

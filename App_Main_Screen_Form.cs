@@ -26,15 +26,19 @@ namespace RYM2_Capstone_Scheduling_App
             ReportsToolTip.SetToolTip(ReportsButton, "Generate Reports");
 
             // Query used to refresh the Appts table when returning from other screens.
-            allApptsQuery = "Select appointment.appointmentId, appointment.userId, user.First_Name, user.Last_Name, customer.customerName, appointment.type, appointment.start, appointment.end " +
+            allApptsQuery = "Select appointment.appointmentId, appointment.userId, user.employeeName, customer.customerName, appointment.type, appointment.start, appointment.end " +
                             "from client_schedule.appointment " +
                             "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
                             "Left Join client_schedule.user on appointment.userId = user.userId " +
                             $"Where appointment.start > '{DateTime.UtcNow:yyyy-MM-dd hh:mm:00}' " +
                             "Order by appointment.start asc ";
-            
-            // Populate the Appointments table.
-            CalendarView.SelectedIndex = 0;
+            GetAppointmentData(allApptsQuery);
+
+            query = "Select Count(appointmentId) " +
+                    "From client_schedule.appointment " +
+                    $"Where appointment.start > '{DateTime.UtcNow:yyyy-MM-dd hh:mm:00}' ";
+            GetAppointmentDataCount(query);
+            //CalendarView.SelectedIndex = 0;
 
             query = "Select user.userId " +
                     "From client_schedule.user " +
@@ -113,7 +117,7 @@ namespace RYM2_Capstone_Scheduling_App
             AppointmentsDGV.MultiSelect = false;
         }
 
-        private void CalendarView_SelectedIndexChanged(object sender, EventArgs e)
+        /*private void CalendarView_SelectedIndexChanged(object sender, EventArgs e)
         {
             string todaysDay = DateTime.Today.ToString("dddd");
             int endOfWeek = 0;
@@ -186,29 +190,48 @@ namespace RYM2_Capstone_Scheduling_App
             {
                 // Populate the Appointments table with all appointments.
                 query = allApptsQuery;
+                GetAppointmentData(query);
+
+                query = "Select Count(appointmentId) " +
+                        "From client_schedule.appointment " +
+                        $"Where appointment.start > '{DateTime.UtcNow:yyyy-MM-dd hh:mm:00}' ";
             }
             else if (CalendarView.SelectedIndex == 1)   // Current Week filter
             {
                 // Populate the Appointments table with only the appointments for the current week.
-                query = "Select appointment.appointmentId, appointment.userID, user.First_Name, user.Last_Name, customer.customerName, appointment.type, appointment.start, appointment.end " +
+                query = "Select appointment.appointmentId, appointment.userID, user.employeeName, customer.customerName, appointment.type, appointment.start, appointment.end " +
                         "from client_schedule.appointment " +
                         "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
                         "Left Join client_schedule.user on appointment.userId = user.userId " +
                         "Where appointment.start between '" + DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:00") + "' and '" + DateTime.UtcNow.ToString($"{nextYear}-MM-{weekEnd} 00:00:00") + "' " +
                         "Order by appointment.start asc ";
+                GetAppointmentData(query);
+
+                query = "Select Count(appointment.appointmentId) " +
+                        "from client_schedule.appointment " +
+                        "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
+                        "Left Join client_schedule.user on appointment.userId = user.userId " +
+                        "Where appointment.start between '" + DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:00") + "' and '" + DateTime.UtcNow.ToString($"{nextYear}-MM-{weekEnd} 00:00:00") + "' ";
             }
             else if (CalendarView.SelectedIndex == 2)   // Current Month filter
             {
                 // Populate the Appointments table with only the appointments for the current week.
-                query = "Select appointment.appointmentId, appointment.userID, user.First_Name, user.Last_Name, customer.customerName, appointment.type, appointment.start, appointment.end " +
+                query = "Select appointment.appointmentId, appointment.userID, user.employeeName, customer.customerName, appointment.type, appointment.start, appointment.end " +
                         "from client_schedule.appointment " +
                         "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
                         "Left Join client_schedule.user on appointment.userId = user.userId " +
                         "Where appointment.start between '" + DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:00") + "' and '" + DateTime.UtcNow.ToString($"{nextYear}-{nextMonth}-01 00:00:00") + "' " +
                         "Order by appointment.start asc ";
+                GetAppointmentData(query);
+
+                query = "Select Count(appointment.appointmentId) " +
+                        "from client_schedule.appointment " +
+                        "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
+                        "Left Join client_schedule.user on appointment.userId = user.userId " +
+                        "Where appointment.start between '" + DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:00") + "' and '" + DateTime.UtcNow.ToString($"{nextYear}-{nextMonth}-01 00:00:00") + "' ";
             }
-            GetAppointmentData(query);
-        }
+            GetAppointmentDataCount(query);
+        }*/
 
         private void ReportsButton_Click(object sender, EventArgs e)
         {
@@ -227,10 +250,11 @@ namespace RYM2_Capstone_Scheduling_App
 
             AppointmentsDGV.DataSource = mainScreendataTable;
             AppointmentsDGV.ClearSelection();
+            return query;
+        }
 
-            query = "Select Count(appointmentId) " +
-                "From client_schedule.appointment " +
-                $"Where appointment.start > '{DateTime.UtcNow:yyyy-MM-dd hh:mm:00}' ";
+        public string GetAppointmentDataCount(string query)
+        {
             string apptCount = DBConnection.GetSQLTableValue(query);
             ApptCount.Text = apptCount;
             return query;
@@ -238,13 +262,14 @@ namespace RYM2_Capstone_Scheduling_App
 
         private void SearchTextBox_TextChanged(object sender, EventArgs e)
         {
+            //CalendarView.SelectedIndex = 0;
+
             string searchText = SearchTextBox.Text;
-            query = "Select appointment.appointmentId, appointment.userID, user.First_Name, user.Last_Name, customer.customerName, appointment.type, appointment.start, appointment.end " +
+            query = "Select appointment.appointmentId, appointment.userID, user.employeeName, customer.customerName, appointment.type, appointment.start, appointment.end " +
                     "from client_schedule.appointment " +
                     "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
                     "Left Join client_schedule.user on appointment.userId = user.userId " +
-                    $"Where user.First_Name Like '%{searchText}%' " +
-                    $"Or user.Last_Name Like '%{searchText}%' " +
+                    $"Where user.employeeName Like '%{searchText}%' " +
                     $"Or customer.customerName like '%{searchText}%' " +
                     $"Or appointment.type like '%{searchText}%' " +
                     $"Or appointment.start like '%{searchText}%' " +
@@ -252,6 +277,18 @@ namespace RYM2_Capstone_Scheduling_App
                     $"And appointment.start > '{DateTime.UtcNow:yyyy-MM-dd hh:mm:00}' " +
                     "Order by appointment.start asc ";
             GetAppointmentData(query);
+
+            query = "Select Count(appointment.appointmentId) " +
+                    "from client_schedule.appointment " +
+                    "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
+                    "Left Join client_schedule.user on appointment.userId = user.userId " +
+                    $"Where user.employeeName Like '%{searchText}%' " +
+                    $"Or customer.customerName like '%{searchText}%' " +
+                    $"Or appointment.type like '%{searchText}%' " +
+                    $"Or appointment.start like '%{searchText}%' " +
+                    $"Or appointment.end like '%{searchText}%' " +
+                    $"And appointment.start > '{DateTime.UtcNow:yyyy-MM-dd hh:mm:00}' ";
+            GetAppointmentDataCount(query);
         }
     }
 }

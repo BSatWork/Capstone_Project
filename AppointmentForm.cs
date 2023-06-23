@@ -12,7 +12,7 @@ namespace RYM2_Capstone_Scheduling_App
         public bool apptUpdate;
         public bool noUpdates = true;
         public int existingUserId;
-        public string existingUserName;
+        public string existingEmployeeName;
         public string existingType;
         public string existingCustomerName;
         public DateTime startTime;
@@ -27,9 +27,9 @@ namespace RYM2_Capstone_Scheduling_App
             appMainScreen = mainScreen;
             apptId = appointmentId;
 
-            ApptUserNameComboBox.DataSource = DBConnection.GetSQLTable("Select distinct user.First_Name, user.Last_Name from client_schedule.user");
-            ApptUserNameComboBox.DisplayMember = "First_Name" + " " + "Last_Name";
-            ApptUserNameComboBox.SelectedIndex = -1;
+            ApptEmployeeComboBox.DataSource = DBConnection.GetSQLTable("Select distinct user.employeeName from client_schedule.user");
+            ApptEmployeeComboBox.DisplayMember = "employeeName";
+            ApptEmployeeComboBox.SelectedIndex = -1;
             //ApptTypeComboBox.DataSource is populated by default in my design.
             ApptCustomerComboBox.DataSource = DBConnection.GetSQLTable("Select distinct customer.customerName from client_schedule.customer");
             ApptCustomerComboBox.DisplayMember = "customerName";
@@ -61,13 +61,13 @@ namespace RYM2_Capstone_Scheduling_App
                 
                 apptUpdate = true;
                 existingUserId = int.Parse(DBConnection.GetSQLTableValue($"Select appointment.userId From client_schedule.appointment Where appointmentId = '{appointmentId}' "));
-                existingUserName = DBConnection.GetSQLTableValue($"Select user.userName From client_schedule.user Where userId = '{existingUserId}' ").ToString(); ;
+                existingEmployeeName = DBConnection.GetSQLTableValue($"Select user.employeeName From client_schedule.user Where userId = '{existingUserId}' ").ToString(); ;
                 existingType = DBConnection.GetSQLTableValue($"Select appointment.type From client_schedule.appointment Where appointmentId = '{appointmentId}' ").ToString();
                 existingCustomerName = DBConnection.GetSQLTableValue($"Select customer.customerName From client_schedule.customer Left Join client_schedule.appointment on customer.customerId = appointment.customerId Where appointmentId = '{appointmentId}' ").ToString();
                 existingStart = TimeZoneInfo.ConvertTimeFromUtc(DateTime.Parse(DBConnection.GetSQLTableValue($"Select appointment.start From client_schedule.appointment Where appointmentId = '{appointmentId}' ")), TimeZoneInfo.Local);
                 existingEnd = TimeZoneInfo.ConvertTimeFromUtc(DateTime.Parse(DBConnection.GetSQLTableValue($"Select appointment.end From client_schedule.appointment Where appointmentId = '{appointmentId}' ")), TimeZoneInfo.Local);
 
-                ApptUserNameComboBox.Text = existingUserName;
+                ApptEmployeeComboBox.Text = existingEmployeeName;
                 ApptTypeComboBox.Text = existingType;
                 ApptCustomerComboBox.Text = existingCustomerName;
                 ApptStartDateTime.Value = existingStart;
@@ -80,7 +80,7 @@ namespace RYM2_Capstone_Scheduling_App
             bool selectionBoxCheck = false;
             bool timeCheck = false;
 
-            if (!string.IsNullOrEmpty(ApptUserNameComboBox.Text) &&
+            if (!string.IsNullOrEmpty(ApptEmployeeComboBox.Text) &&
                 !string.IsNullOrEmpty(ApptTypeComboBox.Text) &&
                 !string.IsNullOrEmpty(ApptCustomerComboBox.Text))
             {
@@ -119,7 +119,7 @@ namespace RYM2_Capstone_Scheduling_App
                         {
                             appointment.appointmentId = 1;
                         }
-                        appointment.userId = int.Parse(DBConnection.GetSQLTableValue($"Select user.userId From client_schedule.user Where userName = '{ApptUserNameComboBox.Text}'"));
+                        appointment.userId = int.Parse(DBConnection.GetSQLTableValue($"Select user.userId From client_schedule.user Where employeeName = '{ApptEmployeeComboBox.Text}'"));
                         appointment.customerId = int.Parse(DBConnection.GetSQLTableValue($"Select customer.customerId From client_schedule.customer Where customerName = '{ApptCustomerComboBox.Text}'"));
                         appointment.type = ApptTypeComboBox.Text;
                         appointment.start = TimeZoneInfo.ConvertTimeToUtc(ApptStartDateTime.Value);
@@ -153,14 +153,14 @@ namespace RYM2_Capstone_Scheduling_App
                     }
                     else
                     {
-                        if (ApptUserNameComboBox.Text == existingUserName)
+                        if (ApptEmployeeComboBox.Text == existingEmployeeName)
                         {
-                            appointment.userId = int.Parse(DBConnection.GetSQLTableValue($"Select user.userId From client_schedule.user Where userName = '{existingUserName}'"));
+                            appointment.userId = int.Parse(DBConnection.GetSQLTableValue($"Select user.userId From client_schedule.user Where employeeName = '{existingEmployeeName}'"));
                         }
                         else
                         {
                             noUpdates = false;
-                            appointment.userId = int.Parse(DBConnection.GetSQLTableValue($"Select user.userId From client_schedule.user Where userName = '{ApptUserNameComboBox.Text}'"));
+                            appointment.userId = int.Parse(DBConnection.GetSQLTableValue($"Select user.userId From client_schedule.user Where employeeName = '{ApptEmployeeComboBox.Text}'"));
                         }
 
                         if (ApptTypeComboBox.Text == existingType)

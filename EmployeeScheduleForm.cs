@@ -20,7 +20,7 @@ namespace RYM2_Capstone_Scheduling_App
             EmployeeUserName = Employee;
             EmployeeScheduleForm.ActiveForm.Text = "Schedule for Employee with UserName " + EmployeeUserName;
 
-            employeeUserId = int.Parse(DBConnection.GetSQLTableValue($"Select user.userId From client_schedule.user Where userName = '{EmployeeUserName}'"));
+            employeeUserId = int.Parse(DBConnection.GetSQLTableValue($"Select user.userId From client_schedule.user Where employeeName = '{EmployeeUserName}'"));
 
             query = "Select " +
                     "client_schedule.customer.customerId, " +

@@ -243,7 +243,8 @@ namespace RYM2_Capstone_Scheduling_App
                     "from client_schedule.appointment " +
                     "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
                     "Left Join client_schedule.user on appointment.userId = user.userId " +
-                    $"Where user.userName Like '%{searchText}%' " +
+                    $"Where user.First_Name Like '%{searchText}%' " +
+                    $"Or user.Last_Name Like '%{searchText}%' " +
                     $"Or customer.customerName like '%{searchText}%' " +
                     $"Or appointment.type like '%{searchText}%' " +
                     $"Or appointment.start like '%{searchText}%' " +

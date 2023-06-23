@@ -27,8 +27,8 @@ namespace RYM2_Capstone_Scheduling_App
             appMainScreen = mainScreen;
             apptId = appointmentId;
 
-            ApptUserNameComboBox.DataSource = DBConnection.GetSQLTable("Select distinct user.userName from client_schedule.user");
-            ApptUserNameComboBox.DisplayMember = "userName";
+            ApptUserNameComboBox.DataSource = DBConnection.GetSQLTable("Select distinct user.First_Name, user.Last_Name from client_schedule.user");
+            ApptUserNameComboBox.DisplayMember = "First_Name" + " " + "Last_Name";
             ApptUserNameComboBox.SelectedIndex = -1;
             //ApptTypeComboBox.DataSource is populated by default in my design.
             ApptCustomerComboBox.DataSource = DBConnection.GetSQLTable("Select distinct customer.customerName from client_schedule.customer");

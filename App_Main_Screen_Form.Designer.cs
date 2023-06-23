@@ -45,7 +45,8 @@
             this.ApptSearchLabel = new System.Windows.Forms.Label();
             this.Appointment_ID_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.User_ID_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Employee_Name_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.First_Name_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Last_Name_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Customer_Name_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Type_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Start_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,7 +62,8 @@
             this.AppointmentsDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Appointment_ID_Column,
             this.User_ID_Column,
-            this.Employee_Name_Column,
+            this.First_Name_Column,
+            this.Last_Name_Column,
             this.Customer_Name_Column,
             this.Type_Column,
             this.Start_Column,
@@ -226,13 +228,21 @@
             this.User_ID_Column.ReadOnly = true;
             this.User_ID_Column.Visible = false;
             // 
-            // Employee_Name_Column
+            // First_Name_Column
             // 
-            this.Employee_Name_Column.DataPropertyName = "First_&_Last_Name";
-            this.Employee_Name_Column.HeaderText = "Employee Name";
-            this.Employee_Name_Column.Name = "Employee_Name_Column";
-            this.Employee_Name_Column.ReadOnly = true;
-            this.Employee_Name_Column.Width = 250;
+            this.First_Name_Column.DataPropertyName = "First_Name";
+            this.First_Name_Column.HeaderText = "Employee First";
+            this.First_Name_Column.Name = "First_Name_Column";
+            this.First_Name_Column.ReadOnly = true;
+            this.First_Name_Column.Width = 125;
+            // 
+            // Last_Name_Column
+            // 
+            this.Last_Name_Column.DataPropertyName = "Last_Name";
+            this.Last_Name_Column.HeaderText = "Employee Last";
+            this.Last_Name_Column.Name = "Last_Name_Column";
+            this.Last_Name_Column.ReadOnly = true;
+            this.Last_Name_Column.Width = 125;
             // 
             // Customer_Name_Column
             // 
@@ -315,7 +325,8 @@
         private System.Windows.Forms.Label ApptSearchLabel;
         private System.Windows.Forms.DataGridViewTextBoxColumn Appointment_ID_Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn User_ID_Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Employee_Name_Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn First_Name_Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Last_Name_Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn Customer_Name_Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn Type_Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn Start_Column;

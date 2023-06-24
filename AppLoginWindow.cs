@@ -53,10 +53,21 @@ namespace RYM2_Capstone_Scheduling_App
                     $"And BINARY password =  '{PasswordInputBox.Text}' ";
             int credentialsCheck = int.Parse(DBConnection.GetSQLTableValue(query));
 
+            query = "Select active " +
+                    "From client_schedule.user " +
+                    $"Where BINARY userName = '{UserNameInputBox.Text}' " +
+                    $"And BINARY password =  '{PasswordInputBox.Text}' ";
+            int activeCheck = int.Parse(DBConnection.GetSQLTableValue(query));
+
             if (credentialsCheck == 0)
             {
                 LoginErrorLabel.Text = LoginError;
                 LoginCheck = "Failed Login Attempt with User " + UserNameInputBox.Text + " at " + DateTime.UtcNow + "\n";
+            }
+            else if (activeCheck == 0)
+            {
+                LoginErrorLabel.Text = "Employee is deactivated.  Contact Admin for support.";
+                LoginCheck = "Login Attempt with Deactivated User " + UserNameInputBox.Text + " at " + DateTime.UtcNow + "\n";
             }
             else
             {

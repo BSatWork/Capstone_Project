@@ -20,7 +20,7 @@ namespace RYM2_Capstone_Scheduling_App
             ConsultantScheduleToolTip.SetToolTip(EmployeeScheduleButton, "Select an Employee below to show their schedule.");
             TotalApptsThisYearToolTip.SetToolTip(TotalApptsThisYearButton, "Shows a total count of appointments for the current calendar year.");
 
-            EmployeeUserNameComboBox.DataSource = DBConnection.GetSQLTable("Select distinct user.employeeName from client_schedule.user where user.employeeName Not like 'Admin User' ");
+            EmployeeUserNameComboBox.DataSource = DBConnection.GetSQLTable("Select distinct user.employeeName from client_schedule.user where user.active = 1 ");
             EmployeeUserNameComboBox.DisplayMember = "employeeName";
             EmployeeUserNameComboBox.SelectedIndex = -1;
         }

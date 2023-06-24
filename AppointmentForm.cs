@@ -27,10 +27,10 @@ namespace RYM2_Capstone_Scheduling_App
             appMainScreen = mainScreen;
             apptId = appointmentId;
 
-            ApptEmployeeComboBox.DataSource = DBConnection.GetSQLTable("Select distinct user.employeeName from client_schedule.user where user.employeeName Not like 'Admin User' ");
+            ApptEmployeeComboBox.DataSource = DBConnection.GetSQLTable("Select distinct user.employeeName from client_schedule.user where user.active = 1 ");
             ApptEmployeeComboBox.DisplayMember = "employeeName";
             ApptEmployeeComboBox.SelectedIndex = -1;
-            ApptCustomerComboBox.DataSource = DBConnection.GetSQLTable("Select distinct customer.customerName from client_schedule.customer");
+            ApptCustomerComboBox.DataSource = DBConnection.GetSQLTable("Select distinct customer.customerName from client_schedule.customer ");
             ApptCustomerComboBox.DisplayMember = "customerName";
             ApptCustomerComboBox.SelectedIndex = -1;
 

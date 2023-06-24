@@ -118,7 +118,6 @@ namespace RYM2_Capstone_Scheduling_App
                                     $"Left Join client_schedule.city on city.countryId = country.countryId " +
                                     $"Where city.cityId = {cityId} "));
 
-                                //Todo Delete the customer row.
                                 query = $"Delete from client_schedule.customer Where customerId = {customerId}; " +
                                         $"Delete from client_schedule.address Where addressId = {addressId}; " +
                                         $"Delete from client_schedule.city Where cityId = {cityId}; " +

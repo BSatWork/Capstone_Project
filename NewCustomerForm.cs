@@ -144,7 +144,6 @@ namespace RYM2_Capstone_Scheduling_App
                             $"'{address.addressLine1}', " +
                             $"'{address.addressLine2}', " +
                             $"{address.cityId}, " +
-                            $"'{address.postalCode}', " +
                             $"'{address.phone }', " +
                             $"'{address.createDate:yyyy-MM-dd HH:mm:00}', " +
                             $"'{address.createdBy}', " +

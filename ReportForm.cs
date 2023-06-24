@@ -17,10 +17,10 @@ namespace RYM2_Capstone_Scheduling_App
             appMainScreen = mainScreen;
 
             NumberApptTypesByMonth.SetToolTip(NumberApptTypesByMonthButton, "Select a Type and Month below to show the resulting count.");
-            ConsultantScheduleToolTip.SetToolTip(EmployeeScheduleButton, "Select a Consultant below to show their schedule.");
+            ConsultantScheduleToolTip.SetToolTip(EmployeeScheduleButton, "Select an Employee below to show their schedule.");
             TotalApptsThisYearToolTip.SetToolTip(TotalApptsThisYearButton, "Shows a total count of appointments for the current calendar year.");
 
-            EmployeeUserNameComboBox.DataSource = DBConnection.GetSQLTable("Select distinct user.employeeName from client_schedule.user");
+            EmployeeUserNameComboBox.DataSource = DBConnection.GetSQLTable("Select distinct user.employeeName from client_schedule.user where user.employeeName Not like 'Admin User' ");
             EmployeeUserNameComboBox.DisplayMember = "employeeName";
             EmployeeUserNameComboBox.SelectedIndex = -1;
         }

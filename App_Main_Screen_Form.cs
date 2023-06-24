@@ -38,7 +38,6 @@ namespace RYM2_Capstone_Scheduling_App
                     "From client_schedule.appointment " +
                     $"Where appointment.start > '{DateTime.UtcNow:yyyy-MM-dd hh:mm:00}' ";
             GetAppointmentDataCount(query);
-            //CalendarView.SelectedIndex = 0;
 
             query = "Select user.userId " +
                     "From client_schedule.user " +
@@ -55,7 +54,7 @@ namespace RYM2_Capstone_Scheduling_App
             {
                 MessageBox.Show("!YOU'RE LATE to an appt that has already started!\n\nSee the first highlighted appt for details.", "Appt Reminder", MessageBoxButtons.OK);
 
-                //Lambda expression used to identify which appt needs to be highlighted that's in-process appt.
+                //Identify which appt needs to be highlighted that's in-process appt.
                 row = AppointmentsDGV.Rows
                     .Cast<DataGridViewRow>()
                     .Where(r => r.Cells[0].Value.ToString().Equals(getLateApptId))
@@ -76,7 +75,7 @@ namespace RYM2_Capstone_Scheduling_App
             {
                 MessageBox.Show("!ATTENTION! You have an appt in the next 15 minutes.\n\nSee the second highlighted appt for details.", "Appt Reminder", MessageBoxButtons.OK);
 
-                //Lambda expression used to identify which appt needs to be highlighted that's upcoming appt.
+                //Identify which appt needs to be highlighted that's upcoming appt.
                 rowIndex = -1;
                 row = AppointmentsDGV.Rows
                     .Cast<DataGridViewRow>()
@@ -99,12 +98,14 @@ namespace RYM2_Capstone_Scheduling_App
 
             _ = new AppointmentForm(this, appointmentId);
             this.Hide();
+            SearchTextBox.Text = string.Empty;
         }
 
         private void CustomerDBButton_Click(object sender, EventArgs e)
         {
             _ = new CustomerDatabaseForm(this);
             this.Hide();
+            SearchTextBox.Text = string.Empty;
         }
 
         private void MainScreenCloseButton_Click(object sender, EventArgs e)
@@ -117,126 +118,11 @@ namespace RYM2_Capstone_Scheduling_App
             AppointmentsDGV.MultiSelect = false;
         }
 
-        /*private void CalendarView_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string todaysDay = DateTime.Today.ToString("dddd");
-            int endOfWeek = 0;
-            if (todaysDay == "Sunday")
-            {
-                endOfWeek = int.Parse(DateTime.Today.ToString("dd"));
-            }
-            else if (todaysDay == "Monday")
-            {
-                endOfWeek = int.Parse(DateTime.Today.ToString("dd")) + 6;
-            }
-            else if (todaysDay == "Tuesday")
-            {
-                endOfWeek = int.Parse(DateTime.Today.ToString("dd")) + 5;
-            }
-            else if (todaysDay == "Wednesday")
-            {
-                endOfWeek = int.Parse(DateTime.Today.ToString("dd")) + 4;
-            }
-            else if (todaysDay == "Thursday")
-            {
-                endOfWeek = int.Parse(DateTime.Today.ToString("dd")) + 3;
-            }
-            else if (todaysDay == "Friday")
-            {
-                endOfWeek = int.Parse(DateTime.Today.ToString("dd")) + 2;
-            }
-            else if (todaysDay == "Saturday")
-            {
-                endOfWeek = int.Parse(DateTime.Today.ToString("dd")) + 1;
-            }
-
-            string weekEnd = "";
-            if (endOfWeek > 9)
-            {
-                weekEnd = endOfWeek.ToString();
-            }
-            else if (endOfWeek < 10)
-            {
-                weekEnd = "0" + endOfWeek.ToString();
-            }
-
-            int todaysMonth = int.Parse(DateTime.Today.ToString("MM"));
-            string nextMonth;
-            if (todaysMonth == 12)
-            {
-                nextMonth = "01";
-            }
-            else if (todaysMonth < 10)
-            {
-                nextMonth = "0" + (todaysMonth + 1).ToString();
-            }
-            else
-            {
-                nextMonth = todaysMonth.ToString();
-            }
-            
-            int todaysYear = int.Parse(DateTime.Today.ToString("yyyy"));
-            string nextYear;
-            if (todaysMonth == 12)
-            {
-                nextYear = (todaysYear + 1).ToString();
-            }
-            else
-            {
-                nextYear = todaysYear.ToString();
-            }
-
-            if (CalendarView.SelectedIndex == 0)        // All filter
-            {
-                // Populate the Appointments table with all appointments.
-                query = allApptsQuery;
-                GetAppointmentData(query);
-
-                query = "Select Count(appointmentId) " +
-                        "From client_schedule.appointment " +
-                        $"Where appointment.start > '{DateTime.UtcNow:yyyy-MM-dd hh:mm:00}' ";
-            }
-            else if (CalendarView.SelectedIndex == 1)   // Current Week filter
-            {
-                // Populate the Appointments table with only the appointments for the current week.
-                query = "Select appointment.appointmentId, appointment.userID, user.employeeName, customer.customerName, appointment.type, appointment.start, appointment.end " +
-                        "from client_schedule.appointment " +
-                        "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
-                        "Left Join client_schedule.user on appointment.userId = user.userId " +
-                        "Where appointment.start between '" + DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:00") + "' and '" + DateTime.UtcNow.ToString($"{nextYear}-MM-{weekEnd} 00:00:00") + "' " +
-                        "Order by appointment.start asc ";
-                GetAppointmentData(query);
-
-                query = "Select Count(appointment.appointmentId) " +
-                        "from client_schedule.appointment " +
-                        "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
-                        "Left Join client_schedule.user on appointment.userId = user.userId " +
-                        "Where appointment.start between '" + DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:00") + "' and '" + DateTime.UtcNow.ToString($"{nextYear}-MM-{weekEnd} 00:00:00") + "' ";
-            }
-            else if (CalendarView.SelectedIndex == 2)   // Current Month filter
-            {
-                // Populate the Appointments table with only the appointments for the current week.
-                query = "Select appointment.appointmentId, appointment.userID, user.employeeName, customer.customerName, appointment.type, appointment.start, appointment.end " +
-                        "from client_schedule.appointment " +
-                        "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
-                        "Left Join client_schedule.user on appointment.userId = user.userId " +
-                        "Where appointment.start between '" + DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:00") + "' and '" + DateTime.UtcNow.ToString($"{nextYear}-{nextMonth}-01 00:00:00") + "' " +
-                        "Order by appointment.start asc ";
-                GetAppointmentData(query);
-
-                query = "Select Count(appointment.appointmentId) " +
-                        "from client_schedule.appointment " +
-                        "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
-                        "Left Join client_schedule.user on appointment.userId = user.userId " +
-                        "Where appointment.start between '" + DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:00") + "' and '" + DateTime.UtcNow.ToString($"{nextYear}-{nextMonth}-01 00:00:00") + "' ";
-            }
-            GetAppointmentDataCount(query);
-        }*/
-
         private void ReportsButton_Click(object sender, EventArgs e)
         {
             _ = new ReportForm(this);
             this.Hide();
+            SearchTextBox.Text = string.Empty;
         }
 
         public string GetAppointmentData(string query)
@@ -262,9 +148,20 @@ namespace RYM2_Capstone_Scheduling_App
 
         private void SearchTextBox_TextChanged(object sender, EventArgs e)
         {
-            //CalendarView.SelectedIndex = 0;
-
             string searchText = SearchTextBox.Text;
+
+            if (searchText.Contains("/"))  //If the search is for a date, convert to find the format in the DB.
+            {
+                string slash = "/";
+                string isSearchTextPartOfDate = searchText.Replace(slash, string.Empty);
+                int searchTextLength = isSearchTextPartOfDate.Length;
+
+                if (isSearchTextPartOfDate.All(char.IsDigit) && searchTextLength == 1)
+                {
+                    searchText = "0" + isSearchTextPartOfDate;
+                }
+            }
+
             query = "Select appointment.appointmentId, appointment.userID, user.employeeName, customer.customerName, appointment.type, appointment.start, appointment.end " +
                     "from client_schedule.appointment " +
                     "Left Join client_schedule.customer on appointment.customerId = customer.customerId " +
